@@ -1,0 +1,3 @@
+[     187ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1600566753190-17f0baa2a6c0&w=750&q=75:0
+[    1960ms] [WARNING] Image with src "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c" was detected as the Largest Contentful Paint (LCP). Please add the "priority" property if this image is above the fold.
+Read more: https://nextjs.org/docs/api-reference/next/image#priority @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/utils/warn-once.js:15

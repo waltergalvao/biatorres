@@ -1,0 +1,2 @@
+[     396ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/favicon.ico:0
+[   14329ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1600566753190-17f0baa2a6c0%3Fw%3D800%26q%3D80%26fit%3Dcrop&w=750&q=75:0
