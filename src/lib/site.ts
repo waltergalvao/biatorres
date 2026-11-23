@@ -25,19 +25,19 @@ export const serviceLinks: NavLink[] = [
     href: '/servicos/consultoria',
     label: 'Consultoria de interiores',
     description: 'Um ambiente resolvido online, com moodboard e lista de compras.',
-    meta: 'a partir de R$ 450',
+    meta: 'Online',
   },
   {
     href: '/servicos/projeto-por-ambiente',
     label: 'Projeto por ambiente',
     description: 'Imagens 3D, marcenaria e caderno técnico para a obra.',
-    meta: 'R$ 250/m²',
+    meta: 'Com 3D',
   },
   {
     href: '/servicos/apartamento-completo',
     label: 'Apartamento completo',
     description: 'O apartamento inteiro em um projeto só, até 60 m².',
-    meta: 'R$ 15.000',
+    meta: 'Até 60 m²',
   },
 ]
 

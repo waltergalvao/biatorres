@@ -13,6 +13,8 @@ import {
   unsplash,
   type NavLink,
 } from '@/lib/site'
+import { audienceHref, audienceOrder, audiences } from '@/data/audiences'
+import { services } from '@/data/services'
 import { Logo } from './Logo'
 import { WhatsAppIcon } from './WhatsAppIcon'
 
@@ -279,49 +281,88 @@ function PanelLink({ link }: { link: NavLink }) {
   )
 }
 
-function ServicesPanel() {
+type Preview = { href: string; image: string; alt: string; kicker: string; caption: string }
+
+const servicePreviews: Record<string, Omit<Preview, 'href'>> = {
+  '/servicos/consultoria': {
+    image: services.consultoria.sideImage.id,
+    alt: services.consultoria.sideImage.alt,
+    kicker: 'Comece por aqui',
+    caption: 'Um ambiente resolvido online, sem obra',
+  },
+  '/servicos/projeto-por-ambiente': {
+    image: services['projeto-por-ambiente'].hero.image,
+    alt: services['projeto-por-ambiente'].hero.imageAlt,
+    kicker: 'Para reformar',
+    caption: 'Veja o ambiente em 3D antes da obra',
+  },
+  '/servicos/apartamento-completo': {
+    image: services['apartamento-completo'].hero.image,
+    alt: services['apartamento-completo'].hero.imageAlt,
+    kicker: 'Mais completo',
+    caption: 'O apartamento inteiro com um conceito só',
+  },
+}
+
+const audiencePreviews: Record<string, Omit<Preview, 'href'>> = Object.fromEntries(
+  audienceOrder.map((slug) => {
+    const a = audiences[slug]
+    return [audienceHref(slug), { image: a.hero.image, alt: a.hero.imageAlt, kicker: a.card.kicker, caption: a.card.title }]
+  }),
+)
+
+/**
+ * Dropdown body: the links on the left and a photo on the right that follows the link
+ * under the pointer (or keyboard focus), so each option gets a picture.
+ */
+function PreviewPanel({ links, previews }: { links: NavLink[]; previews: Record<string, Omit<Preview, 'href'>> }) {
+  const [active, setActive] = useState(links[0].href)
+  const current = previews[active] ?? previews[links[0].href]
+
   return (
-    <div className="grid w-[760px] grid-cols-[1fr_240px]">
+    <div className="grid w-[760px] grid-cols-[1fr_260px]">
       <div className="p-3">
         <ul>
-          {serviceLinks.map((link) => (
-            <li key={link.href}>
+          {links.map((link) => (
+            <li key={link.href} onMouseEnter={() => setActive(link.href)} onFocus={() => setActive(link.href)}>
               <PanelLink link={link} />
             </li>
           ))}
         </ul>
       </div>
-      <div className="relative bg-sand">
-        <Image
-          src={unsplash('1616627561839-074385245ff6')}
-          alt="Quarto com roupa de cama terracota e cabeceira de madeira"
-          fill
-          sizes="240px"
-          className="object-cover"
-        />
+      <Link href={active} tabIndex={-1} aria-hidden className="group relative block min-h-[260px] overflow-hidden bg-sand">
+        {links.map((link) => {
+          const p = previews[link.href]
+          if (!p) return null
+          return (
+            <Image
+              key={link.href}
+              src={unsplash(p.image)}
+              alt=""
+              fill
+              sizes="260px"
+              loading="eager"
+              className={`object-cover transition-opacity duration-500 ease-elegant ${
+                link.href === active ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+          )
+        })}
         <div className="absolute inset-x-3 bottom-3 rounded-xl bg-ink/85 p-4 text-linen backdrop-blur-sm">
-          <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-ochre">Comece por aqui</p>
-          <p className="mt-1 font-display text-[18px] leading-tight">
-            Consultoria de um quarto por R$ 450
-          </p>
+          <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-ochre">{current.kicker}</p>
+          <p className="mt-1 font-display text-[18px] leading-tight">{current.caption}</p>
         </div>
-      </div>
+      </Link>
     </div>
   )
 }
 
+function ServicesPanel() {
+  return <PreviewPanel links={serviceLinks} previews={servicePreviews} />
+}
+
 function AudiencePanel() {
-  return (
-    <div className="w-[440px] p-3">
-      <ul>
-        {audienceLinks.map((link) => (
-          <li key={link.href}>
-            <PanelLink link={link} />
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
+  return <PreviewPanel links={audienceLinks} previews={audiencePreviews} />
 }
 
 function MobileMenu({ open, isActive }: { open: boolean; isActive: (href: string) => boolean }) {
@@ -381,7 +422,7 @@ function MobileMenu({ open, isActive }: { open: boolean; isActive: (href: string
             {PRIMARY_CTA.label} pelo WhatsApp
           </a>
           <p className="mt-2 text-center text-[13px] text-ink-soft">
-            Consultoria online a partir de R$ 450 por ambiente
+            Atendimento online para todo o Brasil
           </p>
         </div>
       </div>
