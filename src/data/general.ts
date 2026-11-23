@@ -32,7 +32,7 @@ export const generalFaq: Faq[] = [
   },
   {
     q: 'Quanto custa?',
-    a: 'Cada serviço tem o valor publicado na própria página, sem precisar pedir orçamento para descobrir. Antes de começar, você recebe a proposta com o valor fechado.',
+    a: 'Consultoria online: de R$ 450 (quarto) a R$ 750 (sala + cozinha), por ambiente. Projeto por ambiente: R$ 250 por m², com mínimo de R$ 1.500. Apartamento completo até 60 m²: R$ 15.000. Antes de começar, eu mando a proposta por escrito com o valor fechado.',
   },
   {
     q: 'Atende fora de São Paulo?',
@@ -45,6 +45,6 @@ export const generalFaq: Faq[] = [
   {
     // TODO(owner): confirm the payment terms and state them here.
     q: 'Como é o pagamento?',
-    a: 'As condições de pagamento vêm por escrito na proposta, junto com o valor fechado, antes de qualquer trabalho começar.',
+    a: 'Eu mando as condições de pagamento por escrito na proposta, junto com o valor fechado, antes de qualquer trabalho começar.',
   },
 ]

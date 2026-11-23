@@ -32,7 +32,7 @@ export function FitCheck({ service }: { service: Service }) {
             {service.fit.no.map((n) => (
               <li key={n.href}>
                 <p className="text-[16px] leading-relaxed text-ink-soft">{n.text}</p>
-                <Link href={n.href} className="link-draw mt-2 text-[15px]">
+                <Link href={n.href} className="link-draw -mb-2.5 -mt-0.5 bg-origin-content py-2.5 text-[15px]">
                   {n.label} <ArrowRight size={15} aria-hidden />
                 </Link>
               </li>

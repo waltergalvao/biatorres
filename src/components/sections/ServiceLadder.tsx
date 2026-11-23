@@ -2,17 +2,17 @@ import Link from 'next/link'
 import { ArrowRight, Check } from 'lucide-react'
 import { services, serviceHref, type ServiceSlug } from '@/data/services'
 
-const steps: { slug: ServiceSlug; n: string; step: string; featured?: boolean }[] = [
+const steps: { slug: ServiceSlug; n: string; step: string; priceExtra?: string; featured?: boolean }[] = [
   { slug: 'consultoria', n: '01', step: 'Comece com uma consultoria' },
-  { slug: 'projeto-por-ambiente', n: '02', step: 'Transforme um ambiente' },
+  { slug: 'projeto-por-ambiente', n: '02', step: 'Transforme um ambiente', priceExtra: 'mínimo R$ 1.500' },
   { slug: 'apartamento-completo', n: '03', step: 'Projete o apartamento inteiro', featured: true },
 ]
 
-/** The three services as a progression, without prices: each card leads to its own page. */
+/** The three services as a progression, with their price anchor: each card leads to its own page. */
 export function ServiceLadder() {
   return (
     <ol className="grid gap-5 lg:grid-cols-3 lg:gap-6">
-      {steps.map(({ slug, n, step, featured }, i) => {
+      {steps.map(({ slug, n, step, priceExtra, featured }, i) => {
         const s = services[slug]
         return (
           <li key={slug} className="relative flex">
@@ -53,8 +53,18 @@ export function ServiceLadder() {
                 ))}
               </ul>
 
-              <span className={`mt-9 inline-flex items-center gap-2 text-[15px] font-semibold ${featured ? 'text-linen' : 'text-clay'}`}>
-                Ver detalhes e valores
+              <p className="mt-8 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                {s.price.pre && (
+                  <span className={`text-[14px] ${featured ? 'text-mist' : 'text-ink-soft'}`}>{s.price.pre}</span>
+                )}
+                <span className="font-display text-[34px] leading-none tracking-[-0.02em] tabular">{s.price.value}</span>
+                <span className={`text-[14px] ${featured ? 'text-mist' : 'text-ink-soft'}`}>
+                  {[s.price.unit, priceExtra].filter(Boolean).join(' · ')}
+                </span>
+              </p>
+
+              <span className={`mt-6 inline-flex items-center gap-2 text-[15px] font-semibold ${featured ? 'text-linen' : 'text-clay'}`}>
+                Ver o que está incluso
                 <ArrowRight size={16} aria-hidden className="transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </Link>

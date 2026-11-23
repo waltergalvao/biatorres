@@ -3,6 +3,7 @@
 // Prices come from the owner's strategy document. Keep them in sync with src/lib/site.ts.
 
 import { consultoriaPrices, projetoPrices, type RoomPrice } from '@/lib/site'
+import type { DeliverableId } from '@/components/sections/Deliverables'
 
 export type ServiceSlug = 'consultoria' | 'projeto-por-ambiente' | 'apartamento-completo'
 
@@ -16,7 +17,11 @@ export type Pricing =
       kind: 'rooms'
       title: string
       intro: string
+      /** One honest line that puts the price in perspective. */
+      framing: string
       rows: RoomPrice[]
+      /** How a table row reads in its WhatsApp message: "quero {rowItem} quarto". */
+      rowItem: string
       showArea: boolean
       foot: string
       calculator?: { perM2: number; minimum: number }
@@ -25,6 +30,7 @@ export type Pricing =
       kind: 'package'
       title: string
       intro: string
+      framing: string
       price: string
       unit: string
       covers: string[]
@@ -34,6 +40,8 @@ export type Pricing =
 export type Service = {
   slug: ServiceSlug
   name: string
+  /** Completes "Vim pela página ..." in prefilled WhatsApp messages. */
+  source: string
   /** One line used on cards (home, cross-sell). */
   summary: string
   /** Three short highlights for cards. */
@@ -48,6 +56,10 @@ export type Service = {
     image: string
     imageAlt: string
   }
+  /** Second hero button (an anchor on the page). */
+  heroSecondary: { href: string; label: string }
+  /** Which sample deliverables this service includes (all when omitted). */
+  deliverables?: DeliverableId[]
   /** Price anchor shown in the hero and the mobile sticky bar. */
   price: { pre?: string; value: string; unit?: string; note: string }
   trust: string[]
@@ -82,8 +94,9 @@ export const services: Record<ServiceSlug, Service> = {
   consultoria: {
     slug: 'consultoria',
     name: 'Consultoria de interiores',
+    source: 'da consultoria online',
     summary: 'Um ambiente resolvido online: layout, cores, materiais e a lista do que comprar.',
-    highlights: ['Briefing por vídeo', 'Moodboard e layout orientativo', 'Lista de compras com links'],
+    highlights: ['Briefing por vídeo', 'Moodboard e planta dos móveis', 'Lista de compras com links'],
     seo: {
       title: 'Consultoria de interiores online a partir de R$ 450 | Beatriz Torres Arquitetura',
       description:
@@ -93,10 +106,12 @@ export const services: Record<ServiceSlug, Service> = {
       eyebrow: 'Consultoria de interiores · online',
       title: 'Saiba o que comprar e onde colocar, com uma consultoria',
       accent: 'online',
-      lede: 'Você manda planta, fotos e medidas. Numa reunião por vídeo eu entendo como você vive e você recebe um PDF com layout, cores, materiais e os móveis com links de compra.',
+      lede: 'Você manda planta, fotos e medidas. Numa reunião por vídeo eu entendo como você vive e você recebe um PDF com a posição de cada móvel, cores, materiais e os móveis com links de compra.',
       image: '1615874959474-d609969a20ed',
       imageAlt: 'Quarto com cama de linho, almofadas laranja, quadros e plantas junto à janela',
     },
+    heroSecondary: { href: '#valores', label: 'Ver os valores por ambiente' },
+    deliverables: ['moodboard', 'layout'],
     price: {
       pre: 'a partir de',
       value: 'R$ 450',
@@ -106,7 +121,7 @@ export const services: Record<ServiceSlug, Service> = {
     trust: ['100% online, de qualquer cidade', 'Valor fechado antes de começar', 'Aproveita os móveis que você já tem'],
     cta: {
       label: 'Quero minha consultoria',
-      message: 'Olá, Beatriz! Vim pela página da consultoria de interiores. O ambiente é: ',
+      message: 'Olá, Beatriz! Vim pela página da consultoria online e quero resolver um ambiente. O ambiente é: ',
     },
     fit: {
       yes: [
@@ -147,7 +162,7 @@ export const services: Record<ServiceSlug, Service> = {
             {
               title: 'Orientação de layout',
               text: 'Onde ficam sofá, mesa, cama e poltronas, como reaproveitar o que você tem e como circular melhor.',
-              delivers: 'Layout orientativo, quando aplicável',
+              delivers: 'Planta com a posição de cada móvel, quando aplicável',
             },
             {
               title: 'Conceito, cores e materiais',
@@ -171,8 +186,11 @@ export const services: Record<ServiceSlug, Service> = {
     pricing: {
       kind: 'rooms',
       title: 'Valor fechado por ambiente',
-      intro: 'O preço cobre as seis etapas e o PDF final. Sem taxa de visita, sem surpresa.',
+      intro: 'O preço cobre as seis etapas e o PDF final. Sem custo extra depois.',
+      framing:
+        'Um sofá que não passa na porta ou um tapete do tamanho errado custam mais que a consultoria. Aqui você decide no papel, antes de gastar.',
       rows: consultoriaPrices,
+      rowItem: 'a consultoria de',
       showArea: false,
       foot: 'Mais de um ambiente? Os valores se somam. Mande a planta e eu confirmo o total.',
     },
@@ -210,7 +228,7 @@ export const services: Record<ServiceSlug, Service> = {
     crossSell: ['projeto-por-ambiente', 'apartamento-completo'],
     final: {
       title: 'Conte qual ambiente quer resolver',
-      text: 'Mande o cômodo e a cidade pelo WhatsApp. A resposta vem com o valor fechado e os próximos passos.',
+      text: 'Mande o cômodo e a cidade pelo WhatsApp. Eu respondo com o valor fechado e os próximos passos.',
     },
     sideImage: { id: '1616627561839-074385245ff6', alt: 'Quarto com roupa de cama terracota, cabeceira de madeira e mesa de cabeceira' },
   },
@@ -218,6 +236,7 @@ export const services: Record<ServiceSlug, Service> = {
   'projeto-por-ambiente': {
     slug: 'projeto-por-ambiente',
     name: 'Projeto por ambiente',
+    source: 'do projeto por ambiente',
     summary: 'Um cômodo projetado com imagens 3D e caderno técnico para marceneiro e obra.',
     highlights: ['Imagens 3D realistas', 'Marcenaria e bancadas detalhadas', 'Caderno técnico para a obra'],
     seo: {
@@ -230,10 +249,11 @@ export const services: Record<ServiceSlug, Service> = {
       title: 'Projeto de interiores por ambiente, com',
       accent: 'imagens 3D',
       titleAfter: ' e tudo pronto para a obra',
-      lede: 'Para reformar um cômodo sem improviso: você aprova o ambiente em imagens realistas, e o marceneiro e a obra recebem plantas, elevações e especificações.',
+      lede: 'Para reformar um cômodo sem improviso. Você aprova o ambiente em 3D e recebe o caderno técnico: o manual da obra, com os desenhos e as medidas que o marceneiro segue.',
       image: '1600585152220-90363fe7e115',
       imageAlt: 'Cozinha com marcenaria clara, bancada de pedra e luz natural',
     },
+    heroSecondary: { href: '#valores', label: 'Calcule o valor do seu ambiente' },
     price: {
       value: 'R$ 250',
       unit: 'por m²',
@@ -242,7 +262,7 @@ export const services: Record<ServiceSlug, Service> = {
     trust: ['Imagens 3D antes de gastar com obra', 'Caderno técnico para marceneiro e pedreiro', 'Uma rodada de ajustes por etapa'],
     cta: {
       label: 'Orçar meu ambiente',
-      message: 'Olá, Beatriz! Vim pela página do projeto por ambiente. O ambiente e a metragem são: ',
+      message: 'Olá, Beatriz! Vim pela página do projeto por ambiente. Vou reformar e quero o projeto com 3D. O cômodo e a metragem são: ',
     },
     fit: {
       yes: [
@@ -307,9 +327,12 @@ export const services: Record<ServiceSlug, Service> = {
       kind: 'rooms',
       title: 'R$ 250 por m², com valor fechado',
       intro: 'Valores de referência para os tamanhos mais comuns. Para outra metragem, use a calculadora.',
+      framing:
+        'Marcenaria refeita é o erro mais caro de uma reforma. O projeto custa uma fração da obra e evita refazer.',
       rows: projetoPrices,
+      rowItem: 'o projeto de',
       showArea: true,
-      foot: 'Valor mínimo por contratação: R$ 1.500. O preço final depende da complexidade e do escopo, e você recebe o valor fechado antes de começar.',
+      foot: 'Valor mínimo por contratação: R$ 1.500. O preço final depende da complexidade e do escopo, e eu passo o valor fechado antes de começar.',
       calculator: { perM2: 250, minimum: 1500 },
     },
     notIncluded: [
@@ -321,12 +344,12 @@ export const services: Record<ServiceSlug, Service> = {
       { title: 'Mande ambiente e metragem', text: 'Pelo WhatsApp. Eu respondo com o valor fechado e o prazo.' },
       { title: 'Briefing e medidas', text: 'Reunião por vídeo, planta e fotos do ambiente como está hoje.' },
       { title: 'Conceito, layout e 3D', text: 'Você aprova o ambiente nas imagens ou junta os ajustes numa rodada.' },
-      { title: 'Projeto técnico', text: 'Plantas, elevações, marcenaria e o caderno técnico para a obra, em PDF.' },
+      { title: 'Projeto técnico', text: 'Plantas, desenhos de cada parede com medidas, marcenaria e o caderno técnico para a obra, em PDF.' },
     ],
     faq: [
       {
         q: 'Como o valor é calculado?',
-        a: 'R$ 250 por metro quadrado do ambiente, com mínimo de R$ 1.500 por contratação. Ambientes mais complexos podem ter ajuste, e você recebe o valor fechado antes de começar.',
+        a: 'R$ 250 por metro quadrado do ambiente, com mínimo de R$ 1.500 por contratação. Ambientes mais complexos podem ter ajuste, e eu passo o valor fechado antes de começar.',
       },
       {
         q: 'Meu ambiente é maior que o da tabela. Quanto fica?',
@@ -346,7 +369,7 @@ export const services: Record<ServiceSlug, Service> = {
     crossSell: ['consultoria', 'apartamento-completo'],
     final: {
       title: 'Mande a planta e receba o valor do seu ambiente',
-      text: 'Diga qual cômodo vai reformar e a metragem. A resposta vem com o valor fechado e o prazo.',
+      text: 'Diga qual cômodo vai reformar e a metragem. Eu respondo com o valor fechado e o prazo.',
     },
     sideImage: { id: '1600585152220-90363fe7e115', alt: 'Cozinha com marcenaria clara, bancada de pedra e luz natural' },
   },
@@ -354,6 +377,7 @@ export const services: Record<ServiceSlug, Service> = {
   'apartamento-completo': {
     slug: 'apartamento-completo',
     name: 'Apartamento completo',
+    source: 'do apartamento completo',
     summary: 'O apartamento inteiro com um conceito só, 3D de todos os ambientes e projeto técnico.',
     highlights: ['Até 60 m², todos os ambientes', 'Até 10 imagens 3D', 'Memorial e caderno técnico'],
     seo: {
@@ -365,10 +389,11 @@ export const services: Record<ServiceSlug, Service> = {
       eyebrow: 'Projeto completo de apartamento',
       title: 'O apartamento inteiro projetado de uma vez,',
       accent: 'até 60 m²',
-      lede: 'Sala, cozinha, lavanderia, dois quartos e dois banheiros com um conceito só. Você recebe 3D de todos os ambientes e o caderno técnico para executar a obra do começo ao fim.',
+      lede: 'Sala, cozinha, lavanderia, dois quartos e dois banheiros com um conceito só. Você vê tudo em 3D e recebe o caderno técnico: o manual que a obra segue.',
       image: '1522708323590-d24dbb6b0267',
       imageAlt: 'Sala e jantar integrados em apartamento compacto com piso de madeira e poltrona vermelha',
     },
+    heroSecondary: { href: '#valores', label: 'Ver o que o pacote cobre' },
     price: {
       value: 'R$ 15.000',
       unit: 'até 60 m²',
@@ -377,7 +402,7 @@ export const services: Record<ServiceSlug, Service> = {
     trust: ['Até 10 imagens 3D', 'Plantas técnicas e memorial descritivo', 'Pensado para compactos e primeiro apê'],
     cta: {
       label: 'Orçar meu apartamento',
-      message: 'Olá, Beatriz! Vim pela página do apartamento completo. A metragem e a cidade são: ',
+      message: 'Olá, Beatriz! Vim pela página do apartamento completo e quero o projeto. Posso mandar a planta por aqui?',
     },
     fit: {
       yes: [
@@ -443,6 +468,8 @@ export const services: Record<ServiceSlug, Service> = {
       kind: 'package',
       title: 'Um valor para o apartamento inteiro',
       intro: 'O pacote cobre a configuração mais comum de apartamentos até 60 m².',
+      framing:
+        'Pelo mesmo R$ 250/m², o preço fica fechado para o apartamento todo, com lavanderia e circulação incluídas, e um conceito só do começo ao fim.',
       price: 'R$ 15.000',
       unit: 'até 60 m²',
       covers: [
@@ -472,11 +499,11 @@ export const services: Record<ServiceSlug, Service> = {
     faq: [
       {
         q: 'Meu apartamento tem mais de 60 m². Dá para fazer?',
-        a: 'Dá. A referência é R$ 250/m², e apartamentos maiores ou com ambientes extras são orçados à parte. Mande a planta e você recebe o valor fechado.',
+        a: 'Dá. A referência é R$ 250/m², e apartamentos maiores ou com ambientes extras são orçados à parte. Mande a planta e eu respondo com o valor fechado.',
       },
       {
         q: 'Meu apartamento é um studio ou tem só um quarto.',
-        a: 'O pacote foi desenhado para a configuração da lista, mas studios e plantas com menos ambientes também são atendidos. Mande a planta e eu respondo com o valor.',
+        a: 'Para um studio, o projeto por ambiente costuma sair mais em conta: são R$ 250/m², então um studio de 30 m² fica em R$ 7.500. Os detalhes estão na página do projeto por ambiente, em Outros serviços, logo acima. Com um quarto só, mande a planta e eu digo qual dos dois compensa mais.',
       },
       {
         q: 'Comprei na planta. Já posso começar?',
@@ -484,7 +511,7 @@ export const services: Record<ServiceSlug, Service> = {
       },
       {
         q: 'Posso fazer por etapas?',
-        a: 'Pode começar por um ambiente com o projeto por ambiente. O pacote do apartamento sai mais em conta por m² e garante um conceito só para tudo.',
+        a: 'Pode começar por um ambiente com o projeto por ambiente. Por m² o valor é o mesmo. A diferença é que o preço fica fechado para o apartamento todo, com lavanderia e circulação incluídas, e todos os ambientes seguem um conceito só.',
       },
       onlineFaq,
       paymentFaq,
@@ -492,7 +519,7 @@ export const services: Record<ServiceSlug, Service> = {
     crossSell: ['projeto-por-ambiente', 'consultoria'],
     final: {
       title: 'Mande a planta do seu apartamento',
-      text: 'Diga a metragem e a cidade. A resposta vem com o valor fechado, o prazo e o que está incluso.',
+      text: 'Diga a metragem e a cidade. Eu respondo com o valor fechado, o prazo e o que está incluso.',
     },
     sideImage: { id: '1600210492486-724fe5c67fb0', alt: 'Sala de estar clara com sofá de couro, mesa de centro de madeira e quadros na parede' },
   },

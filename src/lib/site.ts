@@ -7,12 +7,16 @@ export const WHATSAPP_NUMBER = '5511999999999'
 export const WHATSAPP_DISPLAY = '+55 (11) 99999-9999'
 export const EMAIL = 'contato@beatriztorres.arq.br'
 
-export function waLink(message = 'Olá, Beatriz! Vi o site e quero pedir um orçamento.') {
+export const DEFAULT_MESSAGE =
+  'Olá, Beatriz! Vim pelo site e quero saber qual serviço faz sentido para o meu apartamento. Ele tem (m²):'
+
+export function waLink(message = DEFAULT_MESSAGE) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
 }
 
 export const PRIMARY_CTA = {
-  label: 'Pedir orçamento',
+  // The price is public, so the generic action is a conversation, not a quote request.
+  label: 'Falar com a Beatriz',
   href: waLink(),
 }
 

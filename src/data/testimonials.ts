@@ -12,6 +12,11 @@ export type Testimonial = {
 
 // TODO(owner): PLACEHOLDER testimonials. Replace with real client quotes (and permission to
 // publish name + neighbourhood) before going live, and before running ads to these pages.
+// The section stays hidden while these are placeholders: invented quotes on ad landing pages
+// are misleading advertising (CDC art. 37, Google Ads policy) and break the CAU code of ethics.
+// Set this to true once the quotes below are real.
+export const SHOW_TESTIMONIALS = false
+
 export const testimonials: Testimonial[] = [
   {
     quote:

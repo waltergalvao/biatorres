@@ -9,7 +9,8 @@ import { Analytics } from '@/components/Analytics'
 const fraunces = Fraunces({
   subsets: ['latin'],
   style: ['normal', 'italic'],
-  axes: ['SOFT', 'WONK', 'opsz'],
+  // WONK is always 0 in globals.css, so it isn't downloaded. opsz stays: it shapes the headlines.
+  axes: ['SOFT', 'opsz'],
   variable: '--font-fraunces',
   display: 'swap',
 })

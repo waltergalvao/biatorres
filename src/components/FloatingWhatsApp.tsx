@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useHeroCtaGone } from '@/lib/useHeroCtaGone'
 import { usePathname } from 'next/navigation'
 import { waLink } from '@/lib/site'
 import { WhatsAppIcon } from './WhatsAppIcon'
@@ -11,14 +11,7 @@ import { WhatsAppIcon } from './WhatsAppIcon'
  */
 export function FloatingWhatsApp() {
   const pathname = usePathname()
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 520)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const visible = useHeroCtaGone(520, pathname)
 
   if (pathname.startsWith('/servicos/') || pathname.startsWith('/para/')) return null
 
