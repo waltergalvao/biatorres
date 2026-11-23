@@ -71,7 +71,9 @@ export function Hero() {
           </ul>
         </div>
 
-        <div className="relative bleed-right lg:col-span-6 lg:h-full">
+        {/* No lg:h-full here: the box must hug the photo (capped at 760 px), or on tall windows the
+            price card, pinned to its bottom, drifts below the photo. */}
+        <div className="relative bleed-right lg:col-span-6">
           <div className="relative aspect-[5/4] overflow-hidden rounded-[28px] sm:aspect-[4/3] lg:aspect-auto lg:h-[min(78svh,760px)] lg:rounded-r-none">
             <Image
               src={unsplash('1618220179428-22790b461013')}
