@@ -18,7 +18,7 @@ export function Logo({ tone = 'dark' }: { tone?: 'dark' | 'light' }) {
         className="shrink-0 text-clay transition-transform duration-500 ease-elegant group-hover:-translate-y-0.5"
       >
         <path d="M1 27V11a10 10 0 0 1 20 0v16H1Z" fill="currentColor" />
-        <path d="M7 27V14a4 4 0 0 1 8 0v13" fill="none" stroke="#F4EDE3" strokeWidth="1.6" />
+        <path d="M7 27V14a4 4 0 0 1 8 0v13" fill="none" strokeWidth="1.6" className="stroke-linen" />
       </svg>
       <span className="flex flex-col leading-none">
         <span className={`font-display text-[21px] font-medium tracking-[-0.01em] ${text}`}>

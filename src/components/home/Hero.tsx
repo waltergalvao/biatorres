@@ -70,7 +70,7 @@ export function Hero() {
             />
           </div>
           <div
-            className="enter absolute -bottom-6 left-4 right-4 rounded-2xl bg-ink p-5 text-linen shadow-[0_24px_50px_-20px_rgba(43,32,26,0.6)] sm:left-auto sm:right-6 sm:w-[300px] lg:-left-10 lg:bottom-10 lg:right-auto"
+            className="enter absolute -bottom-6 left-4 right-4 rounded-2xl bg-ink p-5 text-linen shadow-[0_24px_50px_-20px_rgb(var(--color-ink)/0.6)] sm:left-auto sm:right-6 sm:w-[300px] lg:-left-10 lg:bottom-10 lg:right-auto"
             style={i(5)}
           >
             <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-ochre">A partir de</p>

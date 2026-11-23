@@ -110,7 +110,7 @@ export function Packages({ title, lede, items }: { title: string; lede: string; 
                     rel="noopener noreferrer"
                     className={`mt-8 ${featured ? 'btn-light' : 'btn-primary'}`}
                   >
-                    <WhatsAppIcon className={`h-5 w-5 ${featured ? 'text-[#1F7A4D]' : ''}`} />
+                    <WhatsAppIcon className={`h-5 w-5 ${featured ? 'text-whatsapp' : ''}`} />
                     Pedir pelo WhatsApp
                   </a>
                 </article>

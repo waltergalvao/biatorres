@@ -1,11 +1,14 @@
 import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
+import { colorVariables, cssVar, type ColorName } from './src/design/tokens'
 
 /**
- * Beatriz Torres — brand kit "Editorial quente".
- * Contrast (WCAG, all AA for body text): ink on linen 13.7:1 · ink-soft on linen 7.2:1 ·
- * ink-soft on sand 6.2:1 · clay on linen 5.4:1 · clay on sand 4.6:1 · paper on clay 5.9:1 ·
- * ochre on ink 5.8:1 · mist on ink 8.5:1 · olive on linen 5.6:1.
+ * Beatriz Torres — brand kit "Editorial quente". The values live in src/design/tokens.ts.
+ * Each color here points at its CSS variable, so `bg-clay`, `text-ink/70` etc. follow the tokens
+ * and can be re-themed by overriding the variables (e.g. on a `[data-theme]` wrapper).
  */
+const color = (name: ColorName) => `rgb(var(${cssVar(name)}) / <alpha-value>)`
+
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -15,25 +18,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        linen: '#F4EDE3', // page ground
-        paper: '#FBF8F3', // cards, raised surfaces
-        sand: {
-          DEFAULT: '#E8DCCB', // alternate section ground
-          deep: '#DCCBB4',
-        },
-        line: '#D6C6B1', // hairlines and borders (decorative)
-        ink: {
-          DEFAULT: '#2B201A', // espresso — text and dark bands
-          soft: '#5C4A3F', // secondary text
-        },
-        mist: '#CDBBA8', // secondary text on espresso
-        clay: {
-          DEFAULT: '#A04524', // terracotta — primary action and accents
-          deep: '#7E3519', // hover / pressed
-          soft: '#E9C9B0', // tints
-        },
-        olive: '#5E6136',
-        ochre: '#C89234',
+        linen: color('linen'),
+        paper: color('paper'),
+        sand: { DEFAULT: color('sand'), deep: color('sandDeep') },
+        line: color('line'),
+        ink: { DEFAULT: color('ink'), soft: color('inkSoft') },
+        mist: color('mist'),
+        clay: { DEFAULT: color('clay'), deep: color('clayDeep'), soft: color('claySoft') },
+        olive: color('olive'),
+        ochre: color('ochre'),
+        whatsapp: color('whatsapp'),
       },
       fontFamily: {
         display: ['var(--font-fraunces)', 'Georgia', 'serif'],
@@ -68,7 +62,10 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // Writes `--color-*` on :root from the tokens.
+    plugin(({ addBase }) => addBase({ ':root': colorVariables() })),
+  ],
 }
 
 export default config

@@ -99,7 +99,7 @@ export function Pricing({ service }: { service: Service }) {
                 ))}
               </ul>
               <a href={waLink(cta.message)} target="_blank" rel="noopener noreferrer" className="btn-light mt-9 w-full sm:w-auto">
-                <WhatsAppIcon className="h-5 w-5 text-[#1F7A4D]" />
+                <WhatsAppIcon className="h-5 w-5 text-whatsapp" />
                 {cta.label}
               </a>
             </div>

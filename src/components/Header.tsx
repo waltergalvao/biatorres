@@ -278,7 +278,7 @@ function Dropdown({
         hidden={!open}
         className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3"
       >
-        <div className="overflow-hidden rounded-2xl border border-line bg-paper shadow-[0_24px_60px_-24px_rgba(43,32,26,0.35)]">
+        <div className="overflow-hidden rounded-2xl border border-line bg-paper shadow-[0_24px_60px_-24px_rgb(var(--color-ink)/0.35)]">
           {children}
         </div>
       </div>

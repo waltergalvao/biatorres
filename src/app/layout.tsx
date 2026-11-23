@@ -5,6 +5,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { FloatingWhatsApp } from '@/components/FloatingWhatsApp'
 import { Analytics } from '@/components/Analytics'
+import { hex } from '@/design/tokens'
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#F4EDE3',
+  themeColor: hex.linen,
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

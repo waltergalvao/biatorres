@@ -43,7 +43,7 @@ export function Includes({ service }: { service: Service }) {
                   rel="noopener noreferrer"
                   className="btn-light self-start"
                 >
-                  <WhatsAppIcon className="h-5 w-5 text-[#1F7A4D]" />
+                  <WhatsAppIcon className="h-5 w-5 text-whatsapp" />
                   {service.cta.label}
                 </a>
               </li>
