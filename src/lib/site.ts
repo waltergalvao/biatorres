@@ -7,8 +7,8 @@ import { audienceHref, audienceOrder, audiences } from '@/data/audiences'
 export const SITE_DOMAIN = 'beatriztorres.com.br'
 export const SITE_URL = `https://${SITE_DOMAIN}`
 
-export const WHATSAPP_NUMBER = '5511999999999'
-export const WHATSAPP_DISPLAY = '+55 (11) 99999-9999'
+export const WHATSAPP_NUMBER = '5585988842278'
+export const WHATSAPP_DISPLAY = '+55 (85) 98884-2278'
 // TODO(owner): confirm this mailbox exists on the domain.
 export const EMAIL = `contato@${SITE_DOMAIN}`
 

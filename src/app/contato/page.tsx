@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from 'react'
 import { AnimateOnScroll } from '@/components/AnimateOnScroll'
 import { motion } from 'framer-motion'
-import { EMAIL } from '@/lib/site'
+import { EMAIL, WHATSAPP_DISPLAY, waLink } from '@/lib/site'
 
 export default function ContatoPage() {
   const [submitted, setSubmitted] = useState(false)
@@ -45,12 +45,12 @@ export default function ContatoPage() {
                 <div>
                   <h3 className="eyebrow mb-3">WhatsApp</h3>
                   <a
-                    href="https://wa.me/5511999999999"
+                    href={waLink()}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-ink hover:text-ink-soft transition-colors duration-300"
                   >
-                    +55 (11) 99999-9999
+                    {WHATSAPP_DISPLAY}
                   </a>
                 </div>
 
