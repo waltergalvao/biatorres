@@ -20,7 +20,7 @@ export function Testimonials({
 
         <div className="mt-12 grid gap-10 border-t border-line pt-10 lg:grid-cols-12 lg:gap-16">
           <figure className="lg:col-span-7">
-            <blockquote className="font-display text-[clamp(1.6rem,2.6vw,2.4rem)] font-light leading-[1.2] text-ink">
+            <blockquote className="font-display text-[clamp(1.6rem,calc(2.6*var(--vw)),2.4rem)] font-light leading-[1.2] text-ink">
               <span aria-hidden className="text-clay">“</span>
               {lead.quote}
               <span aria-hidden className="text-clay">”</span>

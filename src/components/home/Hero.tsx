@@ -16,7 +16,7 @@ const trust = [
 export function Hero() {
   return (
     <section aria-labelledby="hero-title" className="relative overflow-hidden" data-placement="hero">
-      <div className="container-site grid items-center gap-10 pb-16 pt-8 md:pt-12 lg:min-h-[calc(100svh-72px)] lg:grid-cols-12 lg:gap-12 lg:py-12">
+      <div className="container-site grid items-center gap-10 pb-16 pt-8 md:pt-12 lg:min-h-[calc(100*var(--svh)-72px)] lg:grid-cols-12 lg:gap-12 lg:py-12">
         <div className="lg:col-span-6">
           <p className="eyebrow enter" style={i(0)}>
             Arquitetura de interiores · online
@@ -74,7 +74,7 @@ export function Hero() {
         {/* No lg:h-full here: the box must hug the photo (capped at 760 px), or on tall windows the
             price card, pinned to its bottom, drifts below the photo. */}
         <div className="relative bleed-right lg:col-span-6">
-          <div className="relative aspect-[5/4] overflow-hidden rounded-[28px] sm:aspect-[4/3] lg:aspect-auto lg:h-[min(78svh,760px)] lg:rounded-r-none">
+          <div className="relative aspect-[5/4] overflow-hidden rounded-[28px] sm:aspect-[4/3] lg:aspect-auto lg:h-[min(calc(78*var(--svh)),760px)] lg:rounded-r-none">
             <Image
               src={unsplash('1618220179428-22790b461013')}
               alt="Sala pequena com poltrona terracota, aparador de madeira, espelho redondo e plantas"

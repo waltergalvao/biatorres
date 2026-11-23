@@ -30,14 +30,14 @@ export function LandingHero({ hero, price, cta, trust, secondary }: LandingHeroP
     <section aria-labelledby="hero-title" className="relative overflow-hidden" data-placement="hero">
       {/* Mobile spacing is tighter than md+ so the WhatsApp button ends above ~620px on a
           390x844 phone, inside the visible area of iOS Safari and in-app browsers. */}
-      <div className="container-site grid items-center gap-10 pb-16 pt-5 md:pt-12 lg:min-h-[calc(100svh-72px)] lg:grid-cols-12 lg:gap-12 lg:py-12">
+      <div className="container-site grid items-center gap-10 pb-16 pt-5 md:pt-12 lg:min-h-[calc(100*var(--svh)-72px)] lg:grid-cols-12 lg:gap-12 lg:py-12">
         <div className="lg:col-span-6">
           <p className="eyebrow enter" style={i(0)}>
             {hero.eyebrow}
           </p>
           <h1
             id="hero-title"
-            className="enter mt-4 font-display md:mt-5 text-display text-ink md:text-[clamp(2.4rem,4.4vw,4.2rem)]"
+            className="enter mt-4 font-display md:mt-5 text-display text-ink md:text-[clamp(2.4rem,calc(4.4*var(--vw)),4.2rem)]"
             style={i(1)}
           >
             {hero.title} <em className="italic text-clay">{hero.accent}</em>
@@ -82,7 +82,7 @@ export function LandingHero({ hero, price, cta, trust, secondary }: LandingHeroP
         </div>
 
         <div className="relative bleed-right lg:col-span-6 lg:h-full">
-          <div className="relative aspect-[5/4] overflow-hidden rounded-[28px] sm:aspect-[4/3] lg:aspect-auto lg:h-[min(78svh,760px)] lg:rounded-r-none">
+          <div className="relative aspect-[5/4] overflow-hidden rounded-[28px] sm:aspect-[4/3] lg:aspect-auto lg:h-[min(calc(78*var(--svh)),760px)] lg:rounded-r-none">
             <Image
               src={unsplash(hero.image)}
               alt={hero.imageAlt}
