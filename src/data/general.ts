@@ -32,7 +32,11 @@ export const generalFaq: Faq[] = [
   },
   {
     q: 'Quanto custa?',
-    a: 'Consultoria online: de R$ 450 (quarto) a R$ 750 (sala + cozinha), por ambiente. Projeto por ambiente: R$ 250 por m², com mínimo de R$ 1.500. Apartamento completo até 60 m²: R$ 15.000. Antes de começar, eu mando a proposta por escrito com o valor fechado.',
+    a: 'Consultoria online: de R$ 450 (quarto) a R$ 750 (sala + cozinha), por ambiente. Projeto por ambiente: R$ 250 por m², com mínimo de R$ 1.500. Apartamento completo até 60 m²: R$ 15.000, ou 10x de R$ 1.500. Antes de começar, eu mando a proposta por escrito com o valor fechado.',
+  },
+  {
+    q: 'A loja de planejados faz o projeto de graça. Por que pagar?',
+    a: 'O projeto da loja é feito para vender os móveis daquela loja, no catálogo e no preço dela. O meu é seu: você leva o mesmo desenho para três marceneiros ou lojas e compara preço com preço. E ele vai além dos armários: layout, iluminação, revestimentos e os móveis que você compra prontos.',
   },
   {
     q: 'Atende fora de São Paulo?',
@@ -43,8 +47,8 @@ export const generalFaq: Faq[] = [
     a: 'Nenhum serviço inclui execução, gerenciamento ou acompanhamento de obra, compras e visitas técnicas. Projetos estruturais e complementares de engenharia são contratados à parte.',
   },
   {
-    // TODO(owner): confirm the payment terms and state them here.
+    // TODO(owner): confirm the terms for consultoria and projeto por ambiente, and if the 10x has juros.
     q: 'Como é o pagamento?',
-    a: 'Eu mando as condições de pagamento por escrito na proposta, junto com o valor fechado, antes de qualquer trabalho começar.',
+    a: 'Pagamento do apartamento completo: em até 10x de R$ 1.500. Para os outros serviços, eu envio as condições de pagamento por escrito na proposta, junto com o valor fechado, antes de qualquer trabalho começar.',
   },
 ]

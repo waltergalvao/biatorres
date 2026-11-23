@@ -87,6 +87,9 @@ export function Pricing({ service }: { service: Service }) {
                 </span>
                 <span className="text-[17px] text-mist">{pricing.unit}</span>
               </div>
+              {pricing.installments && (
+                <p className="mt-3 text-[18px] font-semibold text-ochre">{pricing.installments}</p>
+              )}
               <p className="mt-8 text-[13px] font-semibold uppercase tracking-[0.14em] text-ochre">Ambientes inclusos</p>
               <ul className="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2">
                 {pricing.covers.map((c) => (

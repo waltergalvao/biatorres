@@ -2,10 +2,12 @@ import Link from 'next/link'
 import { ArrowRight, Check } from 'lucide-react'
 import { services, serviceHref, type ServiceSlug } from '@/data/services'
 
+// The highlighted card is the entry point, not the biggest ticket: most people start with one
+// room, and a dark card with a badge draws the eye to its price first.
 const steps: { slug: ServiceSlug; n: string; step: string; priceExtra?: string; featured?: boolean }[] = [
-  { slug: 'consultoria', n: '01', step: 'Comece com uma consultoria' },
+  { slug: 'consultoria', n: '01', step: 'Comece com uma consultoria', featured: true },
   { slug: 'projeto-por-ambiente', n: '02', step: 'Transforme um ambiente', priceExtra: 'mínimo R$ 1.500' },
-  { slug: 'apartamento-completo', n: '03', step: 'Projete o apartamento inteiro', featured: true },
+  { slug: 'apartamento-completo', n: '03', step: 'Projete o apartamento inteiro' },
 ]
 
 /** The three services as a progression, with their price anchor: each card leads to its own page. */
@@ -31,7 +33,7 @@ export function ServiceLadder() {
                 </span>
                 {featured && (
                   <span className="rounded-full bg-ochre px-3 py-1 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink">
-                    Mais completo
+                    Comece por aqui
                   </span>
                 )}
               </div>
@@ -62,6 +64,11 @@ export function ServiceLadder() {
                   {[s.price.unit, priceExtra].filter(Boolean).join(' · ')}
                 </span>
               </p>
+              {s.price.installments && (
+                <p className={`mt-2 text-[15px] font-semibold ${featured ? 'text-ochre' : 'text-clay'}`}>
+                  {s.price.installments}
+                </p>
+              )}
 
               <span className={`mt-6 inline-flex items-center gap-2 text-[15px] font-semibold ${featured ? 'text-linen' : 'text-clay'}`}>
                 Ver o que está incluso

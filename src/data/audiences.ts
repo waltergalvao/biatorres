@@ -42,10 +42,11 @@ export type Audience = {
   final: { title: string; text: string }
 }
 
-// TODO(owner): confirm the payment terms and state them here.
+// TODO(owner): confirm the payment terms for consultoria and projeto por ambiente, and whether
+// the 10x for the apartment is com ou sem juros (and by which method).
 const paymentFaq: Faq = {
   q: 'Como é o pagamento?',
-  a: 'Eu envio as condições de pagamento por escrito na proposta, junto com o valor fechado, antes de qualquer trabalho começar.',
+  a: 'Pagamento do apartamento completo: em até 10x de R$ 1.500. Para os outros serviços, eu envio as condições de pagamento por escrito na proposta, junto com o valor fechado, antes de qualquer trabalho começar.',
 }
 
 export const audiences: Record<AudienceSlug, Audience> = {
@@ -78,7 +79,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
       pre: 'a partir de',
       value: 'R$ 450',
       unit: 'por ambiente',
-      note: 'Studio de 30 m² com projeto e 3D: R$ 7.500 · Apartamento até 60 m²: R$ 15.000',
+      note: 'Studio de 30 m² com projeto e 3D: R$ 7.500 · Apartamento até 60 m²: R$ 15.000 (10x de R$ 1.500)',
     },
     trust: ['Para temporada ou contrato longo', 'Compras e obra definidas antes das chaves', 'Executável à distância'],
     cta: {
@@ -110,7 +111,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
           service: 'apartamento-completo',
           badge: 'Na planta ou vai reformar',
           why: 'Para preparar o imóvel inteiro, do layout aos acabamentos, com um conceito só.',
-          price: { value: 'R$ 15.000', unit: 'até 60 m²', note: 'Valor fixo, com lavanderia e circulação' },
+          price: { value: 'R$ 15.000', unit: 'até 60 m²', note: 'ou 10x de R$ 1.500 · valor fixo, com lavanderia e circulação' },
           bullets: ['3D de todos os ambientes (até 10 vistas)', 'Marcenaria, iluminação e pontos elétricos', 'Memorial e caderno técnico para a obra'],
           message:
             'Olá, Beatriz! Vim pela página para investidores. Quero o projeto do apartamento completo (R$ 15.000 até 60 m²). Meu imóvel tem (m²):',
@@ -189,7 +190,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
       pre: 'a partir de',
       value: 'R$ 450',
       unit: 'por ambiente',
-      note: 'O apartamento inteiro, até 60 m², por R$ 15.000',
+      note: 'O apartamento inteiro, até 60 m², por R$ 15.000 ou 10x de R$ 1.500',
     },
     trust: [
       'Ainda na planta? Dá para começar antes das chaves',
@@ -234,7 +235,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
           service: 'apartamento-completo',
           badge: 'Vai reformar',
           why: 'Comprou na planta ou vai reformar? Projete o apartamento inteiro antes da obra.',
-          price: { value: 'R$ 15.000', unit: 'até 60 m²', note: 'Todos os ambientes inclusos' },
+          price: { value: 'R$ 15.000', unit: 'até 60 m²', note: 'ou 10x de R$ 1.500 · todos os ambientes inclusos' },
           bullets: ['3D de todos os ambientes', 'Pontos elétricos e marcenaria', 'Caderno técnico para a obra'],
           message:
             'Olá, Beatriz! Vim pela página do primeiro apartamento. Quero o projeto do apartamento completo (R$ 15.000 até 60 m²). Meu apê tem (m²):',
@@ -353,6 +354,10 @@ export const audiences: Record<AudienceSlug, Audience> = {
       ],
     },
     faq: [
+      {
+        q: 'A loja de planejados faz o projeto de graça. Por que pagar?',
+        a: 'O projeto da loja é feito para vender os móveis daquela loja, no catálogo e no preço dela. O meu é seu: você leva o mesmo desenho para três marceneiros ou lojas e compara preço com preço. E ele vai além dos armários: layout, iluminação, revestimentos e os móveis que você compra prontos.',
+      },
       {
         q: 'Meu studio tem menos de 20 m². Dá para fazer?',
         a: 'Dá, e é onde o projeto mais faz diferença. O valor segue R$ 250/m², com mínimo de R$ 1.500 por contratação.',

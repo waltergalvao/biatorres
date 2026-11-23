@@ -33,6 +33,7 @@ export type Pricing =
       framing: string
       price: string
       unit: string
+      installments?: string
       covers: string[]
       foot: string
     }
@@ -61,7 +62,7 @@ export type Service = {
   /** Which sample deliverables this service includes (all when omitted). */
   deliverables?: DeliverableId[]
   /** Price anchor shown in the hero and the mobile sticky bar. */
-  price: { pre?: string; value: string; unit?: string; note: string }
+  price: { pre?: string; value: string; unit?: string; note: string; installments?: string }
   trust: string[]
   cta: { label: string; message: string }
   fit: {
@@ -79,10 +80,11 @@ export type Service = {
   sideImage: { id: string; alt: string }
 }
 
-// TODO(owner): confirm the payment terms (entrada + parcelas? Pix? cartão?) and state them here.
+// TODO(owner): confirm the payment terms for consultoria and projeto por ambiente, and whether
+// the 10x for the apartment is com ou sem juros (and by which method).
 const paymentFaq: Faq = {
   q: 'Como é o pagamento?',
-  a: 'As condições de pagamento vêm por escrito na proposta, junto com o valor fechado, antes de qualquer trabalho começar.',
+  a: 'Pagamento do apartamento completo: em até 10x de R$ 1.500. Para os outros serviços, eu envio as condições de pagamento por escrito na proposta, junto com o valor fechado, antes de qualquer trabalho começar.',
 }
 
 const onlineFaq: Faq = {
@@ -348,6 +350,10 @@ export const services: Record<ServiceSlug, Service> = {
     ],
     faq: [
       {
+        q: 'A loja de planejados faz o projeto de graça. Por que pagar?',
+        a: 'O projeto da loja é feito para vender os móveis daquela loja, no catálogo e no preço dela. O meu é seu: você leva o mesmo desenho para três marceneiros ou lojas e compara preço com preço. E ele vai além dos armários: layout, iluminação, revestimentos e os móveis que você compra prontos.',
+      },
+      {
         q: 'Como o valor é calculado?',
         a: 'R$ 250 por metro quadrado do ambiente, com mínimo de R$ 1.500 por contratação. Ambientes mais complexos podem ter ajuste, e eu passo o valor fechado antes de começar.',
       },
@@ -397,7 +403,8 @@ export const services: Record<ServiceSlug, Service> = {
     price: {
       value: 'R$ 15.000',
       unit: 'até 60 m²',
-      note: 'Referência de R$ 250/m², todos os ambientes inclusos',
+      note: 'ou 10x de R$ 1.500 · todos os ambientes inclusos',
+      installments: 'ou 10x de R$ 1.500',
     },
     trust: ['Até 10 imagens 3D', 'Plantas técnicas e memorial descritivo', 'Pensado para compactos e primeiro apê'],
     cta: {
@@ -472,6 +479,7 @@ export const services: Record<ServiceSlug, Service> = {
         'Pelo mesmo R$ 250/m², o preço fica fechado para o apartamento todo, com lavanderia e circulação incluídas, e um conceito só do começo ao fim.',
       price: 'R$ 15.000',
       unit: 'até 60 m²',
+      installments: 'ou 10x de R$ 1.500',
       covers: [
         'Sala de estar e jantar integradas',
         'Cozinha',
@@ -497,6 +505,10 @@ export const services: Record<ServiceSlug, Service> = {
       { title: 'Projeto técnico', text: 'Plantas, detalhamentos, memorial e o caderno técnico para a obra.' },
     ],
     faq: [
+      {
+        q: 'A loja de planejados faz o projeto de graça. Por que pagar?',
+        a: 'O projeto da loja é feito para vender os móveis daquela loja, no catálogo e no preço dela. O meu é seu: você leva o mesmo desenho para três marceneiros ou lojas e compara preço com preço. E ele vai além dos armários: layout, iluminação, revestimentos e os móveis que você compra prontos.',
+      },
       {
         q: 'Meu apartamento tem mais de 60 m². Dá para fazer?',
         a: 'Dá. A referência é R$ 250/m², e apartamentos maiores ou com ambientes extras são orçados à parte. Mande a planta e eu respondo com o valor fechado.',

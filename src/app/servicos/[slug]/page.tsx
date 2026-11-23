@@ -96,7 +96,7 @@ export default function ServicePage({ params }: Props) {
       <StickyCta
         pre={service.price.pre}
         value={service.price.value}
-        unit={service.price.unit}
+        unit={service.price.installments ?? service.price.unit}
         label={service.cta.label}
         message={service.cta.message}
       />
