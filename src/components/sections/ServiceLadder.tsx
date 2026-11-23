@@ -14,7 +14,7 @@ const cases: {
 }[] = [
   { slug: 'consultoria', situation: 'Sem obra', detail: 'Móveis, layout e decoração', featured: true },
   { slug: 'projeto-por-ambiente', situation: 'Vai reformar um cômodo', detail: 'Com obra e marcenaria', priceExtra: 'mínimo R$ 1.500' },
-  { slug: 'apartamento-completo', situation: 'Vai reformar o apê inteiro', detail: 'Ou montar do zero, até 60 m²' },
+  { slug: 'apartamento-completo', situation: 'Comprou na planta', detail: 'Ou vai reformar o apê inteiro, até 60 m²' },
 ]
 
 /** One card per situation, each with its price and a link to the service page. */
