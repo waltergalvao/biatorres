@@ -10,7 +10,6 @@ const consultoria = services.consultoria.price // "R$ 450" / "por ambiente"
 
 const trust = [
   `Consultoria online a partir de ${consultoria.value} ${consultoria.unit}`,
-  'Arquiteta do briefing à entrega',
   'Valor fechado antes de começar',
 ]
 
@@ -47,7 +46,22 @@ export function Hero() {
             </a>
           </div>
 
-          <ul className="enter mt-9 grid gap-2 border-t border-line pt-6 text-[15px] text-ink" style={i(4)}>
+          <div className="enter mt-6 flex items-center gap-3" style={i(4)}>
+            <Image
+              src="/images/beatriz-avatar.jpg"
+              alt=""
+              width={48}
+              height={48}
+              className="h-12 w-12 shrink-0 rounded-full object-cover ring-2 ring-paper"
+            />
+            <p className="text-[14px] leading-snug text-ink-soft">
+              <span className="font-semibold text-ink">Beatriz Torres</span>, arquiteta
+              <br />
+              Eu cuido do seu projeto do briefing à entrega.
+            </p>
+          </div>
+
+          <ul className="enter mt-7 grid gap-2 border-t border-line pt-6 text-[15px] text-ink" style={i(5)}>
             {trust.map((t) => (
               <li key={t} className="flex items-center gap-2.5">
                 <Check size={17} aria-hidden className="shrink-0 text-olive" />

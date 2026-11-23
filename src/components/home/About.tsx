@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { unsplash, waLink } from '@/lib/site'
+import { waLink } from '@/lib/site'
 import { WhatsAppIcon } from '../WhatsAppIcon'
 
 const principles = [
@@ -27,8 +27,8 @@ export function About() {
         <div className="lg:col-span-5">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-sand">
             <Image
-              src={unsplash('1573496359142-b8d87734a5a2')}
-              alt="Retrato de Beatriz Torres, arquiteta"
+              src="/images/beatriz-retrato.jpg"
+              alt="Beatriz Torres, arquiteta, em um apartamento com uma planta e amostras de materiais sobre a mesa"
               fill
               sizes="(max-width: 1024px) 100vw, 40vw"
               className="object-cover"

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Check } from 'lucide-react'
 import { work } from '@/data/work'
-import { PRIMARY_CTA, unsplash, waLink } from '@/lib/site'
+import { PRIMARY_CTA, waLink } from '@/lib/site'
 import { Work } from '@/components/sections/Work'
 import { FinalCta } from '@/components/sections/FinalCta'
 import { SectionHeader } from '@/components/sections/SectionHeader'
@@ -77,10 +77,9 @@ export default function SobrePage() {
 
           <div className="lg:col-span-5">
             <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-sand">
-              {/* TODO(owner): replace the stock portrait with a real photo of Beatriz. */}
               <Image
-                src={unsplash('1573496359142-b8d87734a5a2')}
-                alt="Retrato de Beatriz Torres, arquiteta"
+                src="/images/beatriz-retrato.jpg"
+                alt="Beatriz Torres, arquiteta, em um apartamento com uma planta e amostras de materiais sobre a mesa"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 40vw"
@@ -100,6 +99,21 @@ export default function SobrePage() {
             <h2 id="historia-title" className="mt-4 font-display text-display text-ink">
               É onde o projeto mais faz diferença
             </h2>
+            {/* A real visit, shown as experience, not as a service: no service includes site visits. */}
+            <figure className="mt-10 max-w-sm">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[24px] bg-sand">
+                <Image
+                  src="/images/beatriz-obra.jpg"
+                  alt="Beatriz conferindo o puxador de uma porta de marcenaria em um apartamento em obra"
+                  fill
+                  sizes="(max-width: 1024px) 90vw, 384px"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="mt-3 text-[14px] leading-snug text-ink-soft">
+                Conferindo a marcenaria de um projeto. Conhecer a obra é o que deixa o caderno técnico completo.
+              </figcaption>
+            </figure>
           </div>
           {/* TODO(owner): personalise this text with Beatriz's own story. */}
           <div className="space-y-5 text-[18px] leading-relaxed text-ink-soft lg:col-span-7">
