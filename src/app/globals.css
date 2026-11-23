@@ -5,78 +5,150 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    @apply bg-brand-bg text-brand-text font-sans;
-    font-feature-settings:
-      "kern" 1,
-      "liga" 1;
+    @apply bg-linen text-ink font-sans;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
   }
 
   ::selection {
-    background-color: #3e4a3f;
-    color: #f4e9e6;
+    background-color: #a04524;
+    color: #fbf8f3;
   }
 
-  ::-webkit-scrollbar {
-    width: 6px;
+  :focus-visible {
+    outline: 2px solid #a04524;
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 
-  ::-webkit-scrollbar-track {
-    background: #f4e9e6;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #d4c5be;
-    border-radius: 3px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #3e4a3f;
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-delay: 0ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
 @layer components {
+  /* Layout */
+  .container-site {
+    @apply mx-auto w-full max-w-site px-4 sm:px-8 lg:px-10;
+  }
+
+  .section-y {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+
+  /* Type */
+  .font-display {
+    font-variation-settings: 'SOFT' 50, 'WONK' 0;
+  }
+
+  .eyebrow {
+    @apply font-sans text-[13px] font-semibold uppercase tracking-[0.16em] text-clay;
+  }
+
+  .lede {
+    @apply text-lg leading-relaxed text-ink-soft md:text-xl;
+  }
+
+  /* Buttons — one family: solid clay, outline ink, light (on dark) */
+  .btn {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full px-6 py-3
+           font-sans text-[15px] font-semibold tracking-[0.01em]
+           transition-[background-color,color,border-color,transform,box-shadow] duration-300 ease-elegant
+           hover:-translate-y-px active:translate-y-0 active:scale-[0.98];
+  }
+
   .btn-primary {
-    @apply inline-block px-8 py-3.5 bg-brand-accent text-brand-bg
-           font-sans text-sm tracking-[0.12em] uppercase
-           transition-all duration-500 ease-elegant
-           hover:bg-brand-text-light;
+    @apply btn bg-clay text-paper shadow-[0_1px_0_rgba(43,32,26,0.12)] hover:bg-clay-deep hover:shadow-[0_8px_20px_-10px_rgba(126,53,25,0.7)];
   }
 
   .btn-outline {
-    @apply inline-block px-8 py-3.5 border border-brand-accent text-brand-accent
-           font-sans text-sm tracking-[0.12em] uppercase
-           transition-all duration-500 ease-elegant
-           hover:bg-brand-accent hover:text-brand-bg;
+    @apply btn border border-ink/30 text-ink hover:border-ink hover:bg-ink hover:text-linen;
   }
 
-  .section-padding {
-    @apply px-6 md:px-12 lg:px-20 xl:px-28;
+  .btn-light {
+    @apply btn bg-linen text-ink hover:bg-paper;
   }
 
-  .section-spacing {
-    @apply py-24 md:py-32 lg:py-40;
+  .btn-ghost-light {
+    @apply btn border border-linen/40 text-linen hover:border-linen hover:bg-linen hover:text-ink;
   }
 
-  .text-label {
-    @apply font-sans text-[14px] tracking-[0.2em] uppercase text-brand-text-muted;
+  /* Text link with a drawn underline */
+  .link-draw {
+    @apply relative inline-flex items-center gap-1.5 font-semibold text-ink;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.2s;
+  }
+  .link-draw:hover,
+  .link-draw:focus-visible {
+    background-size: 100% 1px;
   }
 
-  .divider {
-    @apply w-full h-px bg-brand-border;
+  /* Photo frames: zoom inside the frame on hover */
+  .photo-zoom img {
+    transition: transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .group:hover .photo-zoom img,
+  .photo-zoom:hover img {
+    transform: scale(1.03);
   }
 
-  .divider-accent {
-    @apply w-12 h-px bg-brand-accent;
+  /* Hero entrance (runs once on load) */
+  .enter {
+    @apply animate-rise;
+    animation-delay: calc(var(--i, 0) * 110ms + 80ms);
+  }
+
+  .hairline {
+    @apply h-px w-full bg-line;
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+}
+
+/* Let a block run off the right edge of the container to the viewport edge (desktop). */
+@media (min-width: 1024px) {
+  .bleed-right {
+    margin-right: calc(-1 * max(2.5rem, (100vw - 1240px) / 2 + 2.5rem));
+  }
+}
+
+/* Align the closing CTA's text with the page container while its card runs wider. */
+@media (min-width: 1024px) {
+  .cta-align {
+    padding-left: clamp(4rem, (100vw - 1240px) / 2 + 1rem, 116px);
   }
 }

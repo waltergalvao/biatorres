@@ -1,5 +1,11 @@
 import type { Config } from 'tailwindcss'
 
+/**
+ * Beatriz Torres — brand kit "Editorial quente".
+ * Contrast (WCAG, all AA for body text): ink on linen 13.7:1 · ink-soft on linen 7.2:1 ·
+ * ink-soft on sand 6.2:1 · clay on linen 5.4:1 · clay on sand 4.6:1 · paper on clay 5.9:1 ·
+ * ochre on ink 5.8:1 · mist on ink 8.5:1 · olive on linen 5.6:1.
+ */
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -9,43 +15,56 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          bg: '#F4E9E6',
-          'bg-light': '#F9F3F1',
-          'bg-dark': '#EDE0DC',
-          'bg-deep': '#E5D5CF',
-          text: '#3E4A3F',
-          'text-light': '#5A6B5C',
-          'text-muted': '#7A8A7C',
-          accent: '#3E4A3F',
-          border: '#D4C5BE',
-          'border-light': '#E8DCD7',
+        linen: '#F4EDE3', // page ground
+        paper: '#FBF8F3', // cards, raised surfaces
+        sand: {
+          DEFAULT: '#E8DCCB', // alternate section ground
+          deep: '#DCCBB4',
         },
+        line: '#D6C6B1', // hairlines and borders (decorative)
+        ink: {
+          DEFAULT: '#2B201A', // espresso — text and dark bands
+          soft: '#5C4A3F', // secondary text
+        },
+        mist: '#CDBBA8', // secondary text on espresso
+        clay: {
+          DEFAULT: '#A04524', // terracotta — primary action and accents
+          deep: '#7E3519', // hover / pressed
+          soft: '#E9C9B0', // tints
+        },
+        olive: '#5E6136',
+        ochre: '#C89234',
       },
       fontFamily: {
-        serif: ['var(--font-cormorant)', 'Cormorant Garamond', 'Georgia', 'serif'],
-        sans: ['var(--font-manrope)', 'Manrope', 'system-ui', 'sans-serif'],
+        display: ['var(--font-fraunces)', 'Georgia', 'serif'],
+        sans: ['var(--font-hanken)', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        'display-xl': ['clamp(3rem, 6vw, 5.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
-        'display': ['clamp(2.25rem, 4.5vw, 4rem)', { lineHeight: '1.1', letterSpacing: '-0.015em' }],
-        'display-sm': ['clamp(1.75rem, 3vw, 2.75rem)', { lineHeight: '1.15', letterSpacing: '-0.01em' }],
-        'heading': ['clamp(1.25rem, 2vw, 1.75rem)', { lineHeight: '1.3' }],
+        'display-xl': ['clamp(2.6rem, 5.6vw, 5.4rem)', { lineHeight: '1', letterSpacing: '-0.025em' }],
+        display: ['clamp(2.1rem, 3.9vw, 3.6rem)', { lineHeight: '1.04', letterSpacing: '-0.02em' }],
+        'display-sm': ['clamp(1.6rem, 2.4vw, 2.25rem)', { lineHeight: '1.1', letterSpacing: '-0.015em' }],
+        heading: ['clamp(1.25rem, 1.6vw, 1.5rem)', { lineHeight: '1.25', letterSpacing: '-0.01em' }],
+        numeral: ['clamp(4.5rem, 8vw, 7.5rem)', { lineHeight: '0.85', letterSpacing: '-0.04em' }],
       },
-      spacing: {
-        '18': '4.5rem',
-        '22': '5.5rem',
-        '26': '6.5rem',
-        '30': '7.5rem',
-        '34': '8.5rem',
+      maxWidth: {
+        site: '1240px',
       },
       transitionTimingFunction: {
-        'elegant': 'cubic-bezier(0.25, 0.1, 0.25, 1)',
-        'smooth-out': 'cubic-bezier(0.0, 0.0, 0.2, 1)',
+        elegant: 'cubic-bezier(0.22, 0.61, 0.36, 1)',
       },
-      transitionDuration: {
-        '800': '800ms',
-        '1200': '1200ms',
+      keyframes: {
+        rise: {
+          from: { opacity: '0', transform: 'translateY(18px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        reveal: {
+          from: { opacity: '0', transform: 'scale(1.04)' },
+          to: { opacity: '1', transform: 'scale(1)' },
+        },
+      },
+      animation: {
+        rise: 'rise 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) both',
+        reveal: 'reveal 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) both',
       },
     },
   },

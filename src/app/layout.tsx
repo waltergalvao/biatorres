@@ -1,43 +1,66 @@
-import type { Metadata } from 'next'
-import { Cormorant_Garamond, Manrope } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { Fraunces, Hanken_Grotesk } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+import { FloatingWhatsApp } from '@/components/FloatingWhatsApp'
+import { Analytics } from '@/components/Analytics'
 
-const cormorant = Cormorant_Garamond({
+const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-cormorant',
+  style: ['normal', 'italic'],
+  axes: ['SOFT', 'WONK', 'opsz'],
+  variable: '--font-fraunces',
   display: 'swap',
 })
 
-const manrope = Manrope({
+const hanken = Hanken_Grotesk({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-manrope',
+  variable: '--font-hanken',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
-  title: 'Beatriz Torres Arquitetura — Projetos Residenciais e Ambientes Planejados',
+  metadataBase: new URL('https://biatorres.arq.br'),
+  title: 'Beatriz Torres Arquitetura — Projeto de interiores para apartamentos pequenos',
   description:
-    'Arquitetura residencial e design de interiores com sofisticação e personalidade. Projetos personalizados para quem busca viver com beleza e funcionalidade.',
+    'Consultoria de interiores online a partir de R$ 450 por ambiente, projeto completo por ambiente com imagens 3D e projeto do apartamento inteiro até 60 m² por R$ 15.000.',
   keywords: [
-    'arquitetura',
-    'design de interiores',
-    'ambientes planejados',
-    'projetos residenciais',
-    'São Paulo',
+    'projeto de interiores',
+    'consultoria de interiores online',
+    'apartamento pequeno',
+    'studio para alugar',
+    'primeiro apartamento',
+    'arquitetura São Paulo',
   ],
+  openGraph: {
+    title: 'Beatriz Torres Arquitetura',
+    description:
+      'Projeto de interiores para apartamentos pequenos. Consultoria online a partir de R$ 450 por ambiente.',
+    locale: 'pt_BR',
+    type: 'website',
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#F4EDE3',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${cormorant.variable} ${manrope.variable}`}>
-      <body className="min-h-screen overflow-x-hidden">
+    <html lang="pt-BR" className={`${fraunces.variable} ${hanken.variable}`}>
+      <body className="min-h-screen overflow-x-clip">
+        <a
+          href="#conteudo"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-linen"
+        >
+          Pular para o conteúdo
+        </a>
         <Header />
-        <main>{children}</main>
+        <main id="conteudo">{children}</main>
         <Footer />
+        <FloatingWhatsApp />
+        <Analytics />
       </body>
     </html>
   )
