@@ -10,6 +10,7 @@ import {
   audienceLinks,
   pageLinks,
   serviceLinks,
+  isArtboardRoute,
   unsplash,
   waLink,
   type NavLink,
@@ -100,6 +101,8 @@ export function Header() {
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
   const cta = pageCta(pathname)
+
+  if (isArtboardRoute(pathname)) return null
 
   // Ad landing pages (/para/*): logo and one action. No site navigation for paid traffic to
   // wander off through; the page itself links to the service details.

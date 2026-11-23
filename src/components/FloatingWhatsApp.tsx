@@ -2,7 +2,7 @@
 
 import { useHeroCtaGone } from '@/lib/useHeroCtaGone'
 import { usePathname } from 'next/navigation'
-import { waLink } from '@/lib/site'
+import { isArtboardRoute, waLink } from '@/lib/site'
 import { WhatsAppIcon } from './WhatsAppIcon'
 
 /**
@@ -13,7 +13,7 @@ export function FloatingWhatsApp() {
   const pathname = usePathname()
   const visible = useHeroCtaGone(520, pathname)
 
-  if (pathname.startsWith('/servicos/') || pathname.startsWith('/para/')) return null
+  if (pathname.startsWith('/servicos/') || pathname.startsWith('/para/') || isArtboardRoute(pathname)) return null
 
   return (
     <a
