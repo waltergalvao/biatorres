@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Check } from 'lucide-react'
 import { work } from '@/data/work'
 import { PRIMARY_CTA, unsplash, waLink } from '@/lib/site'
-import { Deliverables } from '@/components/sections/Deliverables'
+import { Work } from '@/components/sections/Work'
 import { FinalCta } from '@/components/sections/FinalCta'
 import { SectionHeader } from '@/components/sections/SectionHeader'
 import { WhatsAppIcon } from '@/components/WhatsAppIcon'
@@ -32,8 +32,6 @@ const principles = [
     text: 'Você sabe o que vai receber e quanto vai pagar antes de começar. As entregas vêm organizadas para comprar, reformar e montar.',
   },
 ]
-
-const src = (image: string) => (image.startsWith('/') ? image : unsplash(image))
 
 export default function SobrePage() {
   return (
@@ -93,6 +91,8 @@ export default function SobrePage() {
         </div>
       </section>
 
+      <Work items={work} />
+
       <section aria-labelledby="historia-title" className="section-y bg-paper">
         <div className="container-site grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
@@ -136,41 +136,6 @@ export default function SobrePage() {
         </div>
       </section>
 
-      {work.length > 0 ? (
-        <section aria-labelledby="trabalhos-title" className="section-y bg-sand">
-          <div className="container-site">
-            <SectionHeader
-              id="trabalhos-title"
-              eyebrow="Trabalhos"
-              title="Alguns projetos"
-              lede="Projetos entregues e estudos em andamento, cada um identificado pelo que mostra."
-            />
-            <ul className="mt-14 grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-              {work.map((w) => (
-                <li key={w.title}>
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-[24px] bg-sand-deep">
-                    <Image
-                      src={src(w.image)}
-                      alt={w.imageAlt}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover"
-                    />
-                    <span className="absolute left-4 top-4 rounded-full bg-linen/90 px-3 py-1.5 text-[13px] font-semibold text-ink backdrop-blur-sm">
-                      {w.kind}
-                    </span>
-                  </div>
-                  <h3 className="mt-5 font-display text-[24px] leading-tight text-ink">{w.title}</h3>
-                  <p className="mt-1 text-[14px] font-semibold uppercase tracking-[0.12em] text-olive">{w.facts}</p>
-                  <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">{w.text}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      ) : (
-        <Deliverables className="bg-sand" />
-      )}
 
       <FinalCta
         eyebrow="Vamos conversar"
