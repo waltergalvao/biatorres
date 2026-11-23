@@ -62,7 +62,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
     seo: {
       title: 'Projeto de interiores para investidores: imóveis até 60 m² | Beatriz Torres',
       description:
-        'Projeto de interiores para quem compra para alugar: layout, marcenaria e acabamentos pensados para temporada ou contrato longo. Studio de 30 m² com 3D por R$ 7.500, apartamento até 60 m² por R$ 15.000.',
+        'Projeto de interiores para quem compra para alugar: layout, marcenaria e acabamentos pensados para temporada ou contrato longo. Studio de 30 m² com 3D por R$ 7.500, apartamento até 60 m² em 10x de R$ 1.500.',
     },
     hero: {
       // Short enough for one line at 390px ("Para investidores · ..." wraps to two and pushes
@@ -79,7 +79,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
       pre: 'a partir de',
       value: 'R$ 450',
       unit: 'por ambiente',
-      note: 'Studio de 30 m² com projeto e 3D: R$ 7.500 · Apartamento até 60 m²: R$ 15.000 (10x de R$ 1.500)',
+      note: 'Studio de 30 m² com projeto e 3D: R$ 7.500 · Apartamento até 60 m²: 10x de R$ 1.500',
     },
     trust: ['Para temporada ou contrato longo', 'Compras e obra definidas antes das chaves', 'Executável à distância'],
     cta: {
@@ -111,10 +111,10 @@ export const audiences: Record<AudienceSlug, Audience> = {
           service: 'apartamento-completo',
           badge: 'Na planta ou vai reformar',
           why: 'Para preparar o imóvel inteiro, do layout aos acabamentos, com um conceito só.',
-          price: { value: 'R$ 15.000', unit: 'até 60 m²', note: 'ou 10x de R$ 1.500 · valor fixo, com lavanderia e circulação' },
+          price: { pre: '10x de', value: 'R$ 1.500', unit: 'até 60 m²', note: 'Total de R$ 15.000 · valor fixo, com lavanderia e circulação' },
           bullets: ['3D de todos os ambientes (até 10 vistas)', 'Marcenaria, iluminação e pontos elétricos', 'Memorial e caderno técnico para a obra'],
           message:
-            'Olá, Beatriz! Vim pela página para investidores. Quero o projeto do apartamento completo (R$ 15.000 até 60 m²). Meu imóvel tem (m²):',
+            'Olá, Beatriz! Vim pela página para investidores. Quero o projeto do apartamento completo (10x de R$ 1.500, até 60 m²). Meu imóvel tem (m²):',
         },
         {
           service: 'projeto-por-ambiente',
@@ -176,7 +176,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
     seo: {
       title: 'Projeto de interiores para o primeiro apartamento | Beatriz Torres Arquitetura',
       description:
-        'Pegou as chaves do primeiro apartamento? Consultoria online a partir de R$ 450 por ambiente para decidir layout, móveis e cores, ou o projeto completo até 60 m² por R$ 15.000.',
+        'Pegou as chaves do primeiro apartamento? Consultoria online a partir de R$ 450 por ambiente para decidir layout, móveis e cores, ou o projeto completo até 60 m² em 10x de R$ 1.500.',
     },
     hero: {
       eyebrow: 'Primeiro apartamento',
@@ -190,7 +190,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
       pre: 'a partir de',
       value: 'R$ 450',
       unit: 'por ambiente',
-      note: 'O apartamento inteiro, até 60 m², por R$ 15.000 ou 10x de R$ 1.500',
+      note: 'O apartamento inteiro, até 60 m², em 10x de R$ 1.500',
     },
     trust: [
       'Ainda na planta? Dá para começar antes das chaves',
@@ -235,10 +235,10 @@ export const audiences: Record<AudienceSlug, Audience> = {
           service: 'apartamento-completo',
           badge: 'Vai reformar',
           why: 'Comprou na planta ou vai reformar? Projete o apartamento inteiro antes da obra.',
-          price: { value: 'R$ 15.000', unit: 'até 60 m²', note: 'ou 10x de R$ 1.500 · todos os ambientes inclusos' },
+          price: { pre: '10x de', value: 'R$ 1.500', unit: 'até 60 m²', note: 'Total de R$ 15.000 · todos os ambientes inclusos' },
           bullets: ['3D de todos os ambientes', 'Pontos elétricos e marcenaria', 'Caderno técnico para a obra'],
           message:
-            'Olá, Beatriz! Vim pela página do primeiro apartamento. Quero o projeto do apartamento completo (R$ 15.000 até 60 m²). Meu apê tem (m²):',
+            'Olá, Beatriz! Vim pela página do primeiro apartamento. Quero o projeto do apartamento completo (10x de R$ 1.500, até 60 m²). Meu apê tem (m²):',
         },
         {
           service: 'projeto-por-ambiente',

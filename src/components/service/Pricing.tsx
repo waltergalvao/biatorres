@@ -82,14 +82,13 @@ export function Pricing({ service }: { service: Service }) {
           {pricing.kind === 'package' && (
             <div className="mt-8 rounded-[28px] bg-ink p-7 text-linen md:p-10">
               <div className="flex flex-wrap items-baseline gap-x-3">
+                {pricing.pre && <span className="text-[20px] text-mist md:text-[24px]">{pricing.pre}</span>}
                 <span className="font-display text-[56px] leading-none tracking-[-0.02em] tabular md:text-[72px]">
                   {pricing.price}
                 </span>
                 <span className="text-[17px] text-mist">{pricing.unit}</span>
               </div>
-              {pricing.installments && (
-                <p className="mt-3 text-[18px] font-semibold text-ochre">{pricing.installments}</p>
-              )}
+              {pricing.total && <p className="mt-3 text-[15px] text-mist">{pricing.total}</p>}
               <p className="mt-8 text-[13px] font-semibold uppercase tracking-[0.14em] text-ochre">Ambientes inclusos</p>
               <ul className="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2">
                 {pricing.covers.map((c) => (

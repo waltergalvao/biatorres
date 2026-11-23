@@ -9,8 +9,8 @@ export function Services() {
         <SectionHeader
           id="servicos-title"
           eyebrow="Serviços"
-          title="Do primeiro ambiente ao apartamento inteiro"
-          lede="Comece pequeno, com a consultoria de um ambiente, ou resolva tudo de uma vez. Os valores são públicos e cada serviço tem uma página com tudo o que está incluso."
+          title="Qual é o seu caso?"
+          lede="Escolha pelo que você vai fazer no apartamento. Na dúvida, comece pela consultoria. Os valores são públicos e cada serviço tem uma página com tudo o que está incluso."
         />
         <div className="mt-14 lg:mt-20">
           <ServiceLadder />

@@ -93,7 +93,7 @@ export function AreaCalculator({ perM2, minimum }: { perM2: number; minimum: num
 
       {valid && m2 >= MULTI_ROOM_M2 && (
         <div className="mt-5 rounded-2xl bg-linen/10 p-4 text-[14px] leading-snug text-mist">
-          <p>Vai projetar mais de um cômodo? O apartamento completo cobre até 60 m² por R$ 15.000, ou 10x de R$ 1.500.</p>
+          <p>Vai projetar mais de um cômodo? O apartamento completo cobre até 60 m² em 10x de R$ 1.500.</p>
           <Link
             href="/servicos/apartamento-completo"
             className="link-draw -mb-2.5 mt-0.5 bg-origin-content py-2.5 text-[14px] text-linen"

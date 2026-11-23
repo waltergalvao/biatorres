@@ -32,7 +32,7 @@ export const generalFaq: Faq[] = [
   },
   {
     q: 'Quanto custa?',
-    a: 'Consultoria online: de R$ 450 (quarto) a R$ 750 (sala + cozinha), por ambiente. Projeto por ambiente: R$ 250 por m², com mínimo de R$ 1.500. Apartamento completo até 60 m²: R$ 15.000, ou 10x de R$ 1.500. Antes de começar, eu mando a proposta por escrito com o valor fechado.',
+    a: 'Consultoria online: de R$ 450 (quarto) a R$ 750 (sala + cozinha), por ambiente. Projeto por ambiente: R$ 250 por m², com mínimo de R$ 1.500. Apartamento completo até 60 m²: 10x de R$ 1.500 (R$ 15.000 no total). Antes de começar, eu mando a proposta por escrito com o valor fechado.',
   },
   {
     q: 'A loja de planejados faz o projeto de graça. Por que pagar?',

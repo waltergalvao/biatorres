@@ -31,9 +31,11 @@ export type Pricing =
       title: string
       intro: string
       framing: string
+      pre?: string
       price: string
       unit: string
-      installments?: string
+      /** Small print under the price, e.g. the total of an installment price. */
+      total?: string
       covers: string[]
       foot: string
     }
@@ -62,7 +64,8 @@ export type Service = {
   /** Which sample deliverables this service includes (all when omitted). */
   deliverables?: DeliverableId[]
   /** Price anchor shown in the hero and the mobile sticky bar. */
-  price: { pre?: string; value: string; unit?: string; note: string; installments?: string }
+  /** `total` is the small print under an installment price (home card). */
+  price: { pre?: string; value: string; unit?: string; note: string; total?: string }
   trust: string[]
   cta: { label: string; message: string }
   fit: {
@@ -387,7 +390,7 @@ export const services: Record<ServiceSlug, Service> = {
     summary: 'O apartamento inteiro com um conceito só, 3D de todos os ambientes e projeto técnico.',
     highlights: ['Até 60 m², todos os ambientes', 'Até 10 imagens 3D', 'Memorial e caderno técnico'],
     seo: {
-      title: 'Projeto de interiores de apartamento até 60 m² por R$ 15.000 | Beatriz Torres',
+      title: 'Projeto de interiores de apartamento até 60 m² em 10x de R$ 1.500 | Beatriz Torres',
       description:
         'Projeto completo de apartamento até 60 m²: sala, cozinha, lavanderia, 2 quartos e 2 banheiros, com até 10 imagens 3D, projeto técnico, memorial descritivo e caderno para a obra.',
     },
@@ -401,10 +404,11 @@ export const services: Record<ServiceSlug, Service> = {
     },
     heroSecondary: { href: '#valores', label: 'Ver o que o pacote cobre' },
     price: {
-      value: 'R$ 15.000',
+      pre: '10x de',
+      value: 'R$ 1.500',
       unit: 'até 60 m²',
-      note: 'ou 10x de R$ 1.500 · todos os ambientes inclusos',
-      installments: 'ou 10x de R$ 1.500',
+      note: 'Total de R$ 15.000, com todos os ambientes inclusos',
+      total: 'Total de R$ 15.000',
     },
     trust: ['Até 10 imagens 3D', 'Plantas técnicas e memorial descritivo', 'Pensado para compactos e primeiro apê'],
     cta: {
@@ -477,9 +481,10 @@ export const services: Record<ServiceSlug, Service> = {
       intro: 'O pacote cobre a configuração mais comum de apartamentos até 60 m².',
       framing:
         'Pelo mesmo R$ 250/m², o preço fica fechado para o apartamento todo, com lavanderia e circulação incluídas, e um conceito só do começo ao fim.',
-      price: 'R$ 15.000',
+      pre: '10x de',
+      price: 'R$ 1.500',
       unit: 'até 60 m²',
-      installments: 'ou 10x de R$ 1.500',
+      total: 'Total de R$ 15.000',
       covers: [
         'Sala de estar e jantar integradas',
         'Cozinha',
