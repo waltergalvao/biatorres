@@ -1,6 +1,8 @@
 // Shared site data: contact, navigation and the public price list.
 // Prices come from the owner's strategy document — change them here only.
 
+import { audienceHref, audienceOrder, audiences } from '@/data/audiences'
+
 export const WHATSAPP_NUMBER = '5511999999999'
 export const WHATSAPP_DISPLAY = '+55 (11) 99999-9999'
 export const EMAIL = 'contato@beatriztorres.arq.br'
@@ -39,23 +41,11 @@ export const serviceLinks: NavLink[] = [
   },
 ]
 
-export const audienceLinks: NavLink[] = [
-  {
-    href: '/para/investidores',
-    label: 'Investidores e studios',
-    description: 'Studios para alugar por temporada ou por contrato longo.',
-  },
-  {
-    href: '/para/primeiro-apartamento',
-    label: 'Primeiro apartamento',
-    description: 'Pegou as chaves? Comece pelo ambiente que mais pesa.',
-  },
-  {
-    href: '/para/apartamentos-compactos',
-    label: 'Apartamentos compactos (até 50 m²)',
-    description: 'Cada metro com função, sem aperto.',
-  },
-]
+export const audienceLinks: NavLink[] = audienceOrder.map((slug) => ({
+  href: audienceHref(slug),
+  label: audiences[slug].card.kicker,
+  description: audiences[slug].card.menu,
+}))
 
 export const pageLinks: NavLink[] = [
   { href: '/projetos', label: 'Projetos' },

@@ -1,6 +1,14 @@
+import type { AudienceSlug } from './audiences'
 import type { ServiceSlug } from './services'
 
-export type Testimonial = { quote: string; name: string; detail: string; service: ServiceSlug }
+export type Testimonial = {
+  quote: string
+  name: string
+  detail: string
+  service: ServiceSlug
+  /** Audience landing pages (/para/*) where this quote is shown. */
+  audiences?: AudienceSlug[]
+}
 
 // TODO(owner): PLACEHOLDER testimonials. Replace with real client quotes (and permission to
 // publish name + neighbourhood) before going live, and before running ads to these pages.
@@ -11,12 +19,14 @@ export const testimonials: Testimonial[] = [
     name: 'Cliente de consultoria',
     detail: 'Studio de 32 m²',
     service: 'consultoria',
+    audiences: ['primeiro-apartamento', 'studios'],
   },
   {
     quote: 'A lista de compras com os links me poupou semanas de pesquisa. Comprei quase tudo numa tarde.',
     name: 'Cliente de consultoria',
     detail: 'Sala de estar',
     service: 'consultoria',
+    audiences: ['primeiro-apartamento'],
   },
   {
     quote:
@@ -43,5 +53,28 @@ export const testimonials: Testimonial[] = [
     name: 'Cliente de apartamento completo',
     detail: 'Apartamento de 48 m², comprado na planta',
     service: 'apartamento-completo',
+    audiences: ['primeiro-apartamento', 'investidores'],
+  },
+  {
+    quote:
+      'Comprei dois studios para alugar por temporada. O projeto deixou os dois com a mesma identidade, e o empreiteiro seguiu o caderno técnico sem eu precisar viajar.',
+    name: 'Cliente investidor',
+    detail: 'Dois studios de 28 m²',
+    service: 'apartamento-completo',
+    audiences: ['investidores', 'studios'],
+  },
+  {
+    quote: 'A marcenaria resolveu o que eu achava impossível: cama, home office e armário no mesmo studio, sem parecer apertado.',
+    name: 'Cliente de projeto',
+    detail: 'Studio de 24 m²',
+    service: 'projeto-por-ambiente',
+    audiences: ['studios'],
+  },
+  {
+    quote: 'Escolhi acabamentos pensando na manutenção, não só na foto. Um ano depois, o apartamento continua como novo.',
+    name: 'Cliente investidor',
+    detail: 'Apartamento de 42 m² para aluguel',
+    service: 'apartamento-completo',
+    audiences: ['investidores'],
   },
 ]

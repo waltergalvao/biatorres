@@ -1,18 +1,31 @@
 import Image from 'next/image'
 import { ArrowDown, Check } from 'lucide-react'
-import type { Service } from '@/data/services'
 import { unsplash, waLink } from '@/lib/site'
 import { WhatsAppIcon } from '../WhatsAppIcon'
 
 const i = (n: number) => ({ '--i': n }) as React.CSSProperties
 
-/**
- * Landing-page hero: the H1 repeats the ad's keyword, the price is visible without scrolling,
- * and the main action is a WhatsApp message already written for this service.
- */
-export function ServiceHero({ service }: { service: Service }) {
-  const { hero, price, cta, trust } = service
+export type LandingHeroProps = {
+  hero: {
+    eyebrow: string
+    title: string
+    accent: string
+    titleAfter?: string
+    lede: string
+    image: string
+    imageAlt: string
+  }
+  price: { pre?: string; value: string; unit?: string; note: string }
+  cta: { label: string; message: string }
+  trust: string[]
+  secondary: { href: string; label: string }
+}
 
+/**
+ * Landing-page hero: the H1 carries the ad's promise, the price is visible without scrolling,
+ * and the main action is a WhatsApp message already written for this page.
+ */
+export function LandingHero({ hero, price, cta, trust, secondary }: LandingHeroProps) {
   return (
     <section aria-labelledby="hero-title" className="relative overflow-hidden" data-placement="hero">
       <div className="container-site grid items-center gap-10 pb-16 pt-8 md:pt-12 lg:min-h-[calc(100svh-72px)] lg:grid-cols-12 lg:gap-12 lg:py-12">
@@ -20,7 +33,11 @@ export function ServiceHero({ service }: { service: Service }) {
           <p className="eyebrow enter" style={i(0)}>
             {hero.eyebrow}
           </p>
-          <h1 id="hero-title" className="enter mt-5 font-display text-display text-ink md:text-[clamp(2.4rem,4.4vw,4.2rem)]" style={i(1)}>
+          <h1
+            id="hero-title"
+            className="enter mt-5 font-display text-display text-ink md:text-[clamp(2.4rem,4.4vw,4.2rem)]"
+            style={i(1)}
+          >
             {hero.title} <em className="italic text-clay">{hero.accent}</em>
             {hero.titleAfter}
           </h1>
@@ -28,10 +45,7 @@ export function ServiceHero({ service }: { service: Service }) {
             {hero.lede}
           </p>
 
-          <div
-            className="enter mt-8 flex flex-wrap items-end gap-x-5 gap-y-2 border-y border-line py-5"
-            style={i(3)}
-          >
+          <div className="enter mt-8 flex flex-wrap items-end gap-x-5 gap-y-2 border-y border-line py-5" style={i(3)}>
             <p className="flex flex-wrap items-baseline gap-x-2">
               {price.pre && <span className="text-[15px] text-ink-soft">{price.pre}</span>}
               <span className="font-display text-[40px] leading-none tracking-[-0.02em] text-ink tabular md:text-[48px]">
@@ -47,12 +61,12 @@ export function ServiceHero({ service }: { service: Service }) {
               <WhatsAppIcon className="h-5 w-5" />
               {cta.label}
             </a>
-            <a href="#incluso" className="btn-outline">
-              Ver o que está incluso <ArrowDown size={16} aria-hidden />
+            <a href={secondary.href} className="btn-outline">
+              {secondary.label} <ArrowDown size={16} aria-hidden />
             </a>
           </div>
 
-          <ul className="enter mt-8 grid gap-2 text-[15px] text-ink sm:grid-cols-1" style={i(5)}>
+          <ul className="enter mt-8 grid gap-2 text-[15px] text-ink" style={i(5)}>
             {trust.map((t) => (
               <li key={t} className="flex items-center gap-2.5">
                 <Check size={17} aria-hidden className="shrink-0 text-olive" />

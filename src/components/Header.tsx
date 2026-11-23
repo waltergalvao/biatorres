@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react'
+import { ChevronDown, Menu, X } from 'lucide-react'
 import {
   PRIMARY_CTA,
   audienceLinks,
@@ -14,6 +14,7 @@ import {
   type NavLink,
 } from '@/lib/site'
 import { Logo } from './Logo'
+import { WhatsAppIcon } from './WhatsAppIcon'
 
 type MenuId = 'servicos' | 'para' | null
 
@@ -80,6 +81,33 @@ export function Header() {
   }, [])
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
+
+  // Ad landing pages (/para/*): logo and one action. No site navigation for paid traffic to
+  // wander off through; the page itself links to the service details.
+  if (pathname.startsWith('/para/')) {
+    return (
+      <header
+        className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
+          scrolled ? 'border-line bg-linen/95 backdrop-blur-md' : 'border-transparent bg-linen'
+        }`}
+        data-placement="header"
+      >
+        <div className="container-site flex h-[72px] items-center justify-between gap-4">
+          <Logo />
+          <a
+            href={PRIMARY_CTA.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary !min-h-[44px] !px-4 !py-2.5 sm:!px-5"
+          >
+            <WhatsAppIcon className="h-5 w-5" />
+            <span className="hidden sm:inline">{PRIMARY_CTA.label}</span>
+            <span className="sm:hidden">WhatsApp</span>
+          </a>
+        </div>
+      </header>
+    )
+  }
 
   return (
     <>
@@ -262,11 +290,6 @@ function ServicesPanel() {
             </li>
           ))}
         </ul>
-        <div className="mx-4 mt-2 border-t border-line pt-3">
-          <Link href="/servicos" className="link-draw text-[14px]">
-            Ver todos os serviços <ArrowRight size={15} aria-hidden />
-          </Link>
-        </div>
       </div>
       <div className="relative bg-sand">
         <Image
@@ -322,11 +345,6 @@ function MobileMenu({ open, isActive }: { open: boolean; isActive: (href: string
             {serviceLinks.map((link) => (
               <MobileSubLink key={link.href} link={link} />
             ))}
-            <li>
-              <Link href="/servicos" className="link-draw my-2 inline-flex min-h-[44px] text-[15px]">
-                Ver todos os serviços <ArrowRight size={15} aria-hidden />
-              </Link>
-            </li>
           </MobileGroup>
           <MobileGroup
             id="m-para"

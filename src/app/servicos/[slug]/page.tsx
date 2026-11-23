@@ -3,12 +3,12 @@ import { notFound } from 'next/navigation'
 import { serviceOrder, services, serviceHref, type ServiceSlug } from '@/data/services'
 import { testimonials } from '@/data/testimonials'
 import { waLink } from '@/lib/site'
-import { ServiceHero } from '@/components/service/ServiceHero'
+import { LandingHero } from '@/components/landing/LandingHero'
 import { FitCheck } from '@/components/service/FitCheck'
 import { Includes } from '@/components/service/Includes'
 import { Pricing } from '@/components/service/Pricing'
 import { CrossSell } from '@/components/service/CrossSell'
-import { StickyCta } from '@/components/service/StickyCta'
+import { StickyCta } from '@/components/landing/StickyCta'
 import { Gallery } from '@/components/sections/Gallery'
 import { Process } from '@/components/sections/Process'
 import { Testimonials } from '@/components/sections/Testimonials'
@@ -19,6 +19,8 @@ import { WhatsAppIcon } from '@/components/WhatsAppIcon'
 type Props = { params: { slug: string } }
 
 const isSlug = (s: string): s is ServiceSlug => s in services
+
+export const dynamicParams = false
 
 export function generateStaticParams() {
   return serviceOrder.map((slug) => ({ slug }))
@@ -53,7 +55,13 @@ export default function ServicePage({ params }: Props) {
   return (
     <div data-service={service.slug}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <ServiceHero service={service} />
+      <LandingHero
+        hero={service.hero}
+        price={service.price}
+        cta={service.cta}
+        trust={service.trust}
+        secondary={{ href: '#incluso', label: 'Ver o que está incluso' }}
+      />
       <FitCheck service={service} />
       <Includes service={service} />
       <Gallery />

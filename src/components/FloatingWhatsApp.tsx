@@ -7,7 +7,7 @@ import { WhatsAppIcon } from './WhatsAppIcon'
 
 /**
  * Mobile-only WhatsApp button; appears once the visitor scrolls past the hero actions.
- * Service pages have their own sticky bar with the price, so it stays hidden there.
+ * Service and audience pages have their own sticky bar with the price, so it stays hidden there.
  */
 export function FloatingWhatsApp() {
   const pathname = usePathname()
@@ -20,7 +20,7 @@ export function FloatingWhatsApp() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  if (pathname.startsWith('/servicos/')) return null
+  if (pathname.startsWith('/servicos/') || pathname.startsWith('/para/')) return null
 
   return (
     <a

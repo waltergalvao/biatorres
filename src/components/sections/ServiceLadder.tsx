@@ -8,11 +8,8 @@ const steps: { slug: ServiceSlug; n: string; step: string; featured?: boolean }[
   { slug: 'apartamento-completo', n: '03', step: 'Projete o apartamento inteiro', featured: true },
 ]
 
-/**
- * The three design services as a progression. `showPrices` is on for /servicos and off on the
- * home page, where the cards only send visitors to each service page.
- */
-export function ServiceLadder({ showPrices = true }: { showPrices?: boolean }) {
+/** The three services as a progression, without prices: each card leads to its own page. */
+export function ServiceLadder() {
   return (
     <ol className="grid gap-5 lg:grid-cols-3 lg:gap-6">
       {steps.map(({ slug, n, step, featured }, i) => {
@@ -39,32 +36,15 @@ export function ServiceLadder({ showPrices = true }: { showPrices?: boolean }) {
                 )}
               </div>
 
-              <p
-                className={`mt-6 text-[13px] font-semibold uppercase tracking-[0.14em] ${featured ? 'text-ochre' : 'text-clay'}`}
-              >
+              <p className={`mt-6 text-[13px] font-semibold uppercase tracking-[0.14em] ${featured ? 'text-ochre' : 'text-clay'}`}>
                 {step}
               </p>
               <h3 className="mt-2 font-display text-heading group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4">
                 {s.name}
               </h3>
-              <p className={`mt-2 text-[15px] leading-relaxed ${featured ? 'text-mist' : 'text-ink-soft'}`}>
-                {s.summary}
-              </p>
+              <p className={`mt-2 text-[15px] leading-relaxed ${featured ? 'text-mist' : 'text-ink-soft'}`}>{s.summary}</p>
 
-              {showPrices && (
-                <div className={`mt-7 border-t pt-6 ${featured ? 'border-linen/15' : 'border-line'}`}>
-                  {s.price.pre && (
-                    <span className={`block text-[14px] ${featured ? 'text-mist' : 'text-ink-soft'}`}>{s.price.pre}</span>
-                  )}
-                  <p className="flex flex-wrap items-baseline gap-x-2">
-                    <span className="font-display text-[48px] leading-none tracking-[-0.02em] tabular">{s.price.value}</span>
-                    <span className={`text-[15px] ${featured ? 'text-mist' : 'text-ink-soft'}`}>{s.price.unit}</span>
-                  </p>
-                  <p className={`mt-2 text-[14px] ${featured ? 'text-mist' : 'text-ink-soft'}`}>{s.price.note}</p>
-                </div>
-              )}
-
-              <ul className={`mt-7 flex-1 space-y-3 ${showPrices ? '' : `border-t pt-6 ${featured ? 'border-linen/15' : 'border-line'}`}`}>
+              <ul className={`mt-7 flex-1 space-y-3 border-t pt-6 ${featured ? 'border-linen/15' : 'border-line'}`}>
                 {s.highlights.map((item) => (
                   <li key={item} className="flex gap-3 text-[15px] leading-snug">
                     <Check size={18} aria-hidden className={`mt-px shrink-0 ${featured ? 'text-ochre' : 'text-clay'}`} />
@@ -73,10 +53,8 @@ export function ServiceLadder({ showPrices = true }: { showPrices?: boolean }) {
                 ))}
               </ul>
 
-              <span
-                className={`mt-9 inline-flex items-center gap-2 text-[15px] font-semibold ${featured ? 'text-linen' : 'text-clay'}`}
-              >
-                {showPrices ? 'Ver o que inclui e pedir' : 'Ver detalhes e valores'}
+              <span className={`mt-9 inline-flex items-center gap-2 text-[15px] font-semibold ${featured ? 'text-linen' : 'text-clay'}`}>
+                Ver detalhes e valores
                 <ArrowRight size={16} aria-hidden className="transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </Link>
@@ -95,4 +73,3 @@ export function ServiceLadder({ showPrices = true }: { showPrices?: boolean }) {
     </ol>
   )
 }
-

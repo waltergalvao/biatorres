@@ -2,7 +2,7 @@ import { Hero } from '@/components/home/Hero'
 import { About } from '@/components/home/About'
 import { Services } from '@/components/home/Services'
 import { Interlude } from '@/components/home/Interlude'
-import { Deliverables } from '@/components/home/Deliverables'
+import { Deliverables } from '@/components/sections/Deliverables'
 import { Audiences } from '@/components/home/Audiences'
 import { Process } from '@/components/sections/Process'
 import { Gallery } from '@/components/sections/Gallery'
@@ -35,7 +35,6 @@ export default function Home() {
         title="Conte o que você quer mudar na sua casa"
         text="Mande uma mensagem com o ambiente ou a metragem do apartamento. Eu indico o serviço certo e respondo com o valor fechado."
         ctaLabel={PRIMARY_CTA.label}
-        secondary={{ href: '/servicos', label: 'Ver serviços e valores' }}
       />
     </>
   )
