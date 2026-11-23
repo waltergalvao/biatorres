@@ -78,10 +78,10 @@ function ProjectDialog({ item, onClose }: { item: WorkItem | null; onClose: () =
         // A click on the backdrop lands on the <dialog> element itself.
         if (e.target === e.currentTarget) onClose()
       }}
-      className="m-auto max-h-[92svh] w-[min(1080px,calc(100vw-24px))] overflow-hidden rounded-[28px] bg-linen p-0 text-ink shadow-[0_40px_120px_-30px_rgb(var(--color-ink)/0.6)] backdrop:bg-ink/60 backdrop:backdrop-blur-sm"
+      className="m-auto max-h-[calc(92*var(--svh))] w-[min(1080px,calc(100*var(--vw)-24px))] overflow-hidden rounded-[28px] bg-linen p-0 text-ink shadow-[0_40px_120px_-30px_rgb(var(--color-ink)/0.6)] backdrop:bg-ink/60 backdrop:backdrop-blur-sm"
     >
       {item && service && current && (
-        <div className="grid max-h-[92svh] overflow-y-auto lg:grid-cols-[1.35fr_1fr]">
+        <div className="grid max-h-[calc(92*var(--svh))] overflow-y-auto lg:grid-cols-[1.35fr_1fr]">
           <div className="bg-sand p-3 sm:p-4">
             <Frame image={current} className="aspect-[4/3] rounded-[20px]" sizes="(max-width: 1024px) 100vw, 600px" />
             {item.images.length > 1 && (

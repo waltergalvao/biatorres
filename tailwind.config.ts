@@ -34,11 +34,11 @@ const config: Config = {
         sans: ['var(--font-hanken)', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        'display-xl': ['clamp(2.6rem, 5.6vw, 5.4rem)', { lineHeight: '1', letterSpacing: '-0.025em' }],
-        display: ['clamp(2.1rem, 3.9vw, 3.6rem)', { lineHeight: '1.04', letterSpacing: '-0.02em' }],
-        'display-sm': ['clamp(1.6rem, 2.4vw, 2.25rem)', { lineHeight: '1.1', letterSpacing: '-0.015em' }],
-        heading: ['clamp(1.25rem, 1.6vw, 1.5rem)', { lineHeight: '1.25', letterSpacing: '-0.01em' }],
-        numeral: ['clamp(4.5rem, 8vw, 7.5rem)', { lineHeight: '0.85', letterSpacing: '-0.04em' }],
+        'display-xl': ['clamp(2.6rem, calc(5.6 * var(--vw)), 5.4rem)', { lineHeight: '1', letterSpacing: '-0.025em' }],
+        display: ['clamp(2.1rem, calc(3.9 * var(--vw)), 3.6rem)', { lineHeight: '1.04', letterSpacing: '-0.02em' }],
+        'display-sm': ['clamp(1.6rem, calc(2.4 * var(--vw)), 2.25rem)', { lineHeight: '1.1', letterSpacing: '-0.015em' }],
+        heading: ['clamp(1.25rem, calc(1.6 * var(--vw)), 1.5rem)', { lineHeight: '1.25', letterSpacing: '-0.01em' }],
+        numeral: ['clamp(4.5rem, calc(8 * var(--vw)), 7.5rem)', { lineHeight: '0.85', letterSpacing: '-0.04em' }],
       },
       maxWidth: {
         site: '1240px',

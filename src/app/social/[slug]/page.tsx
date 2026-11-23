@@ -17,7 +17,7 @@ export default function SocialPostPage({ params }: { params: { slug: string } })
   const post = findPost(params.slug)
   if (!post) notFound()
   return (
-    <div className="min-h-screen bg-sand-deep p-10">
+    <div data-no-zoom className="min-h-screen bg-sand-deep p-10">
       <div className="mx-auto mb-6 flex max-w-[1080px] items-center justify-between gap-4">
         <Link href="/social" className="link-draw text-[15px]">
           ← Todos os posts

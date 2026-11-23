@@ -12,7 +12,7 @@ const SCALE = 0.36
 
 export default function SocialIndexPage() {
   return (
-    <div className="min-h-screen bg-sand-deep px-6 py-12 md:px-12">
+    <div data-no-zoom className="min-h-screen bg-sand-deep px-6 py-12 md:px-12">
       <p className="eyebrow">Interno</p>
       <div className="mt-3 flex flex-wrap items-end justify-between gap-6">
         <div>

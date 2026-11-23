@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Page scale. On screens 1280 px and wider the whole site renders at 110%, the way it looks with
+ * the browser zoomed to 110%: text, spacing, corners and photos all grow together.
+ *
+ * Under CSS zoom, viewport units are not adjusted (100vw comes out 10% wider than the screen),
+ * so never write vw / vh / svh directly: use var(--vw) and var(--svh), which divide by the zoom
+ * and match what real browser zoom does. Artwork pages (/social) opt out with data-no-zoom, so
+ * the posts stay exactly 1080×1350.
+ */
+:root {
+  --page-zoom: 1;
+  --vw: calc(1vw / var(--page-zoom));
+  --svh: calc(1svh / var(--page-zoom));
+}
+
+@media (min-width: 1280px) {
+  :root:not(:has([data-no-zoom])) {
+    --page-zoom: 1.1;
+    zoom: var(--page-zoom);
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -150,13 +172,13 @@
 /* Let a block run off the right edge of the container to the viewport edge (desktop). */
 @media (min-width: 1024px) {
   .bleed-right {
-    margin-right: calc(-1 * max(2.5rem, (100vw - 1240px) / 2 + 2.5rem));
+    margin-right: calc(-1 * max(2.5rem, (100 * var(--vw) - 1240px) / 2 + 2.5rem));
   }
 }
 
 /* Align the closing CTA's text with the page container while its card runs wider. */
 @media (min-width: 1024px) {
   .cta-align {
-    padding-left: clamp(4rem, (100vw - 1240px) / 2 + 1rem, 116px);
+    padding-left: clamp(4rem, (100 * var(--vw) - 1240px) / 2 + 1rem, 116px);
   }
 }
