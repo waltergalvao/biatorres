@@ -23,7 +23,9 @@ export type Audience = {
   /** Where the visitor came from, for prefilled messages: "Vim pela {source}". */
   source: string
   /** Card on the home page and in the menu. */
-  card: { kicker: string; title: string; text: string; menu: string }
+  /** `who` is the visitor describing themselves (first person, gender-neutral), the first thing
+   *  read on the home card. `kicker` is the short label used in the menu. */
+  card: { who: string; kicker: string; title: string; text: string; menu: string }
   seo: { title: string; description: string }
   hero: {
     eyebrow: string
@@ -55,6 +57,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
     slug: 'investidores',
     source: 'página para investidores',
     card: {
+      who: 'Invisto em imóveis',
       kicker: 'Investidores',
       title: 'Imóvel de renda pronto para alugar',
       text: 'Studios e apartamentos até 60 m² com layout que aproveita cada metro e acabamentos que aguentam a troca de inquilinos.',
@@ -170,6 +173,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
     slug: 'primeiro-apartamento',
     source: 'página do primeiro apartamento',
     card: {
+      who: 'Comprei meu primeiro apê',
       kicker: 'Primeiro apartamento',
       title: 'Chaves na mão, casa vazia',
       text: 'Decida o que comprar primeiro e onde cada móvel entra, antes de gastar com o que não cabe.',
@@ -285,6 +289,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
     slug: 'studios',
     source: 'página de studios',
     card: {
+      who: 'Tenho um studio',
       kicker: 'Studios',
       title: 'Tudo cabe, nada aperta',
       text: 'Dormir, trabalhar, cozinhar e receber no mesmo ambiente, com marcenaria sob medida e móveis na escala certa.',

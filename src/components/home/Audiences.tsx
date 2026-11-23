@@ -17,7 +17,7 @@ export function Audiences() {
           id="para-title"
           eyebrow="Para quem"
           title="Feito para apartamentos de até 60 m²"
-          lede="Investidor, primeiro apartamento ou studio: escolha o seu caso e veja por onde começar."
+          lede="Escolha o que descreve você e veja por onde começar."
         />
 
         <ul className="mt-10 divide-y divide-line border-y border-line md:mt-14 md:grid md:grid-cols-3 md:gap-6 md:divide-y-0 md:border-0">
@@ -37,15 +37,15 @@ export function Audiences() {
                       sizes="(max-width: 768px) 80px, 33vw"
                       className="object-cover"
                     />
-                    <span className="absolute left-4 top-4 hidden rounded-full bg-linen/90 px-3 py-1.5 text-[13px] font-semibold text-ink backdrop-blur-sm md:inline-block">
-                      {a.card.kicker}
-                    </span>
+                    <div aria-hidden className="absolute inset-x-0 bottom-0 hidden h-3/5 bg-gradient-to-t from-ink/85 via-ink/50 to-transparent md:block" />
+                    <p className="absolute inset-x-6 bottom-6 hidden items-end justify-between gap-3 font-display text-[30px] leading-[1.05] text-linen [text-shadow:0_1px_12px_rgba(43,32,26,0.45)] md:flex lg:text-[34px]">
+                      <span>{a.card.who}</span>
+                      <ArrowUpRight size={26} aria-hidden className="mb-1 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </p>
                   </div>
                   <div className="min-w-0 flex-1 md:flex md:flex-col">
-                    <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-clay md:hidden">
-                      {a.card.kicker}
-                    </p>
-                    <h3 className="mt-1 font-display text-[20px] leading-tight text-ink group-hover:text-clay md:mt-6 md:text-[26px]">
+                    <p className="font-display text-[21px] leading-tight text-clay md:hidden">{a.card.who}</p>
+                    <h3 className="mt-1 text-[15px] leading-snug text-ink-soft group-hover:text-clay md:mt-6 md:font-display md:text-[26px] md:leading-tight md:text-ink">
                       {a.card.title}
                     </h3>
                     <p className="mt-2 hidden flex-1 text-[15px] leading-relaxed text-ink-soft md:block">{a.card.text}</p>
