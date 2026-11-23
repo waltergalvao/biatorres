@@ -13,7 +13,7 @@ const i = (n: number) => ({ '--i': n }) as React.CSSProperties
 // TODO(owner): confirm these facts (kept from the previous site) and add the CAU registration
 // number. A real registration number is one of the strongest trust signals on this page.
 const credentials = [
-  'Arquiteta formada pela FAU-USP',
+  'Arquiteta e urbanista',
   'Especialização em design de interiores',
   'Mais de dez anos em projetos residenciais',
 ]

@@ -41,10 +41,10 @@ export function About() {
           <h2 id="sobre-title" className="mt-4 font-display text-display text-ink">
             Sou a Beatriz. Eu cuido de cada projeto, do briefing à entrega.
           </h2>
-          {/* TODO(owner): confirm FAU-USP, the specialization and "mais de dez anos" (same TODO in src/app/sobre/page.tsx). */}
+          {/* TODO(owner): confirm the specialization and "mais de dez anos" (same TODO in src/app/sobre/page.tsx). */}
           <p className="lede mt-6 max-w-2xl">
-            Arquiteta formada pela FAU-USP, com especialização em design de interiores e mais de dez anos
-            em projetos residenciais. Hoje me dedico a apartamentos compactos: studios para alugar,
+            Arquiteta com especialização em design de interiores e mais de dez anos em projetos
+            residenciais. Hoje me dedico a apartamentos compactos: studios para alugar,
             primeiro imóvel e quem quer fazer mais com menos metros.
           </p>
 
