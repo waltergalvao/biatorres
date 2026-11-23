@@ -7,6 +7,8 @@ import { LandingHero } from '@/components/landing/LandingHero'
 import { FitCheck } from '@/components/service/FitCheck'
 import { Includes } from '@/components/service/Includes'
 import { Pricing } from '@/components/service/Pricing'
+import { Changes } from '@/components/service/Changes'
+import { changesBySlug } from '@/data/support'
 import { CrossSell } from '@/components/service/CrossSell'
 import { StickyCta } from '@/components/landing/StickyCta'
 import { Deliverables } from '@/components/sections/Deliverables'
@@ -63,6 +65,7 @@ export default function ServicePage({ params }: Props) {
         secondary={service.heroSecondary}
       />
       <Pricing service={service} />
+      <Changes changes={changesBySlug[service.slug]} />
       <FitCheck service={service} />
       <Includes service={service} />
       <Deliverables className="bg-paper" only={service.deliverables} />

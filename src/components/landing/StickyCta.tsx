@@ -35,8 +35,8 @@ export function StickyCta({
       <div className="container-site flex items-center justify-between gap-3 py-3">
         <p className="min-w-0 leading-tight">
           {pre && <span className="block text-[12px] text-ink-soft">{pre}</span>}
-          <span className="font-display text-[22px] text-ink tabular">{value}</span>
-          {unit && <span className="ml-1 whitespace-nowrap text-[13px] text-ink-soft">{unit}</span>}
+          <span className="whitespace-nowrap font-display text-[22px] text-ink tabular">{value}</span>
+          {unit && <span className="ml-1 inline-block text-[13px] text-ink-soft">{unit}</span>}
         </p>
         <a
           href={waLink(message)}

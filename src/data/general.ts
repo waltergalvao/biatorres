@@ -1,6 +1,7 @@
 // Content shared by the home page and /servicos (not tied to a single service).
 
 import type { Faq, Step } from './services'
+import { changesFaq } from './support'
 
 export const generalProcess: Step[] = [
   {
@@ -46,6 +47,7 @@ export const generalFaq: Faq[] = [
     q: 'O que não está incluso?',
     a: 'Nenhum serviço inclui execução, gerenciamento ou acompanhamento de obra, compras e visitas técnicas. Projetos estruturais e complementares de engenharia são contratados à parte.',
   },
+  changesFaq,
   {
     // TODO(owner): confirm the terms for consultoria and projeto por ambiente, and if the 10x has juros.
     q: 'Como é o pagamento?',

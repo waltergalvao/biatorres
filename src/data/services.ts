@@ -4,6 +4,7 @@
 
 import { consultoriaPrices, projetoPrices, type RoomPrice } from '@/lib/site'
 import type { DeliverableId } from '@/components/sections/Deliverables'
+import { changesFaq, consultoriaChangesFaq, support, supportLabel } from './support'
 
 export type ServiceSlug = 'consultoria' | 'projeto-por-ambiente' | 'apartamento-completo'
 
@@ -228,6 +229,7 @@ export const services: Record<ServiceSlug, Service> = {
         q: 'Depois posso contratar um projeto completo?',
         a: 'Pode. Muita gente começa pela consultoria de um ambiente e depois segue para o projeto por ambiente ou do apartamento inteiro.',
       },
+      consultoriaChangesFaq,
       paymentFaq,
     ],
     crossSell: ['projeto-por-ambiente', 'apartamento-completo'],
@@ -264,7 +266,7 @@ export const services: Record<ServiceSlug, Service> = {
       unit: 'por m²',
       note: 'Banheiro até 6 m² R$ 1.500 · Cozinha até 12 m² R$ 3.000',
     },
-    trust: ['Imagens 3D antes de gastar com obra', 'Caderno técnico para marceneiro e pedreiro', 'Uma rodada de ajustes por etapa'],
+    trust: ['Imagens 3D antes de gastar com obra', 'Caderno técnico para marceneiro e pedreiro', `Ajustes por etapa e ${supportLabel.toLowerCase()}`],
     cta: {
       label: 'Orçar meu ambiente',
       message: 'Olá, Beatriz! Vim pela página do projeto por ambiente. Vou reformar e quero o projeto com 3D. O cômodo e a metragem são: ',
@@ -324,6 +326,7 @@ export const services: Record<ServiceSlug, Service> = {
             { title: 'Indicação de mobiliário, louças, metais e luminárias' },
             { title: 'Caderno técnico para execução' },
             { title: 'Uma rodada consolidada de alterações por etapa' },
+            { title: `Dúvidas da obra respondidas por ${support.questionsDays} dias após a entrega` },
           ],
         },
       ],
@@ -373,6 +376,7 @@ export const services: Record<ServiceSlug, Service> = {
         a: 'Não. O projeto não inclui gerenciamento nem visitas. O caderno técnico é feito para que marceneiro e empreiteiro executem sem depender de visita.',
       },
       onlineFaq,
+      changesFaq,
       paymentFaq,
     ],
     crossSell: ['consultoria', 'apartamento-completo'],
@@ -410,7 +414,11 @@ export const services: Record<ServiceSlug, Service> = {
       note: 'Total de R$ 15.000, com todos os ambientes inclusos',
       total: 'Total de R$ 15.000',
     },
-    trust: ['Até 10 imagens 3D', 'Plantas técnicas e memorial descritivo', 'Pensado para compactos e primeiro apê'],
+    trust: [
+      'Até 10 imagens 3D',
+      ...(support.measureCheck ? ['Medidas conferidas depois das chaves'] : ['Plantas técnicas e memorial descritivo']),
+      supportLabel,
+    ],
     cta: {
       label: 'Orçar meu apartamento',
       message: 'Olá, Beatriz! Vim pela página do apartamento completo e quero o projeto. Posso mandar a planta por aqui?',
@@ -471,6 +479,8 @@ export const services: Record<ServiceSlug, Service> = {
             { title: 'Referências de mobiliário e decoração' },
             { title: 'Memorial descritivo' },
             { title: 'Caderno técnico organizado para execução' },
+            ...(support.measureCheck ? [{ title: 'Conferência das medidas reais depois das chaves' }] : []),
+            { title: `Dúvidas da obra respondidas por ${support.questionsDays} dias após a entrega` },
           ],
         },
       ],
@@ -531,6 +541,7 @@ export const services: Record<ServiceSlug, Service> = {
         a: 'Pode começar por um ambiente com o projeto por ambiente. Por m² o valor é o mesmo. A diferença é que o preço fica fechado para o apartamento todo, com lavanderia e circulação incluídas, e todos os ambientes seguem um conceito só.',
       },
       onlineFaq,
+      changesFaq,
       paymentFaq,
     ],
     crossSell: ['projeto-por-ambiente', 'consultoria'],

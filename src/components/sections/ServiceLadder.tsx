@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, Check } from 'lucide-react'
 import { services, serviceHref, type ServiceSlug } from '@/data/services'
+import { supportLabel } from '@/data/support'
 
 // The three services as alternatives, by what the visitor is about to do, not as numbered steps:
 // people pick the one that matches their situation. The highlighted card is the entry point,
@@ -11,18 +12,21 @@ const cases: {
   detail: string
   priceExtra?: string
   featured?: boolean
+  /** Extra check item: support and adjustments after delivery. */
+  support?: boolean
 }[] = [
   { slug: 'consultoria', situation: 'Sem obra', detail: 'Móveis, layout e decoração', featured: true },
-  { slug: 'projeto-por-ambiente', situation: 'Vai reformar um cômodo', detail: 'Com obra e marcenaria', priceExtra: 'mínimo R$ 1.500' },
-  { slug: 'apartamento-completo', situation: 'Comprou na planta', detail: 'Ou vai reformar o apê inteiro, até 60 m²' },
+  { slug: 'projeto-por-ambiente', situation: 'Vai reformar um cômodo', detail: 'Com obra e marcenaria', priceExtra: 'mínimo R$ 1.500', support: true },
+  { slug: 'apartamento-completo', situation: 'Comprou na planta', detail: 'Ou vai reformar o apê inteiro, até 60 m²', support: true },
 ]
 
 /** One card per situation, each with its price and a link to the service page. */
 export function ServiceLadder() {
   return (
     <ul className="grid gap-5 lg:grid-cols-3 lg:gap-6">
-      {cases.map(({ slug, situation, detail, priceExtra, featured }) => {
+      {cases.map(({ slug, situation, detail, priceExtra, featured, support }) => {
         const s = services[slug]
+        const items = support ? [...s.highlights, `${supportLabel} e ajustes após a entrega`] : s.highlights
         const soft = featured ? 'text-mist' : 'text-ink-soft'
         return (
           <li key={slug} className="flex">
@@ -48,7 +52,7 @@ export function ServiceLadder() {
               <p className={`mt-2 text-[15px] leading-relaxed ${soft}`}>{s.summary}</p>
 
               <ul className="mt-6 flex-1 space-y-3">
-                {s.highlights.map((item) => (
+                {items.map((item) => (
                   <li key={item} className="flex gap-3 text-[15px] leading-snug">
                     <Check size={18} aria-hidden className={`mt-px shrink-0 ${featured ? 'text-ochre' : 'text-clay'}`} />
                     <span>{item}</span>

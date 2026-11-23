@@ -3,6 +3,7 @@
 // Prices come from the owner's strategy document; see src/data/services.ts.
 
 import type { Faq, ServiceSlug } from './services'
+import { changesFaq } from './support'
 
 export type AudienceSlug = 'investidores' | 'primeiro-apartamento' | 'studios'
 
@@ -156,6 +157,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
         q: 'O projeto inclui compras, obra e montagem?',
         a: 'Não. Você recebe a lista de produtos e o caderno técnico; compras, obra e montagem ficam com você ou com a sua equipe.',
       },
+      changesFaq,
       paymentFaq,
     ],
     final: {
@@ -270,6 +272,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
         q: 'Funciona mesmo online?',
         a: 'Sim. Você manda a planta, fotos e medidas, o briefing é por chamada de vídeo e as entregas chegam em PDF.',
       },
+      changesFaq,
       paymentFaq,
     ],
     final: {
@@ -378,6 +381,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
         q: 'Funciona mesmo online?',
         a: 'Sim. Você manda a planta, fotos e medidas, o briefing é por chamada de vídeo e as entregas chegam em PDF.',
       },
+      changesFaq,
       paymentFaq,
     ],
     final: {
