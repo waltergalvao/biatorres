@@ -1,6 +1,7 @@
 import { Hero } from '@/components/home/Hero'
 import { About } from '@/components/home/About'
 import { Services } from '@/components/home/Services'
+import { Interlude } from '@/components/home/Interlude'
 import { Deliverables } from '@/components/sections/Deliverables'
 import { Audiences } from '@/components/home/Audiences'
 import { Process } from '@/components/sections/Process'
@@ -23,6 +24,7 @@ export default function Home() {
       <Services />
       <Audiences />
       <About />
+      <Interlude />
       <Deliverables />
       <Process title="Do WhatsApp ao projeto, em quatro etapas online" steps={generalProcess}>
         <a

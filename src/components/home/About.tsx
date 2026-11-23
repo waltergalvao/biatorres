@@ -6,8 +6,8 @@ import { WhatsAppIcon } from '../WhatsAppIcon'
 
 const principles = [
   {
-    title: 'Casa pequena não perdoa improviso',
-    text: 'Em 40 m², um sofá errado ocupa a sala inteira. Eu decido tudo no papel, com as medidas do seu apartamento, antes de você gastar.',
+    title: 'Pensado para o tamanho real',
+    text: 'Em 40 m², um sofá errado ocupa a sala inteira. Cada decisão começa pelas medidas do seu apartamento.',
   },
   {
     title: 'Tudo online, sem perder o cuidado',
