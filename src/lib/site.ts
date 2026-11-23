@@ -3,9 +3,14 @@
 
 import { audienceHref, audienceOrder, audiences } from '@/data/audiences'
 
+/** The site's domain: metadata, sitemap, robots, e-mail and the Instagram posts read it from here. */
+export const SITE_DOMAIN = 'beatriztorres.com.br'
+export const SITE_URL = `https://${SITE_DOMAIN}`
+
 export const WHATSAPP_NUMBER = '5511999999999'
 export const WHATSAPP_DISPLAY = '+55 (11) 99999-9999'
-export const EMAIL = 'contato@beatriztorres.arq.br'
+// TODO(owner): confirm this mailbox exists on the domain.
+export const EMAIL = `contato@${SITE_DOMAIN}`
 
 export const DEFAULT_MESSAGE =
   'Olá, Beatriz! Vim pelo site e quero saber qual serviço faz sentido para o meu apartamento. Ele tem (m²):'

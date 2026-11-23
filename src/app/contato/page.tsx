@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from 'react'
 import { AnimateOnScroll } from '@/components/AnimateOnScroll'
 import { motion } from 'framer-motion'
+import { EMAIL } from '@/lib/site'
 
 export default function ContatoPage() {
   const [submitted, setSubmitted] = useState(false)
@@ -34,10 +35,10 @@ export default function ContatoPage() {
                 <div>
                   <h3 className="eyebrow mb-3">E-mail</h3>
                   <a
-                    href="mailto:contato@beatriztorres.arq.br"
+                    href={`mailto:${EMAIL}`}
                     className="text-ink hover:text-ink-soft transition-colors duration-300"
                   >
-                    contato@beatriztorres.arq.br
+                    {EMAIL}
                   </a>
                 </div>
 
