@@ -5,6 +5,8 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { FloatingWhatsApp } from '@/components/FloatingWhatsApp'
 import { Analytics } from '@/components/Analytics'
+import { hex } from '@/design/tokens'
+import { SITE_URL } from '@/lib/site'
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -22,7 +24,7 @@ const hanken = Hanken_Grotesk({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://biatorres.arq.br'),
+  metadataBase: new URL(SITE_URL),
   title: 'Beatriz Torres Arquitetura — Projeto de interiores para apartamentos pequenos',
   description:
     'Consultoria de interiores online a partir de R$ 450 por ambiente, projeto completo por ambiente com imagens 3D e projeto do apartamento inteiro até 60 m² em 10x de R$ 1.500.',
@@ -44,7 +46,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#F4EDE3',
+  themeColor: hex.linen,
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

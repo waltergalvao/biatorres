@@ -38,7 +38,7 @@ export function Audiences() {
                       className="object-cover"
                     />
                     <div aria-hidden className="absolute inset-x-0 bottom-0 hidden h-3/5 bg-gradient-to-t from-ink/85 via-ink/50 to-transparent md:block" />
-                    <p className="absolute inset-x-6 bottom-6 hidden items-end justify-between gap-3 font-display text-[30px] leading-[1.05] text-linen [text-shadow:0_1px_12px_rgba(43,32,26,0.45)] md:flex lg:text-[34px]">
+                    <p className="absolute inset-x-6 bottom-6 hidden items-end justify-between gap-3 font-display text-[30px] leading-[1.05] text-linen [text-shadow:0_1px_12px_rgb(var(--color-ink)/0.45)] md:flex lg:text-[34px]">
                       <span>{a.card.who}</span>
                       <ArrowUpRight size={26} aria-hidden className="mb-1 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </p>

@@ -35,7 +35,7 @@ export function FinalCta({
               <p className="mt-5 max-w-md text-[17px] leading-relaxed text-paper/90">{text}</p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <a href={waLink(message)} target="_blank" rel="noopener noreferrer" className="btn-light">
-                  <WhatsAppIcon className="h-5 w-5 text-[#1F7A4D]" />
+                  <WhatsAppIcon className="h-5 w-5 text-whatsapp" />
                   {ctaLabel}
                 </a>
                 <Link href={secondary.href} className="btn-ghost-light">

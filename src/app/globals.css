@@ -22,12 +22,12 @@
   }
 
   ::selection {
-    background-color: #a04524;
-    color: #fbf8f3;
+    background-color: rgb(var(--color-clay));
+    color: rgb(var(--color-paper));
   }
 
   :focus-visible {
-    outline: 2px solid #a04524;
+    outline: 2px solid rgb(var(--color-clay));
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -78,7 +78,7 @@
   }
 
   .btn-primary {
-    @apply btn bg-clay text-paper shadow-[0_1px_0_rgba(43,32,26,0.12)] hover:bg-clay-deep hover:shadow-[0_8px_20px_-10px_rgba(126,53,25,0.7)];
+    @apply btn bg-clay text-paper shadow-[0_1px_0_rgb(var(--color-ink)/0.12)] hover:bg-clay-deep hover:shadow-[0_8px_20px_-10px_rgb(var(--color-clay-deep)/0.7)];
   }
 
   .btn-outline {

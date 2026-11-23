@@ -1,8 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { serviceHref, serviceOrder } from '@/data/services'
 import { audienceHref, audienceOrder } from '@/data/audiences'
-
-const BASE = 'https://biatorres.arq.br'
+import { SITE_URL as BASE } from '@/lib/site'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = ['/', ...serviceOrder.map(serviceHref), ...audienceOrder.map(audienceHref), '/sobre', '/contato']
