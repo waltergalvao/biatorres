@@ -28,7 +28,7 @@ export const generalFaq: Faq[] = [
   },
   {
     q: 'Funciona mesmo online?',
-    a: 'Sim. Você manda a planta, fotos e medidas, o briefing é por chamada de vídeo e as entregas chegam em PDF. A vistoria é o único serviço presencial.',
+    a: 'Sim. Você manda a planta, fotos e medidas, o briefing é por chamada de vídeo e as entregas chegam em PDF. Por isso a cidade onde você mora não faz diferença.',
   },
   {
     q: 'Quanto custa?',
@@ -36,7 +36,7 @@ export const generalFaq: Faq[] = [
   },
   {
     q: 'Atende fora de São Paulo?',
-    a: 'Sim. Consultoria e projetos são feitos online para qualquer cidade. Só a vistoria exige visita ao imóvel.',
+    a: 'Sim. Todos os serviços são feitos online, para qualquer cidade do Brasil.',
   },
   {
     q: 'O que não está incluso?',

@@ -63,7 +63,7 @@ export function Hero() {
           >
             <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-ochre">Do primeiro móvel à obra</p>
             <p className="mt-2 font-display text-[22px] leading-tight">
-              Consultoria, projeto por ambiente, apartamento completo e vistoria.
+              Consultoria, projeto por ambiente e apartamento completo.
             </p>
           </div>
         </div>

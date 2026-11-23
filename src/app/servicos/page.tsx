@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { ServiceLadder, VistoriaStrip } from '@/components/sections/ServiceLadder'
+import { ServiceLadder } from '@/components/sections/ServiceLadder'
 import { CompareTable } from '@/components/sections/CompareTable'
 import { Process } from '@/components/sections/Process'
 import { Faq } from '@/components/sections/Faq'
@@ -10,7 +10,7 @@ import { generalFaq, generalProcess } from '@/data/general'
 export const metadata: Metadata = {
   title: 'Serviços e valores | Beatriz Torres Arquitetura',
   description:
-    'Consultoria de interiores a partir de R$ 450 por ambiente, projeto por ambiente com 3D a R$ 250/m², apartamento completo até 60 m² por R$ 15.000 e vistoria de imóvel.',
+    'Consultoria de interiores a partir de R$ 450 por ambiente, projeto por ambiente com 3D a R$ 250/m² e apartamento completo até 60 m² por R$ 15.000.',
   alternates: { canonical: '/servicos' },
 }
 
@@ -34,7 +34,6 @@ export default function ServicosPage() {
 
           <div className="mt-14 lg:mt-20">
             <ServiceLadder />
-            <VistoriaStrip />
           </div>
           <p className="mt-8 text-center text-[14px] text-ink-soft">
             Nenhum serviço inclui execução, gestão de obra ou compras. Projetos de engenharia são contratados à parte.

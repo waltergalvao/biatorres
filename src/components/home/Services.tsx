@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { SectionHeader } from '../sections/SectionHeader'
-import { ServiceLadder, VistoriaStrip } from '../sections/ServiceLadder'
+import { ServiceLadder } from '../sections/ServiceLadder'
 
 /** The services, without prices: each card leads to its own page, where the prices are. */
 export function Services() {
@@ -16,7 +16,6 @@ export function Services() {
         />
         <div className="mt-14 lg:mt-20">
           <ServiceLadder showPrices={false} />
-          <VistoriaStrip />
         </div>
         <p className="mt-8 text-center">
           <Link href="/servicos" className="link-draw text-[15px]">

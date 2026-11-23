@@ -37,12 +37,6 @@ export const serviceLinks: NavLink[] = [
     description: 'O apartamento inteiro em um projeto só, até 60 m².',
     meta: 'R$ 15.000',
   },
-  {
-    href: '/servicos/vistoria',
-    label: 'Vistoria de imóvel',
-    description: 'Laudo com fotos antes de receber as chaves ou alugar.',
-    meta: 'laudo em 48 h',
-  },
 ]
 
 export const audienceLinks: NavLink[] = [

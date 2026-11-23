@@ -46,7 +46,7 @@ export default function ServicePage({ params }: Props) {
     name: service.name,
     description: service.seo.description,
     serviceType: service.name,
-    areaServed: service.slug === 'vistoria' ? 'São Paulo, SP' : 'BR',
+    areaServed: 'BR',
     provider: { '@type': 'ProfessionalService', name: 'Beatriz Torres Arquitetura' },
   }
 
@@ -56,15 +56,11 @@ export default function ServicePage({ params }: Props) {
       <ServiceHero service={service} />
       <FitCheck service={service} />
       <Includes service={service} />
-      {service.slug !== 'vistoria' && <Gallery />}
+      <Gallery />
       <Pricing service={service} />
       <Process
         title="Como funciona, passo a passo"
-        lede={
-          service.slug === 'vistoria'
-            ? 'Do primeiro contato ao laudo, sem complicação.'
-            : 'Tudo online: mensagem, chamada de vídeo e arquivos. Você não precisa estar em São Paulo.'
-        }
+        lede="Tudo online: mensagem, chamada de vídeo e arquivos. Você não precisa estar em São Paulo."
         steps={service.process}
       >
         <a

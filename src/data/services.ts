@@ -4,7 +4,7 @@
 
 import { consultoriaPrices, projetoPrices, type RoomPrice } from '@/lib/site'
 
-export type ServiceSlug = 'consultoria' | 'projeto-por-ambiente' | 'apartamento-completo' | 'vistoria'
+export type ServiceSlug = 'consultoria' | 'projeto-por-ambiente' | 'apartamento-completo'
 
 export type Step = { title: string; text: string }
 export type Faq = { q: string; a: string }
@@ -28,13 +28,6 @@ export type Pricing =
       price: string
       unit: string
       covers: string[]
-      foot: string
-    }
-  | {
-      kind: 'quote'
-      title: string
-      intro: string
-      factors: string[]
       foot: string
     }
 
@@ -504,109 +497,8 @@ export const services: Record<ServiceSlug, Service> = {
     sideImage: { id: '1600210492486-724fe5c67fb0', alt: 'Sala de estar clara com sofá de couro, mesa de centro de madeira e quadros na parede' },
   },
 
-  vistoria: {
-    slug: 'vistoria',
-    name: 'Vistoria de imóvel',
-    summary: 'Laudo com fotos antes de receber as chaves, ou na entrada e na saída do inquilino.',
-    highlights: ['Registro fotográfico completo', 'Elétrica, hidráulica e acabamentos', 'Lista de pendências'],
-    seo: {
-      title: 'Vistoria de imóvel novo e para aluguel | Beatriz Torres Arquitetura',
-      description:
-        'Vistoria técnica feita por arquiteta antes de receber as chaves do imóvel novo ou na entrada e saída do inquilino. Laudo com fotos, instalações, acabamentos e lista de pendências.',
-    },
-    hero: {
-      eyebrow: 'Vistoria de imóvel',
-      title: 'Vistoria antes de receber as chaves',
-      accent: 'ou de alugar',
-      lede: 'Recebeu um apartamento novo ou vai alugar o seu? A vistoria registra pendências e defeitos antes da mudança e documenta o estado do imóvel na entrada e na saída do inquilino.',
-      image: '1630699144867-37acec97df5a',
-      imageAlt: 'Apartamento novo vazio, com piso de madeira e porta de vidro para a varanda',
-    },
-    // TODO(owner): there is no vistoria price in the strategy document. Add one here if you
-    // want it shown; until then the page asks for a quote.
-    price: {
-      value: 'Sob consulta',
-      note: 'Valor fechado antes da visita, conforme metragem e endereço',
-    },
-    // TODO(owner): confirm "laudo em até 48 horas" (kept from the previous site).
-    trust: ['Feita por arquiteta', 'Laudo com registro fotográfico', 'Relatório em até 48 horas'],
-    cta: {
-      label: 'Pedir orçamento da vistoria',
-      message: 'Olá, Beatriz! Vim pela página da vistoria. Quero orçar uma vistoria. Bairro e metragem: ',
-    },
-    fit: {
-      yes: [
-        'Vai receber as chaves de um imóvel novo da construtora',
-        'Vai alugar seu imóvel e quer documentar o estado na entrada',
-        'O inquilino vai sair e você precisa comparar com a entrada',
-        'Comprou um imóvel usado e quer saber o que precisa de reparo',
-      ],
-      no: [
-        {
-          text: 'Quer decorar ou reorganizar o imóvel, não inspecionar.',
-          label: 'Veja a consultoria',
-          href: '/servicos/consultoria',
-        },
-      ],
-    },
-    includes: {
-      title: 'O que a vistoria verifica',
-      intro: 'Uma visita ao imóvel e um laudo técnico com tudo o que foi encontrado.',
-      groups: [
-        {
-          items: [
-            { title: 'Registro fotográfico completo', text: 'Cada ambiente fotografado e identificado no laudo.' },
-            { title: 'Instalações elétricas e hidráulicas', text: 'Tomadas, interruptores, torneiras, ralos e registros.' },
-            { title: 'Vícios aparentes e ocultos', text: 'Trincas, infiltrações, desníveis e falhas de execução.' },
-            { title: 'Acabamentos e revestimentos', text: 'Pisos, pintura, rejuntes, esquadrias e louças.' },
-            { title: 'Laudo técnico', text: 'Relatório com fotos e a lista de pendências para cobrar ou comparar.' },
-          ],
-        },
-      ],
-    },
-    pricing: {
-      kind: 'quote',
-      title: 'Orçamento pelo tamanho do imóvel',
-      intro: 'O valor da vistoria é fechado antes da visita e depende de três coisas:',
-      factors: ['Metragem do imóvel', 'Endereço', 'Tipo: entrega de chaves, entrada ou saída de inquilino'],
-      foot: 'Mande o bairro e a metragem pelo WhatsApp e receba o valor.',
-    },
-    notIncluded: [
-      'Reparos e acompanhamento de obra',
-      'Laudos estruturais ou de engenharia',
-      'Projeto ou consultoria de interiores (contratados à parte)',
-    ],
-    process: [
-      { title: 'Mande bairro e metragem', text: 'Pelo WhatsApp. Você recebe o valor e as datas disponíveis.' },
-      { title: 'Agende a visita', text: 'De preferência antes de assinar o termo de recebimento ou o contrato.' },
-      { title: 'Vistoria no imóvel', text: 'Inspeção de cada ambiente, com fotos e testes das instalações.' },
-      { title: 'Receba o laudo', text: 'Relatório com fotos e a lista de pendências.' },
-    ],
-    faq: [
-      {
-        q: 'Quando devo fazer a vistoria de entrega de chaves?',
-        a: 'Antes de assinar o termo de recebimento. Assim as pendências ficam registradas e podem ser cobradas da construtora.',
-      },
-      {
-        q: 'O laudo serve para o contrato de aluguel?',
-        a: 'Serve. O laudo de entrada documenta o estado do imóvel com fotos e pode ser anexado ao contrato. Na saída, ele é a base de comparação.',
-      },
-      {
-        // TODO(owner): confirm the area served in person.
-        q: 'Atende em quais cidades?',
-        a: 'A vistoria é o único serviço presencial. Atendo São Paulo e região. Mande o endereço e eu confirmo.',
-      },
-      paymentFaq,
-    ],
-    crossSell: ['consultoria', 'apartamento-completo'],
-    final: {
-      title: 'Agende a vistoria antes de assinar',
-      text: 'Mande o bairro, a metragem e o tipo de vistoria. A resposta vem com o valor e as datas.',
-    },
-    sideImage: { id: '1503387837-b154d5074bd2', alt: 'Mão anotando sobre folha de projeto impressa, com escalímetro' },
-  },
 }
 
-export const serviceOrder: ServiceSlug[] = ['consultoria', 'projeto-por-ambiente', 'apartamento-completo', 'vistoria']
+export const serviceOrder: ServiceSlug[] = ['consultoria', 'projeto-por-ambiente', 'apartamento-completo']
 
 export const serviceHref = (slug: ServiceSlug) => `/servicos/${slug}`

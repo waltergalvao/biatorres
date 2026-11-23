@@ -96,23 +96,3 @@ export function ServiceLadder({ showPrices = true }: { showPrices?: boolean }) {
   )
 }
 
-/** Vistoria, shown as a smaller fourth service next to the ladder. */
-export function VistoriaStrip() {
-  const v = services.vistoria
-  return (
-    <Link
-      href={serviceHref('vistoria')}
-      className="group mt-6 flex flex-col justify-between gap-4 rounded-[28px] border border-line bg-sand p-7 transition-colors duration-300 hover:bg-sand-deep md:flex-row md:items-center md:p-9"
-    >
-      <div>
-        <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-olive">Também faço</p>
-        <h3 className="mt-2 font-display text-heading text-ink">{v.name}</h3>
-        <p className="mt-1 max-w-xl text-[15px] leading-relaxed text-ink-soft">{v.summary}</p>
-      </div>
-      <span className="inline-flex shrink-0 items-center gap-2 text-[15px] font-semibold text-ink">
-        Ver como funciona
-        <ArrowRight size={16} aria-hidden className="transition-transform duration-300 group-hover:translate-x-1" />
-      </span>
-    </Link>
-  )
-}

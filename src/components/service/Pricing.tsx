@@ -98,19 +98,6 @@ export function Pricing({ service }: { service: Service }) {
             </div>
           )}
 
-          {pricing.kind === 'quote' && (
-            <ol className="mt-8 border-t border-ink/25">
-              {pricing.factors.map((f, n) => (
-                <li key={f} className="flex items-baseline gap-5 border-b border-ink/10 py-5">
-                  <span aria-hidden className="font-display text-[28px] italic text-clay">
-                    {n + 1}
-                  </span>
-                  <span className="font-display text-[22px] text-ink">{f}</span>
-                </li>
-              ))}
-            </ol>
-          )}
-
           <p className="mt-5 text-[15px] leading-relaxed text-ink-soft">{pricing.foot}</p>
 
           <div className="mt-10 rounded-[24px] border border-ink/15 p-6 md:p-7">
@@ -142,12 +129,10 @@ export function Pricing({ service }: { service: Service }) {
           )}
           <div className="rounded-[24px] bg-paper p-7">
             <p className="font-display text-[24px] leading-tight text-ink">
-              {pricing.kind === 'quote' ? 'Receba o valor pelo WhatsApp' : 'Valor fechado antes de começar'}
+              Valor fechado antes de começar
             </p>
             <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">
-              {pricing.kind === 'quote'
-                ? 'Mande o bairro e a metragem. A resposta vem com o valor e as datas para a visita.'
-                : 'Mande a planta ou as medidas. Você recebe a proposta por escrito, com valor, prazo e condições.'}
+              Mande a planta ou as medidas. Você recebe a proposta por escrito, com valor, prazo e condições.
             </p>
             <a href={waLink(cta.message)} target="_blank" rel="noopener noreferrer" className="btn-primary mt-6 w-full sm:w-auto">
               <WhatsAppIcon className="h-5 w-5" />
