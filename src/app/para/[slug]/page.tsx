@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { audienceHref, audienceOrder, audiences, type AudienceSlug } from '@/data/audiences'
 import { generalProcess } from '@/data/general'
 import { testimonials } from '@/data/testimonials'
-import { waLink } from '@/lib/site'
+import { EMAIL, waLink } from '@/lib/site'
 import { LandingHero } from '@/components/landing/LandingHero'
 import { Contrast } from '@/components/landing/Contrast'
 import { Packages } from '@/components/landing/Packages'
@@ -16,7 +16,7 @@ import { FinalCta } from '@/components/sections/FinalCta'
 import { WhatsAppIcon } from '@/components/WhatsAppIcon'
 
 // Google Ads landing pages. The header drops the site navigation on /para/* (see Header),
-// so the only ways forward are the WhatsApp buttons and the package pages.
+// and the footer to contact links (see Footer), so the only ways forward are WhatsApp and e-mail.
 
 type Props = { params: { slug: string } }
 
@@ -70,15 +70,16 @@ export default function AudiencePage({ params }: Props) {
         <p className="text-[15px] text-ink-soft">O primeiro passo é uma mensagem. Sem compromisso.</p>
       </Process>
       <Testimonials items={quotes} />
-      <Faq items={a.faq} message={`Olá, Beatriz! Vim pela página de ${a.card.kicker.toLowerCase()} e tenho uma dúvida: `} />
+      <Faq items={a.faq} message={`Olá, Beatriz! Vim pela ${a.source} e tenho uma dúvida:`} />
       <FinalCta
         eyebrow={a.card.kicker}
         title={a.final.title}
         text={a.final.text}
         ctaLabel={a.cta.label}
         message={a.cta.message}
+        secondary={{ href: `mailto:${EMAIL}`, label: 'Prefiro e-mail' }}
       />
-      <StickyCta pre={a.price.pre} value={a.price.value} unit={a.price.unit} label="Pedir orçamento" message={a.cta.message} />
+      <StickyCta pre={a.price.pre} value={a.price.value} unit={a.price.unit} label={a.cta.label} message={a.cta.message} />
     </div>
   )
 }

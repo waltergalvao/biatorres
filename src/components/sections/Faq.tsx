@@ -37,7 +37,7 @@ export function Faq({
             href={waLink(message)}
             target="_blank"
             rel="noopener noreferrer"
-            className="link-draw mt-3 text-[16px] !text-clay"
+            className="link-draw -mb-2.5 mt-0.5 bg-origin-content py-2.5 text-[16px] !text-clay"
           >
             Enviar uma pergunta
           </a>

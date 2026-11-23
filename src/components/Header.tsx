@@ -11,6 +11,7 @@ import {
   pageLinks,
   serviceLinks,
   unsplash,
+  waLink,
   type NavLink,
 } from '@/lib/site'
 import { audienceHref, audienceOrder, audiences } from '@/data/audiences'
@@ -19,6 +20,21 @@ import { Logo } from './Logo'
 import { WhatsAppIcon } from './WhatsAppIcon'
 
 type MenuId = 'servicos' | 'para' | null
+
+/**
+ * The header CTA carries the current page's WhatsApp message and service, so a lead from the
+ * header of a service or ad page keeps its context (and its attribution in Analytics).
+ */
+function pageCta(pathname: string): { href: string; service?: string } {
+  const [, section, slug] = pathname.split('/')
+  if (section === 'servicos' && slug && slug in services) {
+    return { href: waLink(services[slug as keyof typeof services].cta.message), service: slug }
+  }
+  if (section === 'para' && slug && slug in audiences) {
+    return { href: waLink(audiences[slug as keyof typeof audiences].cta.message), service: `para-${slug}` }
+  }
+  return { href: PRIMARY_CTA.href }
+}
 
 export function Header() {
   const pathname = usePathname()
@@ -83,6 +99,7 @@ export function Header() {
   }, [])
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
+  const cta = pageCta(pathname)
 
   // Ad landing pages (/para/*): logo and one action. No site navigation for paid traffic to
   // wander off through; the page itself links to the service details.
@@ -93,11 +110,12 @@ export function Header() {
           scrolled ? 'border-line bg-linen/95 backdrop-blur-md' : 'border-transparent bg-linen'
         }`}
         data-placement="header"
+        data-service={cta.service}
       >
         <div className="container-site flex h-[72px] items-center justify-between gap-4">
           <Logo />
           <a
-            href={PRIMARY_CTA.href}
+            href={cta.href}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary !min-h-[44px] !px-4 !py-2.5 sm:!px-5"
@@ -119,8 +137,10 @@ export function Header() {
           ? 'border-line bg-linen/95 backdrop-blur-md'
           : 'border-transparent bg-linen'
       }`}
+      data-placement="header"
+      data-service={cta.service}
     >
-      <div className="container-site flex h-[72px] items-center justify-between gap-6">
+      <div className="container-site flex h-[72px] items-center justify-between gap-3 sm:gap-6">
         <Logo />
 
         {/* Desktop navigation */}
@@ -168,12 +188,22 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <a
-            href={PRIMARY_CTA.href}
+            href={cta.href}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary hidden !min-h-[44px] !px-5 !py-2.5 sm:inline-flex"
           >
             {PRIMARY_CTA.label}
+          </a>
+          {/* Phones: a WhatsApp button next to Menu, so the action never needs the menu. */}
+          <a
+            href={cta.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Falar com a Beatriz no WhatsApp"
+            className="btn-primary !h-11 !min-h-0 !w-11 shrink-0 !p-0 sm:hidden"
+          >
+            <WhatsAppIcon className="h-5 w-5" />
           </a>
           <button
             id="mobile-menu-button"
@@ -181,7 +211,7 @@ export function Header() {
             onClick={() => setMobileOpen((v) => !v)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
-            className="inline-flex h-11 items-center gap-2 rounded-full border border-ink/20 px-4 text-[15px] font-semibold text-ink transition-colors hover:bg-sand lg:hidden"
+            className="inline-flex h-11 items-center gap-2 rounded-full border border-ink/20 px-3.5 text-[15px] font-semibold text-ink transition-colors hover:bg-sand sm:px-4 lg:hidden"
           >
             {mobileOpen ? <X size={18} aria-hidden /> : <Menu size={18} aria-hidden />}
             <span>{mobileOpen ? 'Fechar' : 'Menu'}</span>
@@ -341,7 +371,6 @@ function PreviewPanel({ links, previews }: { links: NavLink[]; previews: Record<
               alt=""
               fill
               sizes="260px"
-              loading="eager"
               className={`object-cover transition-opacity duration-500 ease-elegant ${
                 link.href === active ? 'opacity-100' : 'opacity-0'
               }`}
@@ -414,6 +443,7 @@ function MobileMenu({ open, isActive }: { open: boolean; isActive: (href: string
       <div className="border-t border-line bg-paper">
         <div className="container-site py-4">
           <a
+            data-placement="menu-mobile"
             href={PRIMARY_CTA.href}
             target="_blank"
             rel="noopener noreferrer"

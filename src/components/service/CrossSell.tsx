@@ -9,7 +9,7 @@ export function CrossSell({ service }: { service: Service }) {
   const others = service.crossSell.map((slug) => services[slug])
 
   return (
-    <section aria-labelledby="outros-title" className="section-y bg-paper">
+    <section aria-labelledby="outros-title" className="section-y">
       <div className="container-site">
         <p className="eyebrow">Outros serviços</p>
         <h2 id="outros-title" className="mt-4 font-display text-display-sm text-ink">
@@ -21,7 +21,7 @@ export function CrossSell({ service }: { service: Service }) {
             <li key={s.slug}>
               <Link
                 href={serviceHref(s.slug)}
-                className="group grid h-full overflow-hidden rounded-[28px] border border-line bg-linen transition-transform duration-500 ease-elegant hover:-translate-y-0.5 sm:grid-cols-[180px_1fr]"
+                className="group grid h-full overflow-hidden rounded-[28px] border border-line bg-paper transition-transform duration-500 ease-elegant hover:-translate-y-0.5 sm:grid-cols-[180px_1fr]"
               >
                 <div className="photo-zoom relative aspect-[16/9] sm:aspect-auto">
                   <Image src={unsplash(s.hero.image)} alt="" fill sizes="(max-width: 640px) 100vw, 180px" className="object-cover" />

@@ -1,10 +1,18 @@
 import Image from 'next/image'
 import { ArrowDown, Check } from 'lucide-react'
+import { services } from '@/data/services'
 import { unsplash, waLink } from '@/lib/site'
+import { WhatsAppIcon } from '../WhatsAppIcon'
 
 const i = (n: number) => ({ '--i': n }) as React.CSSProperties
 
-const trust = ['Atendimento online para todo o Brasil', 'Arquiteta do briefing à entrega', 'Valor fechado antes de começar']
+const consultoria = services.consultoria.price // "R$ 450" / "por ambiente"
+
+const trust = [
+  `Consultoria online a partir de ${consultoria.value} ${consultoria.unit}`,
+  'Arquiteta do briefing à entrega',
+  'Valor fechado antes de começar',
+]
 
 export function Hero() {
   return (
@@ -23,16 +31,19 @@ export function Hero() {
           </p>
 
           <div className="enter mt-9 flex flex-col gap-3 sm:flex-row" style={i(3)}>
-            <a href="#servicos" className="btn-primary">
-              Conhecer os serviços <ArrowDown size={16} aria-hidden />
-            </a>
             <a
-              href={waLink('Olá, Beatriz! Vi o site e quero entender qual serviço faz sentido para mim.')}
+              href={waLink(
+                'Olá, Beatriz! Vim pelo site e quero saber qual serviço faz sentido para o meu apartamento. Ele tem (m²):',
+              )}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-outline"
+              className="btn-primary"
             >
-              Conversar pelo WhatsApp
+              <WhatsAppIcon className="h-5 w-5" />
+              Falar com a Beatriz no WhatsApp
+            </a>
+            <a href="#servicos" className="btn-outline">
+              Ver serviços e valores <ArrowDown size={16} aria-hidden />
             </a>
           </div>
 
@@ -53,7 +64,8 @@ export function Hero() {
               alt="Sala pequena com poltrona terracota, aparador de madeira, espelho redondo e plantas"
               fill
               priority
-              sizes="(max-width: 1024px) 100vw, 55vw"
+              sizes="(max-width: 640px) 92vw, (max-width: 1024px) 100vw, 55vw"
+              quality={70}
               className="animate-reveal object-cover"
             />
           </div>
@@ -61,9 +73,9 @@ export function Hero() {
             className="enter absolute -bottom-6 left-4 right-4 rounded-2xl bg-ink p-5 text-linen shadow-[0_24px_50px_-20px_rgba(43,32,26,0.6)] sm:left-auto sm:right-6 sm:w-[300px] lg:-left-10 lg:bottom-10 lg:right-auto"
             style={i(5)}
           >
-            <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-ochre">Do primeiro móvel à obra</p>
+            <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-ochre">A partir de</p>
             <p className="mt-2 font-display text-[22px] leading-tight">
-              Consultoria, projeto por ambiente e apartamento completo.
+              {consultoria.value} {consultoria.unit}, 100% online
             </p>
           </div>
         </div>

@@ -7,6 +7,8 @@ import { LandingHero } from '@/components/landing/LandingHero'
 import { FitCheck } from '@/components/service/FitCheck'
 import { Includes } from '@/components/service/Includes'
 import { Pricing } from '@/components/service/Pricing'
+import { Changes } from '@/components/service/Changes'
+import { changesBySlug } from '@/data/support'
 import { CrossSell } from '@/components/service/CrossSell'
 import { StickyCta } from '@/components/landing/StickyCta'
 import { Deliverables } from '@/components/sections/Deliverables'
@@ -60,12 +62,13 @@ export default function ServicePage({ params }: Props) {
         price={service.price}
         cta={service.cta}
         trust={service.trust}
-        secondary={{ href: '#incluso', label: 'Ver o que está incluso' }}
+        secondary={service.heroSecondary}
       />
+      <Pricing service={service} />
+      <Changes changes={changesBySlug[service.slug]} />
       <FitCheck service={service} />
       <Includes service={service} />
-      <Deliverables className="bg-paper" />
-      <Pricing service={service} />
+      <Deliverables className="bg-paper" only={service.deliverables} />
       <Process
         title="Como funciona, passo a passo"
         lede="Tudo online: mensagem, chamada de vídeo e arquivos. Você não precisa estar em São Paulo."
@@ -84,8 +87,8 @@ export default function ServicePage({ params }: Props) {
         <p className="text-[15px] text-ink-soft">O primeiro passo é uma mensagem. Sem compromisso.</p>
       </Process>
       <Testimonials items={quotes} />
-      <Faq items={service.faq} message={`Olá, Beatriz! Tenho uma dúvida sobre ${service.name.toLowerCase()}: `} />
       <CrossSell service={service} />
+      <Faq items={service.faq} message={`Olá, Beatriz! Vim pela página ${service.source} e tenho uma dúvida: `} />
       <FinalCta
         eyebrow={service.name}
         title={service.final.title}
@@ -97,7 +100,7 @@ export default function ServicePage({ params }: Props) {
         pre={service.price.pre}
         value={service.price.value}
         unit={service.price.unit}
-        label="Pedir orçamento"
+        label={service.cta.label}
         message={service.cta.message}
       />
     </div>

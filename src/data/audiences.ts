@@ -3,6 +3,7 @@
 // Prices come from the owner's strategy document; see src/data/services.ts.
 
 import type { Faq, ServiceSlug } from './services'
+import { changesFaq } from './support'
 
 export type AudienceSlug = 'investidores' | 'primeiro-apartamento' | 'studios'
 
@@ -19,8 +20,12 @@ export type Package = {
 
 export type Audience = {
   slug: AudienceSlug
+  /** Where the visitor came from, for prefilled messages: "Vim pela {source}". */
+  source: string
   /** Card on the home page and in the menu. */
-  card: { kicker: string; title: string; text: string; menu: string }
+  /** `who` is the visitor describing themselves (first person, gender-neutral), the first thing
+   *  read on the home card. `kicker` is the short label used in the menu. */
+  card: { who: string; kicker: string; title: string; text: string; menu: string }
   seo: { title: string; description: string }
   hero: {
     eyebrow: string
@@ -40,16 +45,19 @@ export type Audience = {
   final: { title: string; text: string }
 }
 
-// TODO(owner): confirm the payment terms and state them here.
+// TODO(owner): confirm the payment terms for consultoria and projeto por ambiente, and whether
+// the 10x for the apartment is com ou sem juros (and by which method).
 const paymentFaq: Faq = {
   q: 'Como é o pagamento?',
-  a: 'As condições de pagamento vêm por escrito na proposta, junto com o valor fechado, antes de qualquer trabalho começar.',
+  a: 'Pagamento do apartamento completo: em até 10x de R$ 1.500. Para os outros serviços, eu envio as condições de pagamento por escrito na proposta, junto com o valor fechado, antes de qualquer trabalho começar.',
 }
 
 export const audiences: Record<AudienceSlug, Audience> = {
   investidores: {
     slug: 'investidores',
+    source: 'página para investidores',
     card: {
+      who: 'Invisto em imóveis',
       kicker: 'Investidores',
       title: 'Imóvel de renda pronto para alugar',
       text: 'Studios e apartamentos até 60 m² com layout que aproveita cada metro e acabamentos que aguentam a troca de inquilinos.',
@@ -58,30 +66,30 @@ export const audiences: Record<AudienceSlug, Audience> = {
     seo: {
       title: 'Projeto de interiores para investidores: imóveis até 60 m² | Beatriz Torres',
       description:
-        'Projeto de interiores para quem compra para alugar: layout, marcenaria e acabamentos pensados para temporada ou contrato longo. Apartamento completo até 60 m² por R$ 15.000.',
+        'Projeto de interiores para quem compra para alugar: layout, marcenaria e acabamentos pensados para temporada ou contrato longo. Studio de 30 m² com 3D por R$ 7.500, apartamento até 60 m² em 10x de R$ 1.500.',
     },
     hero: {
-      eyebrow: 'Para investidores · imóveis até 60 m²',
-      title: 'Seu imóvel de investimento pronto para',
-      accent: 'alugar bem',
-      lede: 'Projeto de interiores para studios e apartamentos de até 60 m² comprados para renda: layout que aproveita cada metro, acabamentos que aguentam a rotatividade e um visual que se destaca no anúncio.',
+      // Short enough for one line at 390px ("Para investidores · ..." wraps to two and pushes
+      // the WhatsApp button below the fold in in-app browsers).
+      eyebrow: 'Investidores · studios e aptos até 60 m²',
+      title: 'Imóvel de renda que',
+      accent: 'se destaca no anúncio',
+      titleAfter: ' e aguenta a troca de inquilinos',
+      lede: 'Projeto online para Airbnb ou contrato longo: layout que acomoda bem, materiais fáceis de limpar e manual da obra.',
       image: '1595526114035-0d45ed16cfbf',
       imageAlt: 'Quarto claro de studio com cama de casal, mesa de cabeceira e janela',
     },
     price: {
-      pre: 'projeto completo',
-      value: 'R$ 15.000',
-      unit: 'até 60 m²',
-      note: 'Só mobiliar e decorar? Consultoria a partir de R$ 450 por ambiente',
+      pre: 'a partir de',
+      value: 'R$ 450',
+      unit: 'por ambiente',
+      note: 'Studio de 30 m² com projeto e 3D: R$ 7.500 · Apartamento até 60 m²: 10x de R$ 1.500',
     },
-    trust: [
-      'Projeto pensado para aluguel, não só para morar',
-      'Valor do projeto fechado antes de começar',
-      'Online, para imóveis em qualquer cidade',
-    ],
+    trust: ['Para temporada ou contrato longo', 'Compras e obra definidas antes das chaves', 'Executável à distância'],
     cta: {
       label: 'Falar sobre meu imóvel',
-      message: 'Olá, Beatriz! Vim pela página para investidores. Meu imóvel tem __ m², fica em __ e é para aluguel de: ',
+      message:
+        'Olá, Beatriz! Vim pela página para investidores. Tenho um imóvel para alugar e quero o projeto. É para temporada ou contrato longo:',
     },
     contrast: {
       title: 'Imóvel de renda pede decisões de projeto',
@@ -105,32 +113,36 @@ export const audiences: Record<AudienceSlug, Audience> = {
       items: [
         {
           service: 'apartamento-completo',
-          badge: 'Mais indicado',
+          badge: 'Na planta ou vai reformar',
           why: 'Para preparar o imóvel inteiro, do layout aos acabamentos, com um conceito só.',
-          price: { value: 'R$ 15.000', unit: 'até 60 m²', note: 'Referência de R$ 250/m²' },
+          price: { pre: '10x de', value: 'R$ 1.500', unit: 'até 60 m²', note: 'Total de R$ 15.000 · valor fixo, com lavanderia e circulação' },
           bullets: ['3D de todos os ambientes (até 10 vistas)', 'Marcenaria, iluminação e pontos elétricos', 'Memorial e caderno técnico para a obra'],
-          message: 'Olá, Beatriz! Vim pela página para investidores. Quero o projeto do apartamento completo. Metragem e cidade: ',
+          message:
+            'Olá, Beatriz! Vim pela página para investidores. Quero o projeto do apartamento completo (10x de R$ 1.500, até 60 m²). Meu imóvel tem (m²):',
         },
         {
           service: 'projeto-por-ambiente',
-          why: 'Para reformar só a cozinha ou o banheiro, onde a manutenção mais pesa.',
-          price: { value: 'R$ 250', unit: 'por m²', note: 'Banheiro até 6 m² por R$ 1.500' },
+          badge: 'Studio ou um ambiente',
+          why: 'Para projetar um studio inteiro, ou só a cozinha e o banheiro, onde a manutenção mais pesa.',
+          price: { value: 'R$ 250', unit: 'por m²', note: 'Studio de 30 m²: R$ 7.500 · Banheiro até 6 m²: R$ 1.500' },
           bullets: ['Imagens 3D realistas', 'Marcenaria e bancadas detalhadas', 'Caderno técnico para a obra'],
-          message: 'Olá, Beatriz! Vim pela página para investidores. Quero o projeto de um ambiente. Ambiente e metragem: ',
+          message: 'Olá, Beatriz! Vim pela página para investidores. Quero o projeto por ambiente (R$ 250/m²) para:',
         },
         {
           service: 'consultoria',
+          badge: 'Pronto, só mobiliar',
           why: 'Para mobiliar e decorar um imóvel que já está pronto, sem obra.',
           price: { pre: 'a partir de', value: 'R$ 450', unit: 'por ambiente' },
           bullets: ['Layout e lista de móveis com links', 'Moodboard de cores e materiais', 'Entrega em PDF'],
-          message: 'Olá, Beatriz! Vim pela página para investidores. Quero uma consultoria para mobiliar o imóvel. Ambientes: ',
+          message:
+            'Olá, Beatriz! Vim pela página para investidores. Quero a consultoria para mobiliar o imóvel (a partir de R$ 450 por ambiente). Os ambientes são:',
         },
       ],
     },
     faq: [
       {
         q: 'O projeto muda se o aluguel for por temporada?',
-        a: 'Muda. No briefing definimos o perfil de quem vai ocupar o imóvel, e isso orienta o layout, os acabamentos e quanto de móvel fica no imóvel.',
+        a: 'Muda. No briefing eu defino com você o perfil de quem vai ocupar o imóvel, e isso orienta o layout, os acabamentos e quanto de móvel fica no imóvel.',
       },
       {
         q: 'Comprei na planta. Quando devo começar?',
@@ -148,17 +160,20 @@ export const audiences: Record<AudienceSlug, Audience> = {
         q: 'O projeto inclui compras, obra e montagem?',
         a: 'Não. Você recebe a lista de produtos e o caderno técnico; compras, obra e montagem ficam com você ou com a sua equipe.',
       },
+      changesFaq,
       paymentFaq,
     ],
     final: {
       title: 'Mande a planta do seu imóvel de investimento',
-      text: 'Diga a metragem, a cidade e se vai alugar por temporada ou contrato longo. A resposta vem com o pacote indicado e o valor fechado.',
+      text: 'Diga a metragem, a cidade e se vai alugar por temporada ou contrato longo. Eu respondo com o pacote indicado e o valor fechado.',
     },
   },
 
   'primeiro-apartamento': {
     slug: 'primeiro-apartamento',
+    source: 'página do primeiro apartamento',
     card: {
+      who: 'Comprei meu primeiro apê',
       kicker: 'Primeiro apartamento',
       title: 'Chaves na mão, casa vazia',
       text: 'Decida o que comprar primeiro e onde cada móvel entra, antes de gastar com o que não cabe.',
@@ -167,13 +182,13 @@ export const audiences: Record<AudienceSlug, Audience> = {
     seo: {
       title: 'Projeto de interiores para o primeiro apartamento | Beatriz Torres Arquitetura',
       description:
-        'Pegou as chaves do primeiro apartamento? Consultoria online a partir de R$ 450 por ambiente para decidir layout, móveis e cores, ou o projeto completo até 60 m² por R$ 15.000.',
+        'Pegou as chaves do primeiro apartamento? Consultoria online a partir de R$ 450 por ambiente para decidir layout, móveis e cores, ou o projeto completo até 60 m² em 10x de R$ 1.500.',
     },
     hero: {
       eyebrow: 'Primeiro apartamento',
       title: 'Seu primeiro apartamento planejado',
       accent: 'antes de gastar',
-      lede: 'Chaves na mão e casa vazia? Eu ajudo você a decidir o que comprar primeiro, onde cada móvel entra e como deixar tudo com a sua cara, dentro do orçamento.',
+      lede: 'Eu ajudo você a decidir o que comprar primeiro e onde cada móvel entra.',
       image: '1502672260266-1c1ef2d93688',
       imageAlt: 'Sala de apartamento com sofá cinza, plantas, estante e luz natural',
     },
@@ -181,16 +196,17 @@ export const audiences: Record<AudienceSlug, Audience> = {
       pre: 'a partir de',
       value: 'R$ 450',
       unit: 'por ambiente',
-      note: 'O apartamento inteiro, até 60 m², por R$ 15.000',
+      note: 'O apartamento inteiro, até 60 m², em 10x de R$ 1.500',
     },
     trust: [
-      'Comece por um ambiente e siga no seu ritmo',
-      'Lista de compras com links, dentro do orçamento',
+      'Ainda na planta? Dá para começar antes das chaves',
+      'Comece por um ambiente, com lista de compras no seu orçamento',
       '100% online, de qualquer cidade',
     ],
     cta: {
       label: 'Quero planejar meu apê',
-      message: 'Olá, Beatriz! Vim pela página de primeiro apartamento. Meu apê tem __ m² e quero começar por: ',
+      message:
+        'Olá, Beatriz! Vim pela página do primeiro apartamento. Peguei (ou vou pegar) as chaves e quero começar por:',
     },
     contrast: {
       title: 'Os erros mais comuns do primeiro apê',
@@ -218,22 +234,24 @@ export const audiences: Record<AudienceSlug, Audience> = {
           why: 'Para mobiliar e decorar um ambiente de cada vez, sem obra.',
           price: { pre: 'a partir de', value: 'R$ 450', unit: 'por ambiente', note: 'Quarto R$ 450 · Sala R$ 500' },
           bullets: ['Briefing por vídeo', 'Layout e moodboard', 'Lista de compras com links'],
-          message: 'Olá, Beatriz! Vim pela página de primeiro apartamento. Quero uma consultoria. O ambiente é: ',
+          message:
+            'Olá, Beatriz! Vim pela página do primeiro apartamento. Quero a consultoria de um ambiente (a partir de R$ 450). O ambiente é:',
         },
         {
           service: 'apartamento-completo',
           badge: 'Vai reformar',
           why: 'Comprou na planta ou vai reformar? Projete o apartamento inteiro antes da obra.',
-          price: { value: 'R$ 15.000', unit: 'até 60 m²', note: 'Todos os ambientes inclusos' },
+          price: { pre: '10x de', value: 'R$ 1.500', unit: 'até 60 m²', note: 'Total de R$ 15.000 · todos os ambientes inclusos' },
           bullets: ['3D de todos os ambientes', 'Pontos elétricos e marcenaria', 'Caderno técnico para a obra'],
-          message: 'Olá, Beatriz! Vim pela página de primeiro apartamento. Quero o projeto do apartamento completo. Metragem: ',
+          message:
+            'Olá, Beatriz! Vim pela página do primeiro apartamento. Quero o projeto do apartamento completo (10x de R$ 1.500, até 60 m²). Meu apê tem (m²):',
         },
         {
           service: 'projeto-por-ambiente',
           why: 'Para a cozinha ou o banheiro que vão passar por reforma.',
           price: { value: 'R$ 250', unit: 'por m²', note: 'Cozinha até 12 m² por R$ 3.000' },
           bullets: ['Imagens 3D realistas', 'Marcenaria e bancadas', 'Caderno técnico'],
-          message: 'Olá, Beatriz! Vim pela página de primeiro apartamento. Quero o projeto de um ambiente. Ambiente e metragem: ',
+          message: 'Olá, Beatriz! Vim pela página do primeiro apartamento. Quero o projeto por ambiente (R$ 250/m²). O ambiente é:',
         },
       ],
     },
@@ -258,17 +276,20 @@ export const audiences: Record<AudienceSlug, Audience> = {
         q: 'Funciona mesmo online?',
         a: 'Sim. Você manda a planta, fotos e medidas, o briefing é por chamada de vídeo e as entregas chegam em PDF.',
       },
+      changesFaq,
       paymentFaq,
     ],
     final: {
       title: 'Conte como é o seu primeiro apê',
-      text: 'Mande a metragem e por qual ambiente quer começar. A resposta vem com o serviço indicado e o valor fechado.',
+      text: 'Mande a metragem e por qual ambiente quer começar. Eu respondo com o serviço indicado e o valor fechado.',
     },
   },
 
   studios: {
     slug: 'studios',
+    source: 'página de studios',
     card: {
+      who: 'Tenho um studio',
       kicker: 'Studios',
       title: 'Tudo cabe, nada aperta',
       text: 'Dormir, trabalhar, cozinhar e receber no mesmo ambiente, com marcenaria sob medida e móveis na escala certa.',
@@ -284,7 +305,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
       title: 'Um studio onde',
       accent: 'tudo cabe',
       titleAfter: ' e nada aperta',
-      lede: 'Dormir, trabalhar, cozinhar e receber no mesmo ambiente pede projeto. Marcenaria sob medida, móveis na escala certa e uma circulação que funciona em 25 ou 30 m².',
+      lede: 'Dormir, trabalhar e receber em 25 ou 30 m², com marcenaria sob medida.',
       image: '1522708323590-d24dbb6b0267',
       imageAlt: 'Sala e jantar integrados em apartamento compacto com piso de madeira e poltrona vermelha',
     },
@@ -294,12 +315,12 @@ export const audiences: Record<AudienceSlug, Audience> = {
       pre: 'projeto a',
       value: 'R$ 250',
       unit: 'por m²',
-      note: 'Studio de 25 m²: R$ 6.250 · Consultoria a partir de R$ 450',
+      note: 'Studio de 30 m²: R$ 7.500 · Consultoria a partir de R$ 450',
     },
     trust: ['Marcenaria pensada para cada centímetro', '3D antes de comprar ou quebrar', 'Para quem mora ou para quem aluga'],
     cta: {
       label: 'Quero projetar meu studio',
-      message: 'Olá, Beatriz! Vim pela página de studios. Meu studio tem __ m², fica em __ e é para: ',
+      message: 'Olá, Beatriz! Vim pela página de studios. Quero projetar meu studio, que é para:',
     },
     contrast: {
       title: 'Em um studio, cada decisão aparece',
@@ -326,20 +347,25 @@ export const audiences: Record<AudienceSlug, Audience> = {
           title: 'Projeto do studio',
           badge: 'Mais indicado',
           why: 'O studio inteiro como um ambiente só, com 3D, marcenaria e caderno técnico.',
-          price: { value: 'R$ 250', unit: 'por m²', note: 'Studio de 25 m²: R$ 6.250' },
+          price: { value: 'R$ 250', unit: 'por m²', note: 'Studio de 30 m²: R$ 7.500' },
           bullets: ['Layout e marcenaria sob medida', 'Imagens 3D realistas', 'Caderno técnico para a obra'],
-          message: 'Olá, Beatriz! Vim pela página de studios. Quero o projeto do meu studio. Metragem: ',
+          message: 'Olá, Beatriz! Vim pela página de studios. Quero o projeto do studio (R$ 250/m²). Meu studio tem (m²):',
         },
         {
           service: 'consultoria',
           why: 'Para reorganizar e decorar o studio sem obra.',
           price: { pre: 'a partir de', value: 'R$ 450', unit: 'por ambiente', note: 'Valor conforme a planta do studio' },
           bullets: ['Layout orientativo', 'Moodboard de cores e materiais', 'Lista de compras com links'],
-          message: 'Olá, Beatriz! Vim pela página de studios. Quero uma consultoria para o meu studio. Metragem: ',
+          message:
+            'Olá, Beatriz! Vim pela página de studios. Quero a consultoria para o meu studio (a partir de R$ 450). Meu studio tem (m²):',
         },
       ],
     },
     faq: [
+      {
+        q: 'A loja de planejados faz o projeto de graça. Por que pagar?',
+        a: 'O projeto da loja é feito para vender os móveis daquela loja, no catálogo e no preço dela. O meu é seu: você leva o mesmo desenho para três marceneiros ou lojas e compara preço com preço. E ele vai além dos armários: layout, iluminação, revestimentos e os móveis que você compra prontos.',
+      },
       {
         q: 'Meu studio tem menos de 20 m². Dá para fazer?',
         a: 'Dá, e é onde o projeto mais faz diferença. O valor segue R$ 250/m², com mínimo de R$ 1.500 por contratação.',
@@ -360,11 +386,12 @@ export const audiences: Record<AudienceSlug, Audience> = {
         q: 'Funciona mesmo online?',
         a: 'Sim. Você manda a planta, fotos e medidas, o briefing é por chamada de vídeo e as entregas chegam em PDF.',
       },
+      changesFaq,
       paymentFaq,
     ],
     final: {
       title: 'Mande a planta do seu studio',
-      text: 'Diga a metragem e se é para morar ou alugar. A resposta vem com o serviço indicado e o valor fechado.',
+      text: 'Diga a metragem e se é para morar ou alugar. Eu respondo com o serviço indicado e o valor fechado.',
     },
   },
 }

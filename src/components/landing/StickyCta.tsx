@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useHeroCtaGone } from '@/lib/useHeroCtaGone'
 import { waLink } from '@/lib/site'
 import { WhatsAppIcon } from '../WhatsAppIcon'
 
@@ -21,14 +21,7 @@ export function StickyCta({
   label: string
   message: string
 }) {
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 700)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const visible = useHeroCtaGone(700)
 
   return (
     <div
@@ -42,8 +35,8 @@ export function StickyCta({
       <div className="container-site flex items-center justify-between gap-3 py-3">
         <p className="min-w-0 leading-tight">
           {pre && <span className="block text-[12px] text-ink-soft">{pre}</span>}
-          <span className="font-display text-[22px] text-ink tabular">{value}</span>
-          {unit && <span className="ml-1 text-[13px] text-ink-soft">{unit}</span>}
+          <span className="whitespace-nowrap font-display text-[22px] text-ink tabular">{value}</span>
+          {unit && <span className="ml-1 inline-block text-[13px] text-ink-soft">{unit}</span>}
         </p>
         <a
           href={waLink(message)}

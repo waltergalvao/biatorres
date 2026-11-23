@@ -9,7 +9,8 @@ import { Analytics } from '@/components/Analytics'
 const fraunces = Fraunces({
   subsets: ['latin'],
   style: ['normal', 'italic'],
-  axes: ['SOFT', 'WONK', 'opsz'],
+  // WONK is always 0 in globals.css, so it isn't downloaded. opsz stays: it shapes the headlines.
+  axes: ['SOFT', 'opsz'],
   variable: '--font-fraunces',
   display: 'swap',
 })
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://biatorres.arq.br'),
   title: 'Beatriz Torres Arquitetura — Projeto de interiores para apartamentos pequenos',
   description:
-    'Consultoria de interiores online a partir de R$ 450 por ambiente, projeto completo por ambiente com imagens 3D e projeto do apartamento inteiro até 60 m² por R$ 15.000.',
+    'Consultoria de interiores online a partir de R$ 450 por ambiente, projeto completo por ambiente com imagens 3D e projeto do apartamento inteiro até 60 m² em 10x de R$ 1.500.',
   keywords: [
     'projeto de interiores',
     'consultoria de interiores online',

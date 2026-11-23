@@ -58,7 +58,7 @@
 
   /* Type */
   .font-display {
-    font-variation-settings: 'SOFT' 50, 'WONK' 0;
+    font-variation-settings: 'SOFT' 50;
   }
 
   .eyebrow {
@@ -120,6 +120,14 @@
   .enter {
     @apply animate-rise;
     animation-delay: calc(var(--i, 0) * 110ms + 80ms);
+  }
+
+  /* Phones: the hero price and button are on screen within half a second. */
+  @media (max-width: 1023px) {
+    .enter {
+      animation-duration: 0.5s;
+      animation-delay: calc(var(--i, 0) * 50ms);
+    }
   }
 
   .hairline {

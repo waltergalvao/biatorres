@@ -18,6 +18,9 @@ export function Pricing({ service }: { service: Service }) {
             {pricing.title}
           </h2>
           <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-ink-soft">{pricing.intro}</p>
+          <p className="mt-5 max-w-xl border-l-2 border-clay pl-4 text-[16px] leading-relaxed text-ink">
+            {pricing.framing}
+          </p>
 
           {pricing.kind === 'rooms' && (
             <table className="mt-8 w-full border-collapse text-left">
@@ -35,7 +38,7 @@ export function Pricing({ service }: { service: Service }) {
                   <th scope="col" className="py-3 text-right font-semibold">
                     Valor
                   </th>
-                  <th scope="col" className="w-12 py-3">
+                  <th scope="col" className="py-3">
                     <span className="sr-only">Pedir</span>
                   </th>
                 </tr>
@@ -58,14 +61,16 @@ export function Pricing({ service }: { service: Service }) {
                     <td className="py-4 pl-3 text-right">
                       <a
                         href={waLink(
-                          `Olá, Beatriz! Vim pela página de ${service.name.toLowerCase()}. Quero contratar para: ${row.room}${row.area ? ` (${row.area})` : ''}, ${row.price}.`,
+                          `Olá, Beatriz! Vim pela página ${service.source} e quero ${pricing.rowItem} ${row.room.toLowerCase()}${row.area ? ` (${row.area})` : ''}, ${row.price}. Como seguimos?`,
                         )}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`Pedir ${service.name.toLowerCase()} de ${row.room.toLowerCase()} pelo WhatsApp`}
-                        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-ink/20 text-ink transition-colors duration-200 hover:border-clay hover:bg-clay hover:text-paper"
+                        aria-label={`Quero ${pricing.rowItem} ${row.room.toLowerCase()}, pelo WhatsApp`}
+                        className="inline-flex h-11 items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-ink/20 px-4 text-[14px] font-semibold text-ink transition-colors duration-200 hover:border-clay hover:bg-clay hover:text-paper"
+                        data-placement="valores-tabela"
                       >
-                        <ArrowUpRight size={18} aria-hidden />
+                        Quero este
+                        <ArrowUpRight size={16} aria-hidden className="hidden sm:block" />
                       </a>
                     </td>
                   </tr>
@@ -77,11 +82,13 @@ export function Pricing({ service }: { service: Service }) {
           {pricing.kind === 'package' && (
             <div className="mt-8 rounded-[28px] bg-ink p-7 text-linen md:p-10">
               <div className="flex flex-wrap items-baseline gap-x-3">
+                {pricing.pre && <span className="text-[20px] text-mist md:text-[24px]">{pricing.pre}</span>}
                 <span className="font-display text-[56px] leading-none tracking-[-0.02em] tabular md:text-[72px]">
                   {pricing.price}
                 </span>
                 <span className="text-[17px] text-mist">{pricing.unit}</span>
               </div>
+              {pricing.total && <p className="mt-3 text-[15px] text-mist">{pricing.total}</p>}
               <p className="mt-8 text-[13px] font-semibold uppercase tracking-[0.14em] text-ochre">Ambientes inclusos</p>
               <ul className="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2">
                 {pricing.covers.map((c) => (
@@ -100,6 +107,13 @@ export function Pricing({ service }: { service: Service }) {
 
           <p className="mt-5 text-[15px] leading-relaxed text-ink-soft">{pricing.foot}</p>
 
+          {/* On mobile the calculator sits right under the table, so "#valores" lands next to it. */}
+          {pricing.kind === 'rooms' && pricing.calculator && (
+            <div className="mt-8 lg:hidden">
+              <AreaCalculator perM2={pricing.calculator.perM2} minimum={pricing.calculator.minimum} />
+            </div>
+          )}
+
           <div className="mt-10 rounded-[24px] border border-ink/15 p-6 md:p-7">
             <h3 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-ink-soft">Não está incluso</h3>
             <ul className="mt-4 space-y-2.5">
@@ -115,7 +129,9 @@ export function Pricing({ service }: { service: Service }) {
 
         <div className="flex flex-col gap-6 lg:col-span-5">
           {pricing.kind === 'rooms' && pricing.calculator ? (
-            <AreaCalculator perM2={pricing.calculator.perM2} minimum={pricing.calculator.minimum} />
+            <div className="hidden lg:block">
+              <AreaCalculator perM2={pricing.calculator.perM2} minimum={pricing.calculator.minimum} />
+            </div>
           ) : (
             <div className="photo-zoom relative hidden overflow-hidden rounded-[28px] lg:block lg:min-h-[420px] lg:flex-1">
               <Image
@@ -132,7 +148,7 @@ export function Pricing({ service }: { service: Service }) {
               Valor fechado antes de começar
             </p>
             <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">
-              Mande a planta ou as medidas. Você recebe a proposta por escrito, com valor, prazo e condições.
+              Mande a planta ou as medidas. Eu mando a proposta por escrito, com valor, prazo e condições.
             </p>
             <a href={waLink(cta.message)} target="_blank" rel="noopener noreferrer" className="btn-primary mt-6 w-full sm:w-auto">
               <WhatsAppIcon className="h-5 w-5" />

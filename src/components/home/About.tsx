@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { unsplash } from '@/lib/site'
+import { unsplash, waLink } from '@/lib/site'
+import { WhatsAppIcon } from '../WhatsAppIcon'
 
 const principles = [
   {
@@ -14,7 +15,7 @@ const principles = [
   },
   {
     title: 'Você sabe o que vai receber',
-    text: 'Cada serviço tem entregas e valores publicados. Antes de começar, a proposta vem por escrito.',
+    text: 'Cada serviço tem entregas e valores publicados. Antes de começar, eu mando a proposta por escrito.',
   },
 ]
 
@@ -40,6 +41,7 @@ export function About() {
           <h2 id="sobre-title" className="mt-4 font-display text-display text-ink">
             Sou a Beatriz. Eu cuido de cada projeto, do briefing à entrega.
           </h2>
+          {/* TODO(owner): confirm FAU-USP, the specialization and "mais de dez anos" (same TODO in src/app/sobre/page.tsx). */}
           <p className="lede mt-6 max-w-2xl">
             Arquiteta formada pela FAU-USP, com especialização em design de interiores e mais de dez anos
             em projetos residenciais. Hoje me dedico a apartamentos compactos: studios para alugar,
@@ -55,9 +57,21 @@ export function About() {
             ))}
           </ul>
 
-          <Link href="/sobre" className="link-draw mt-10 self-start text-[16px]">
-            Conheça a minha história <ArrowRight size={16} aria-hidden />
-          </Link>
+          <div className="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
+            <a
+              href={waLink('Olá, Beatriz! Li sobre o seu trabalho no site e quero conversar sobre o meu apartamento.')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary w-full sm:w-auto"
+              data-placement="sobre-home"
+            >
+              <WhatsAppIcon className="h-5 w-5" />
+              Falar com a Beatriz
+            </a>
+            <Link href="/sobre" className="link-draw bg-origin-content py-2.5 text-[16px]">
+              Conheça a minha história <ArrowRight size={16} aria-hidden />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

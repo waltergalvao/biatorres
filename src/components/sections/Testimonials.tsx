@@ -1,4 +1,4 @@
-import type { Testimonial } from '@/data/testimonials'
+import { SHOW_TESTIMONIALS, type Testimonial } from '@/data/testimonials'
 
 export function Testimonials({
   items,
@@ -7,7 +7,7 @@ export function Testimonials({
   items: Testimonial[]
   title?: string
 }) {
-  if (items.length === 0) return null
+  if (!SHOW_TESTIMONIALS || items.length === 0) return null
   const [lead, ...rest] = items
 
   return (
