@@ -7,6 +7,7 @@
 
 import { services, type ServiceSlug } from './services'
 import { support } from './support'
+import { SITE_DOMAIN } from '@/lib/site'
 
 export const POST_SIZE = { width: 1080, height: 1350 } as const
 
@@ -19,7 +20,8 @@ export type SocialPost = {
   /** Unsplash photo id (the service's hero photo). */
   image: string
   imageAlt: string
-  price: { pre?: string; value: string; unit: string; note: string }
+  /** `note` is a small line under the price; `highlight` replaces it with a large figure. */
+  price: { pre?: string; value: string; unit: string; note?: string; highlight?: { label: string; value: string } }
   features: string[]
   cta: string
 }
@@ -50,15 +52,20 @@ export const socialPosts: SocialPost[] = [
   {
     slug: 'apartamento-completo',
     title: ['Apartamento', 'completo'],
-    tag: 'Até 60 m²',
+    tag: 'Todos os ambientes',
     image: s['apartamento-completo'].hero.image,
     imageAlt: s['apartamento-completo'].hero.imageAlt,
-    price: { pre: '10x de', value: s['apartamento-completo'].price.value, unit: 'até 60 m²', note: 'Total de R$ 15.000' },
-    features: ['Todos os ambientes, um conceito só', 'Até 10 imagens 3D', 'Pronto antes das chaves', 'Memorial e caderno técnico'],
+    price: {
+      pre: '10x de',
+      value: s['apartamento-completo'].price.value,
+      unit: 'pelo apartamento inteiro',
+      highlight: { label: 'Para apês de até', value: '60 m²' },
+    },
+    features: ['Um conceito só, do início ao fim', 'Até 10 imagens 3D', 'Pronto antes das chaves', 'Memorial e caderno técnico'],
     cta: 'Chame no WhatsApp e mande a planta do apê',
   },
 ]
 
-export const SOCIAL_HANDLE = 'biatorres.arq.br'
+export const SOCIAL_HANDLE = SITE_DOMAIN
 
 export const findPost = (slug: string) => socialPosts.find((p) => p.slug === slug)

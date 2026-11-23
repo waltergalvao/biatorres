@@ -52,7 +52,14 @@ export function PostArtboard({ post, id }: { post: SocialPost; id?: string }) {
         )}
         <p className="mt-2 whitespace-nowrap font-display text-[88px] leading-none tracking-[-0.03em] tabular">{nbsp(post.price.value)}</p>
         <p className="mt-2 text-[20px] text-mist">{post.price.unit}</p>
-        <p className="mt-5 border-t border-linen/15 pt-4 text-[17px] leading-snug text-mist">{nbsp(post.price.note)}</p>
+        {post.price.highlight ? (
+          <p className="mt-5 flex items-baseline justify-between gap-4 border-t border-linen/15 pt-4">
+            <span className="whitespace-nowrap text-[20px] text-mist">{post.price.highlight.label}</span>
+            <span className="whitespace-nowrap font-display text-[56px] leading-none tracking-[-0.02em] text-ochre">{post.price.highlight.value}</span>
+          </p>
+        ) : (
+          post.price.note && <p className="mt-5 border-t border-linen/15 pt-4 text-[17px] leading-snug text-mist">{nbsp(post.price.note)}</p>
+        )}
       </div>
 
       {/* Title */}
