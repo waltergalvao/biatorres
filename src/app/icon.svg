@@ -1,0 +1,9 @@
+<!-- Browser tab icon: the BT monogram (paths from src/components/Monogram.tsx) in clay #A04524 on linen #F4EDE3, from src/design/tokens.ts. Update here if the logo or those colors change. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#F4EDE3"/>
+  <svg x="17" y="7" width="30" height="50" viewBox="1 1.5 334 553" fill="none" stroke="#A04524" stroke-width="34" stroke-linejoin="miter">
+    <path d="M191 481.5H8V8.5H165C233.5 12.5 274 58 279 112V133.5C277 187 249 215 216.5 238.5C259.5 251.5 310.5 293 307.5 357.5C311 429.5 258.5 481.5 191 481.5"/>
+    <path d="M2 169H334.5"/>
+    <path d="M184 169V554"/>
+  </svg>
+</svg>

@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { colors, cssVar, fonts, kebab, rgbChannels, type ColorName } from '@/design/tokens'
+import { Monogram } from '@/components/Monogram'
+import { Logo } from '@/components/Logo'
 
 // Internal reference for the design system: colors, type and buttons, all read from
 // src/design/tokens.ts. Not linked from the site and not indexed.
@@ -24,11 +26,36 @@ export default function BrandPage() {
       <p className="eyebrow">Sistema de design</p>
       <h1 className="mt-4 font-display text-display text-ink">Marca</h1>
       <p className="lede mt-5 max-w-2xl">
-        Cores, tipografia e botões do site. Os valores ficam em <code className="text-[0.9em]">src/design/tokens.ts</code>:
+        Logo, cores, tipografia e botões do site. Os valores ficam em <code className="text-[0.9em]">src/design/tokens.ts</code>:
         mude ali e o site inteiro acompanha. Use os hex abaixo em posts, stories e apresentações.
       </p>
 
-      <section aria-labelledby="cores" className="mt-16">
+      <section aria-labelledby="logo" className="mt-16">
+        <h2 id="logo" className="font-display text-display-sm text-ink">Logo</h2>
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          <div className="flex h-64 items-center justify-center rounded-[20px] border border-line bg-paper">
+            <Monogram className="h-40 w-auto text-clay" title="Monograma BT" />
+          </div>
+          <div className="flex h-64 items-center justify-center rounded-[20px] bg-ink">
+            <Monogram className="h-40 w-auto text-clay-soft" title="Monograma BT sobre fundo escuro" />
+          </div>
+          <div className="flex h-64 flex-col items-center justify-center gap-8 rounded-[20px] border border-line bg-linen">
+            <Logo />
+            <div className="rounded-[18px] bg-ink px-6 py-3">
+              <Logo tone="light" />
+            </div>
+          </div>
+        </div>
+        <p className="mt-5 text-[14px] text-ink-soft">
+          Monograma em terracota (<code>text-clay</code>); sobre fundo escuro, <code>text-clay-soft</code>. Em tamanho pequeno use{' '}
+          <code>{'<Monogram weight={1.6} />'}</code> para a linha não sumir.{' '}
+          <a href="/marca/monograma.svg" download className="link-draw text-clay">Baixar SVG (terracota)</a>
+          {' · '}
+          <a href="/marca/monograma.svg?cor=ink" download className="link-draw text-clay">Baixar SVG (espresso)</a>
+        </p>
+      </section>
+
+      <section aria-labelledby="cores" className="mt-20">
         <h2 id="cores" className="font-display text-display-sm text-ink">Cores</h2>
         <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {(Object.keys(colors) as ColorName[]).map((name) => {

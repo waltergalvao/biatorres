@@ -3,6 +3,7 @@ import { Check } from 'lucide-react'
 import { unsplash } from '@/lib/site'
 import { POST_SIZE, SOCIAL_HANDLE, type SocialPost } from '@/data/social'
 import { WhatsAppIcon } from '../WhatsAppIcon'
+import { Monogram } from '../Monogram'
 
 /** Keeps "R$ 450" and "10x de" from breaking across lines. */
 const nbsp = (text: string) => text.replace(/(R\$|\d+x de|de) /g, '$1 ')
@@ -22,10 +23,7 @@ export function PostArtboard({ post, id }: { post: SocialPost; id?: string }) {
       {/* Brand bar */}
       <div className="absolute inset-x-16 top-14 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <svg width="30" height="38" viewBox="0 0 22 28" aria-hidden className="text-clay">
-            <path d="M1 27V11a10 10 0 0 1 20 0v16H1Z" fill="currentColor" />
-            <path d="M7 27V14a4 4 0 0 1 8 0v13" fill="none" strokeWidth="1.6" className="stroke-linen" />
-          </svg>
+          <Monogram weight={2.6} className="h-[64px] w-auto text-clay" />
           <div className="leading-none">
             <p className="font-display text-[30px] font-medium tracking-[-0.01em]">Beatriz Torres</p>
             <p className="mt-1.5 text-[13px] font-semibold uppercase tracking-[0.24em] text-ink-soft">Arquitetura &amp; interiores</p>
