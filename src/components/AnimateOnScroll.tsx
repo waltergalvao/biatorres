@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useInView, type Variant } from 'framer-motion'
+import { motion, useInView, useReducedMotion, type Variant } from 'framer-motion'
 import { useRef, type ReactNode } from 'react'
 
 type AnimationVariant = 'fadeUp' | 'fadeIn' | 'fadeLeft' | 'fadeRight' | 'scaleIn'
@@ -44,7 +44,9 @@ export function AnimateOnScroll({
   once?: boolean
 }) {
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once, margin: '-80px' })
+  const inView = useInView(ref, { once, margin: '-80px' })
+  const reduce = useReducedMotion()
+  const isInView = inView || reduce
   const v = variants[variant]
 
   return (
@@ -78,7 +80,9 @@ export function StaggerContainer({
   staggerDelay?: number
 }) {
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const reduce = useReducedMotion()
+  const isInView = inView || reduce
 
   return (
     <motion.div

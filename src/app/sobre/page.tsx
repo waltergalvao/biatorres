@@ -22,18 +22,18 @@ const philosophy = [
 export default function SobrePage() {
   return (
     <>
-      <section className="section-padding pt-36 md:pt-44 pb-24 md:pb-32">
+      <section className="container-site pt-12 md:pt-20 pb-24 md:pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           <div className="lg:col-span-7 order-2 lg:order-1">
             <AnimateOnScroll>
-              <span className="text-label mb-6 block">Sobre</span>
-              <h1 className="font-serif text-display-xl text-brand-text mb-10">
+              <span className="eyebrow mb-6 block">Sobre</span>
+              <h1 className="font-display text-display-xl text-ink mb-10">
                 Beatriz Torres
               </h1>
             </AnimateOnScroll>
 
             <AnimateOnScroll delay={0.2}>
-              <div className="space-y-6 text-brand-text-muted leading-relaxed">
+              <div className="space-y-6 text-ink-soft leading-relaxed">
                 <p className="text-lg">
                   Arquiteta e designer de interiores, Beatriz Torres atua há mais de
                   uma década transformando espaços residenciais em reflexos autênticos
@@ -79,12 +79,12 @@ export default function SobrePage() {
         </div>
       </section>
 
-      <section className="divider section-padding" />
+      <div className="container-site"><div className="hairline" /></div>
 
-      <section className="section-padding section-spacing">
+      <section className="container-site section-y">
         <AnimateOnScroll className="mb-16 md:mb-24 max-w-2xl">
-          <span className="text-label mb-4 block">Filosofia</span>
-          <h2 className="font-serif text-display">
+          <span className="eyebrow mb-4 block">Filosofia</span>
+          <h2 className="font-display text-display">
             O que orienta cada projeto
           </h2>
         </AnimateOnScroll>
@@ -92,9 +92,9 @@ export default function SobrePage() {
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16">
           {philosophy.map((item) => (
             <StaggerItem key={item.title}>
-              <div className="divider-accent mb-6" />
-              <h3 className="font-serif text-heading mb-4">{item.title}</h3>
-              <p className="text-sm text-brand-text-muted leading-relaxed">
+              <div className="mb-6 h-px w-12 bg-clay" />
+              <h3 className="font-display text-heading mb-4">{item.title}</h3>
+              <p className="text-sm text-ink-soft leading-relaxed">
                 {item.text}
               </p>
             </StaggerItem>
@@ -102,17 +102,17 @@ export default function SobrePage() {
         </StaggerContainer>
       </section>
 
-      <section className="section-padding pb-32 md:pb-40 bg-brand-bg-light">
+      <section className="container-site pb-32 md:pb-40 bg-paper">
         <div className="section-spacing">
           <AnimateOnScroll>
-            <blockquote className="font-serif text-display text-center max-w-3xl mx-auto text-balance">
+            <blockquote className="font-display text-display text-center max-w-3xl mx-auto text-balance">
               &ldquo;A arquitetura que me move é aquela que acolhe, que respeita
               quem a vive, e que envelhece com graça.&rdquo;
             </blockquote>
           </AnimateOnScroll>
 
           <AnimateOnScroll delay={0.2}>
-            <p className="text-center text-label mt-8">Beatriz Torres</p>
+            <p className="text-center eyebrow mt-8">Beatriz Torres</p>
           </AnimateOnScroll>
 
           <AnimateOnScroll delay={0.3} className="flex justify-center mt-12">

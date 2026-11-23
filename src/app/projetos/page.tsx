@@ -16,28 +16,28 @@ export default function ProjetosPage() {
 
   return (
     <>
-      <section className="section-padding pt-36 md:pt-44 pb-16 md:pb-20">
+      <section className="container-site pt-12 md:pt-20 pb-16 md:pb-20">
         <AnimateOnScroll>
-          <span className="text-label mb-4 block">Portfólio</span>
-          <h1 className="font-serif text-display-xl text-brand-text">Projetos</h1>
-          <p className="mt-6 text-brand-text-muted text-lg max-w-lg leading-relaxed">
+          <span className="eyebrow mb-4 block">Portfólio</span>
+          <h1 className="font-display text-display-xl text-ink">Projetos</h1>
+          <p className="mt-6 text-ink-soft text-lg max-w-lg leading-relaxed">
             Uma seleção dos nossos trabalhos mais recentes em arquitetura
             residencial e ambientes planejados.
           </p>
         </AnimateOnScroll>
       </section>
 
-      <section className="section-padding pb-8">
+      <section className="container-site pb-8">
         <AnimateOnScroll delay={0.2}>
           <div className="flex flex-wrap gap-3 md:gap-4">
             {categories.map((cat) => (
               <button
                 key={cat.value}
                 onClick={() => setActive(cat.value)}
-                className={`px-5 py-2 text-[12px] tracking-[0.1em] uppercase font-sans transition-all duration-400 ${
+                className={`min-h-[40px] rounded-full px-5 py-2 text-[12px] tracking-[0.1em] uppercase font-sans transition-all duration-300 ${
                   active === cat.value
-                    ? 'bg-brand-accent text-brand-bg'
-                    : 'bg-transparent text-brand-text-muted border border-brand-border hover:border-brand-accent hover:text-brand-text'
+                    ? 'bg-ink text-linen'
+                    : 'bg-transparent text-ink-soft border border-line hover:border-ink hover:text-ink'
                 }`}
               >
                 {cat.label}
@@ -47,7 +47,7 @@ export default function ProjetosPage() {
         </AnimateOnScroll>
       </section>
 
-      <section className="section-padding pb-32 md:pb-40">
+      <section className="container-site pb-32 md:pb-40">
         <motion.div
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-12"
@@ -68,26 +68,26 @@ export default function ProjetosPage() {
                       src={project.image}
                       alt={project.title}
                       fill
-                      className="object-cover transition-transform duration-1200 ease-elegant group-hover:scale-105"
+                      className="object-cover transition-transform duration-700 ease-elegant group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
-                    <div className="absolute inset-0 bg-brand-text/0 group-hover:bg-brand-text/15 transition-colors duration-700" />
+                    <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/15 transition-colors duration-700" />
                   </div>
 
                   <div className="mt-4 flex items-start justify-between gap-4">
                     <div>
-                      <h3 className="font-serif text-lg text-brand-text leading-tight">
+                      <h3 className="font-display text-lg text-ink leading-tight">
                         {project.title}
                       </h3>
-                      <span className="text-[11px] tracking-[0.1em] text-brand-text-muted mt-1 block">
+                      <span className="text-[11px] tracking-[0.1em] text-ink-soft mt-1 block">
                         {project.categoryLabel}
                       </span>
                     </div>
                     <div className="text-right flex-shrink-0">
-                      <span className="text-[11px] tracking-[0.1em] text-brand-text-muted block">
+                      <span className="text-[11px] tracking-[0.1em] text-ink-soft block">
                         {project.year}
                       </span>
-                      <span className="text-[11px] tracking-[0.05em] text-brand-text-muted block mt-0.5">
+                      <span className="text-[11px] tracking-[0.05em] text-ink-soft block mt-0.5">
                         {project.location}
                       </span>
                     </div>
