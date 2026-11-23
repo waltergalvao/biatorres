@@ -5,7 +5,6 @@ import { Interlude } from '@/components/home/Interlude'
 import { Deliverables } from '@/components/sections/Deliverables'
 import { Audiences } from '@/components/home/Audiences'
 import { Process } from '@/components/sections/Process'
-import { Gallery } from '@/components/sections/Gallery'
 import { Testimonials } from '@/components/sections/Testimonials'
 import { Faq } from '@/components/sections/Faq'
 import { FinalCta } from '@/components/sections/FinalCta'
@@ -27,7 +26,6 @@ export default function Home() {
       <Deliverables />
       <Audiences />
       <Process title="Do WhatsApp ao projeto, em quatro etapas online" steps={generalProcess} />
-      <Gallery />
       <Testimonials items={homeQuotes} />
       <Faq items={generalFaq} />
       <FinalCta

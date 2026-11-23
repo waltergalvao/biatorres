@@ -1,6 +1,9 @@
 import Image from 'next/image'
 import { unsplash } from '@/lib/site'
 
+// TODO(owner): replace these stock photos with real samples of each deliverable (a real
+// moodboard, floor plan, 3D render and caderno page) as soon as they exist.
+
 const pieces = [
   {
     title: 'Moodboard de cores e materiais',
@@ -32,12 +35,13 @@ const pieces = [
   },
 ]
 
-export function Deliverables() {
+/** Sample deliverables: what a client actually receives. Stands in for a portfolio. */
+export function Deliverables({ className = '' }: { className?: string }) {
   return (
-    <section aria-labelledby="entrega-title" className="section-y">
+    <section aria-labelledby="entrega-title" className={`section-y ${className}`}>
       <div className="container-site">
         <div className="max-w-3xl">
-          <p className="eyebrow">O que você recebe</p>
+          <p className="eyebrow">Como fica o seu projeto</p>
           <h2 id="entrega-title" className="mt-4 font-display text-display text-ink">
             Material que você usa para comprar, reformar e montar
           </h2>

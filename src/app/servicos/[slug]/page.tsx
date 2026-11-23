@@ -9,7 +9,7 @@ import { Includes } from '@/components/service/Includes'
 import { Pricing } from '@/components/service/Pricing'
 import { CrossSell } from '@/components/service/CrossSell'
 import { StickyCta } from '@/components/landing/StickyCta'
-import { Gallery } from '@/components/sections/Gallery'
+import { Deliverables } from '@/components/sections/Deliverables'
 import { Process } from '@/components/sections/Process'
 import { Testimonials } from '@/components/sections/Testimonials'
 import { Faq } from '@/components/sections/Faq'
@@ -64,7 +64,7 @@ export default function ServicePage({ params }: Props) {
       />
       <FitCheck service={service} />
       <Includes service={service} />
-      <Gallery />
+      <Deliverables className="bg-paper" />
       <Pricing service={service} />
       <Process
         title="Como funciona, passo a passo"

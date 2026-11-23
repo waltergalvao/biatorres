@@ -9,7 +9,6 @@ import { Contrast } from '@/components/landing/Contrast'
 import { Packages } from '@/components/landing/Packages'
 import { StickyCta } from '@/components/landing/StickyCta'
 import { Deliverables } from '@/components/sections/Deliverables'
-import { Gallery } from '@/components/sections/Gallery'
 import { Process } from '@/components/sections/Process'
 import { Testimonials } from '@/components/sections/Testimonials'
 import { Faq } from '@/components/sections/Faq'
@@ -56,8 +55,7 @@ export default function AudiencePage({ params }: Props) {
       />
       <Contrast title={a.contrast.title} lede={a.contrast.lede} without={a.contrast.without} withProject={a.contrast.with} />
       <Packages title={a.packages.title} lede={a.packages.lede} items={a.packages.items} />
-      <Deliverables />
-      <Gallery />
+      <Deliverables className="bg-paper" />
       <Process title="Do WhatsApp ao projeto, em quatro etapas online" steps={generalProcess}>
         <a
           href={waLink(a.cta.message)}

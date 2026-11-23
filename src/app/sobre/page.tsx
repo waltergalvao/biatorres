@@ -1,127 +1,183 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
-import { AnimateOnScroll, StaggerContainer, StaggerItem } from '@/components/AnimateOnScroll'
+import { Check } from 'lucide-react'
+import { work } from '@/data/work'
+import { PRIMARY_CTA, unsplash, waLink } from '@/lib/site'
+import { Deliverables } from '@/components/sections/Deliverables'
+import { FinalCta } from '@/components/sections/FinalCta'
+import { SectionHeader } from '@/components/sections/SectionHeader'
+import { WhatsAppIcon } from '@/components/WhatsAppIcon'
 
-const philosophy = [
+const i = (n: number) => ({ '--i': n }) as React.CSSProperties
+
+// TODO(owner): confirm these facts (kept from the previous site) and add the CAU registration
+// number. A real registration number is one of the strongest trust signals on this page.
+const credentials = [
+  'Arquiteta formada pela FAU-USP',
+  'Especialização em design de interiores',
+  'Mais de dez anos em projetos residenciais',
+]
+
+const principles = [
   {
     title: 'Escuta',
-    text: 'Todo projeto começa no diálogo. Entender quem você é, como vive e o que sonha é o primeiro passo para criar um espaço autêntico.',
+    text: 'Antes de desenhar, entendo a sua rotina, o seu orçamento e o que fica ou sai. O projeto parte de como você vive, não de uma tendência.',
   },
   {
-    title: 'Intenção',
-    text: 'Cada escolha — do layout ao acabamento — é feita com propósito. Nada é aleatório, tudo é pensado para fazer sentido no conjunto.',
+    title: 'Medida',
+    text: 'Em poucos metros, cada centímetro conta. Confiro as medidas de cada móvel e cada circulação antes de você comprar ou quebrar.',
   },
   {
-    title: 'Equilíbrio',
-    text: 'A verdadeira sofisticação está no equilíbrio entre o belo e o funcional, entre o atemporal e o contemporâneo.',
+    title: 'Clareza',
+    text: 'Você sabe o que vai receber e quanto vai pagar antes de começar. As entregas vêm organizadas para comprar, reformar e montar.',
   },
 ]
+
+const src = (image: string) => (image.startsWith('/') ? image : unsplash(image))
 
 export default function SobrePage() {
   return (
     <>
-      <section className="container-site pt-12 md:pt-20 pb-24 md:pb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          <div className="lg:col-span-7 order-2 lg:order-1">
-            <AnimateOnScroll>
-              <span className="eyebrow mb-6 block">Sobre</span>
-              <h1 className="font-display text-display-xl text-ink mb-10">
-                Beatriz Torres
-              </h1>
-            </AnimateOnScroll>
+      <section aria-labelledby="sobre-title" className="relative overflow-hidden" data-placement="hero">
+        <div className="container-site grid items-center gap-12 pb-20 pt-8 md:pt-12 lg:grid-cols-12 lg:gap-16 lg:pb-28">
+          <div className="lg:col-span-7">
+            <p className="eyebrow enter" style={i(0)}>
+              Sobre
+            </p>
+            <h1 id="sobre-title" className="enter mt-5 font-display text-display-xl text-ink" style={i(1)}>
+              Sou a Beatriz. Projeto apartamentos <em className="italic text-clay">pequenos</em>.
+            </h1>
+            <p className="enter lede mt-6 max-w-[38rem] text-pretty" style={i(2)}>
+              Arquiteta de interiores dedicada a studios, primeiro imóvel e apartamentos de até 60 m². Eu
+              conduzo cada projeto do briefing à entrega, online, para clientes de qualquer cidade.
+            </p>
 
-            <AnimateOnScroll delay={0.2}>
-              <div className="space-y-6 text-ink-soft leading-relaxed">
-                <p className="text-lg">
-                  Arquiteta e designer de interiores, Beatriz Torres atua há mais de
-                  uma década transformando espaços residenciais em reflexos autênticos
-                  de quem os habita.
-                </p>
-                <p>
-                  Formada pela Faculdade de Arquitetura e Urbanismo da Universidade de
-                  São Paulo (FAU-USP), com especialização em design de interiores, Beatriz
-                  construiu sua carreira sobre a convicção de que a arquitetura deve servir
-                  à vida — e não o contrário.
-                </p>
-                <p>
-                  Sua abordagem nasce da escuta atenta. Antes de desenhar qualquer linha,
-                  ela busca compreender profundamente o estilo de vida, os rituais
-                  cotidianos e os sonhos de cada cliente. É dessa imersão que surgem
-                  projetos com alma, onde cada ambiente conta uma história e cada detalhe
-                  tem um porquê.
-                </p>
-                <p>
-                  Ao longo de sua trajetória, desenvolveu projetos em São Paulo, litoral
-                  paulista e interior, sempre com a mesma dedicação: entregar espaços que
-                  emocionam pela beleza e surpreendem pela funcionalidade.
-                </p>
-              </div>
-            </AnimateOnScroll>
+            <ul className="enter mt-8 grid gap-2.5 border-t border-line pt-6 text-[16px] text-ink" style={i(3)}>
+              {credentials.map((c) => (
+                <li key={c} className="flex items-center gap-3">
+                  <Check size={18} aria-hidden className="shrink-0 text-olive" />
+                  {c}
+                </li>
+              ))}
+            </ul>
+
+            <div className="enter mt-9 flex flex-col gap-3 sm:flex-row" style={i(4)}>
+              <a
+                href={waLink('Olá, Beatriz! Li sobre o seu trabalho e quero conversar sobre o meu apartamento.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
+                <WhatsAppIcon className="h-5 w-5" />
+                Conversar com a Beatriz
+              </a>
+              <Link href="/#servicos" className="btn-outline">
+                Ver serviços
+              </Link>
+            </div>
           </div>
 
-          <AnimateOnScroll
-            variant="fadeRight"
-            className="lg:col-span-5 order-1 lg:order-2"
-          >
-            <div className="relative aspect-[3/4] overflow-hidden lg:mt-16">
+          <div className="lg:col-span-5">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-sand">
+              {/* TODO(owner): replace the stock portrait with a real photo of Beatriz. */}
               <Image
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
-                alt="Beatriz Torres — Arquiteta e Designer de Interiores"
+                src={unsplash('1573496359142-b8d87734a5a2')}
+                alt="Retrato de Beatriz Torres, arquiteta"
                 fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 40vw"
                 priority
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="animate-reveal object-cover"
               />
             </div>
-          </AnimateOnScroll>
+          </div>
         </div>
       </section>
 
-      <div className="container-site"><div className="hairline" /></div>
-
-      <section className="container-site section-y">
-        <AnimateOnScroll className="mb-16 md:mb-24 max-w-2xl">
-          <span className="eyebrow mb-4 block">Filosofia</span>
-          <h2 className="font-display text-display">
-            O que orienta cada projeto
-          </h2>
-        </AnimateOnScroll>
-
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16">
-          {philosophy.map((item) => (
-            <StaggerItem key={item.title}>
-              <div className="mb-6 h-px w-12 bg-clay" />
-              <h3 className="font-display text-heading mb-4">{item.title}</h3>
-              <p className="text-sm text-ink-soft leading-relaxed">
-                {item.text}
-              </p>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-      </section>
-
-      <section className="container-site pb-32 md:pb-40 bg-paper">
-        <div className="section-spacing">
-          <AnimateOnScroll>
-            <blockquote className="font-display text-display text-center max-w-3xl mx-auto text-balance">
-              &ldquo;A arquitetura que me move é aquela que acolhe, que respeita
-              quem a vive, e que envelhece com graça.&rdquo;
-            </blockquote>
-          </AnimateOnScroll>
-
-          <AnimateOnScroll delay={0.2}>
-            <p className="text-center eyebrow mt-8">Beatriz Torres</p>
-          </AnimateOnScroll>
-
-          <AnimateOnScroll delay={0.3} className="flex justify-center mt-12">
-            <Link href="/contato" className="btn-primary">
-              Iniciar um projeto
-            </Link>
-          </AnimateOnScroll>
+      <section aria-labelledby="historia-title" className="section-y bg-paper">
+        <div className="container-site grid gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <p className="eyebrow">Por que apartamentos pequenos</p>
+            <h2 id="historia-title" className="mt-4 font-display text-display text-ink">
+              É onde o projeto mais faz diferença
+            </h2>
+          </div>
+          {/* TODO(owner): personalise this text with Beatriz's own story. */}
+          <div className="space-y-5 text-[18px] leading-relaxed text-ink-soft lg:col-span-7">
+            <p>
+              Em um apartamento grande, um erro de medida passa despercebido. Em 40 m², um sofá fora de
+              escala ocupa a sala inteira, e uma tomada no lugar errado vira uma extensão para sempre.
+            </p>
+            <p>
+              Por isso escolhi trabalhar com studios, primeiro imóvel e apartamentos compactos: quem compra
+              para morar, quem compra para alugar e quem quer fazer mais com menos metros.
+            </p>
+            <p>
+              Atendo online porque funciona: com a planta, fotos, medidas e uma boa conversa por vídeo, eu
+              entrego o projeto pronto para você comprar, reformar e montar, esteja onde estiver.
+            </p>
+          </div>
         </div>
       </section>
+
+      <section aria-labelledby="como-title" className="section-y">
+        <div className="container-site">
+          <SectionHeader id="como-title" eyebrow="Como eu trabalho" title="Três coisas que não mudam de projeto para projeto" />
+          <ul className="mt-14 grid gap-px overflow-hidden rounded-[28px] border border-line bg-line md:grid-cols-3">
+            {principles.map((p, n) => (
+              <li key={p.title} className="bg-linen p-7 md:p-9">
+                <span aria-hidden className="font-display text-[44px] font-light italic leading-none text-clay">
+                  {String(n + 1).padStart(2, '0')}
+                </span>
+                <h3 className="mt-6 font-display text-[26px] leading-tight text-ink">{p.title}</h3>
+                <p className="mt-3 text-[16px] leading-relaxed text-ink-soft">{p.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {work.length > 0 ? (
+        <section aria-labelledby="trabalhos-title" className="section-y bg-sand">
+          <div className="container-site">
+            <SectionHeader
+              id="trabalhos-title"
+              eyebrow="Trabalhos"
+              title="Alguns projetos"
+              lede="Projetos entregues e estudos em andamento, cada um identificado pelo que mostra."
+            />
+            <ul className="mt-14 grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+              {work.map((w) => (
+                <li key={w.title}>
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-[24px] bg-sand-deep">
+                    <Image
+                      src={src(w.image)}
+                      alt={w.imageAlt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                    <span className="absolute left-4 top-4 rounded-full bg-linen/90 px-3 py-1.5 text-[13px] font-semibold text-ink backdrop-blur-sm">
+                      {w.kind}
+                    </span>
+                  </div>
+                  <h3 className="mt-5 font-display text-[24px] leading-tight text-ink">{w.title}</h3>
+                  <p className="mt-1 text-[14px] font-semibold uppercase tracking-[0.12em] text-olive">{w.facts}</p>
+                  <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">{w.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : (
+        <Deliverables className="bg-sand" />
+      )}
+
+      <FinalCta
+        eyebrow="Vamos conversar"
+        title="Conte o que você quer mudar no seu apartamento"
+        text="Mande a metragem e o que quer resolver. Eu indico o serviço certo e respondo com o valor fechado."
+        ctaLabel={PRIMARY_CTA.label}
+      />
     </>
   )
 }

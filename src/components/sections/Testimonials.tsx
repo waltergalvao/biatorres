@@ -11,7 +11,7 @@ export function Testimonials({
   const [lead, ...rest] = items
 
   return (
-    <section aria-labelledby="depoimentos-title" className="section-y">
+    <section aria-labelledby="depoimentos-title" className="section-y bg-paper">
       <div className="container-site">
         <p className="eyebrow">Depoimentos</p>
         <h2 id="depoimentos-title" className="mt-4 max-w-3xl font-display text-display text-ink">
@@ -33,7 +33,7 @@ export function Testimonials({
           {rest.length > 0 && (
             <div className="grid gap-6 lg:col-span-5">
               {rest.slice(0, 2).map((t) => (
-                <figure key={t.quote} className="rounded-[24px] border border-line bg-paper p-7">
+                <figure key={t.quote} className="rounded-[24px] border border-line bg-linen p-7">
                   <blockquote className="text-[17px] leading-relaxed text-ink">“{t.quote}”</blockquote>
                   <figcaption className="mt-5 text-[14px] text-ink-soft">
                     <span className="font-semibold text-ink">{t.name}</span> · {t.detail}
