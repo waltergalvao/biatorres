@@ -8,6 +8,7 @@ import {
   PRIMARY_CTA,
   WHATSAPP_DISPLAY,
   audienceLinks,
+  isArtboardRoute,
   pageLinks,
   serviceLinks,
   waLink,
@@ -80,6 +81,8 @@ function LandingFooter({ message }: { message?: string }) {
 
 export function Footer() {
   const pathname = usePathname()
+
+  if (isArtboardRoute(pathname)) return null
 
   if (pathname.startsWith('/para/')) {
     const slug = pathname.split('/')[2] as AudienceSlug

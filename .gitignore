@@ -36,3 +36,6 @@ next-env.d.ts
 
 # contentlayer
 .contentlayer
+
+# Instagram posts exported by npm run social:export
+/social-export/

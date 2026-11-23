@@ -20,6 +20,9 @@ export const PRIMARY_CTA = {
   href: waLink(),
 }
 
+/** Internal routes that render artwork (Instagram posts) without the site's header and footer. */
+export const isArtboardRoute = (pathname: string) => pathname === '/social' || pathname.startsWith('/social/')
+
 export const unsplash = (id: string) => `https://images.unsplash.com/photo-${id}`
 
 export type NavLink = { href: string; label: string; description?: string; meta?: string }
