@@ -1,4 +1,4 @@
-# biatorres.arq.br
+# beatriztorres.com.br
 
 ## Design tokens
 
