@@ -1,4 +1,5 @@
-import { OG_CONTENT_TYPE, OG_SIZE, portraitPhoto, renderOgCard, sitePhoto } from '@/lib/og'
+import { OG_CONTENT_TYPE, OG_SIZE, renderOgCard } from '@/lib/og'
+import { portraitPhoto, sitePhoto } from '@/lib/og-photos'
 
 // Share image of /contato: an invitation to talk, between two photos of Beatriz.
 export const alt = 'Fale com a Beatriz Torres pelo WhatsApp ou por e-mail'

@@ -1,4 +1,5 @@
-import { OG_CONTENT_TYPE, OG_SIZE, portraitPhoto, renderOgCard, sitePhoto } from '@/lib/og'
+import { OG_CONTENT_TYPE, OG_SIZE, renderOgCard } from '@/lib/og'
+import { portraitPhoto, sitePhoto } from '@/lib/og-photos'
 
 // Share image of /sobre: the page's headline between two photos of Beatriz.
 export const alt = 'Beatriz Torres, arquiteta de interiores de apartamentos pequenos'

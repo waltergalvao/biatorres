@@ -60,11 +60,6 @@ export async function fetchPhoto(url: string | URL, init?: RequestInit): Promise
 /** An Unsplash photo at a size that is sharp on the card and quick to fetch. */
 export const unsplashPhoto = (id: string) => fetchPhoto(`${unsplash(id)}?w=1200&q=80&fm=jpg&fit=max`)
 
-/** Beatriz's portrait (public/images/beatriz-retrato.jpg), bundled with the edge function. */
-export const portraitPhoto = () => fetchPhoto(new URL('../../public/images/beatriz-retrato.jpg', import.meta.url))
-
-/** Beatriz at a site visit (public/images/beatriz-obra.jpg), bundled with the edge function. */
-export const sitePhoto = () => fetchPhoto(new URL('../../public/images/beatriz-obra.jpg', import.meta.url))
 
 /**
  * The BT monogram as an inline SVG, in any token color. `weight` sets a fixed line thickness in
