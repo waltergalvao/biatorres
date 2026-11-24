@@ -51,6 +51,8 @@ function validate(slug: string, article: Partial<Article> | undefined): asserts 
   if (article.updated && article.updated < article.date!) fail('`updated` is earlier than `date`')
   if (!isCategory(article.category!)) fail(`unknown category "${article.category}" (see src/lib/blog/categories.ts)`)
   if (!article.image!.startsWith('/')) fail('`image` must be a path under /public, e.g. /images/blog/<slug>.jpg')
+  // The share image (src/lib/blog/og.ts) draws the cover with Satori, which reads JPEG and PNG only.
+  if (!/\.(jpe?g|png)$/i.test(article.image!)) fail('`image` must be a .jpg or .png file (the share image reads no other format)')
 
   const length = article.description!.length
   if (length < 140 || length > 160) {

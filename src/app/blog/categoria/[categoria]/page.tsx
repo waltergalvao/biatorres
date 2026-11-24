@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { getAllArticles } from '@/lib/blog/articles'
 import { categoryPath, getCategories, getCategory } from '@/lib/blog/categories'
 import { blogPageMetadata } from '@/lib/blog/metadata'
+import { categoryOgImage } from '@/lib/blog/og'
 import { listingGraph } from '@/lib/blog/schema'
 import { BLOG_PATH } from '@/lib/blog/site'
 import { JsonLd } from '@/components/JsonLd'
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${category.label}: artigos do blog`,
     description: category.description,
     path: categoryPath(category.slug),
-    cover: (await getAllArticles()).find((a) => a.category === category.slug),
+    images: categoryOgImage(category, (await getAllArticles()).find((a) => a.category === category.slug)),
   })
 }
 

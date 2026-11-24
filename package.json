@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "social:export": "node scripts/export-social.mjs",
+    "og:fonts": "node scripts/og-fonts.mjs",
     "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
