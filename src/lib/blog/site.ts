@@ -1,9 +1,8 @@
 // Blog-wide constants: names, paths and the author. Shared by pages, JSON-LD, RSS and the
 // Markdown versions, so every surface describes the blog and its author the same way.
 
+import { aboutSummary } from '@/data/about'
 import { SITE_URL, WHATSAPP_DISPLAY } from '@/lib/site'
-
-export const SITE_NAME = 'Beatriz Torres Arquitetura'
 
 export const BLOG_PATH = '/blog'
 export const RSS_PATH = '/blog/rss.xml'
@@ -15,18 +14,16 @@ export const BLOG_DESCRIPTION =
 /** @id of the Blog entity (JSON-LD). Articles point at it with isPartOf. */
 export const BLOG_ID = `${SITE_URL}/blog#blog`
 
-/** Title suffix for blog pages; the root layout has no title template. */
-export const titleWithBrand = (title: string) => `${title} | Beatriz Torres`
-
-// TODO(owner): keep in sync with the credentials on /sobre (and add the CAU number there).
+/** The author of every post. The Person entity itself is site-wide (src/lib/schema.ts). */
 export const AUTHOR = {
   name: 'Beatriz Torres',
-  role: 'Arquiteta e urbanista',
+  /** Same as the Person's jobTitle in src/lib/schema.ts. */
+  role: 'Arquiteta de interiores',
   /** Profile page. Article bylines link here with rel="author". */
   path: '/sobre',
   avatar: '/images/beatriz-avatar.jpg',
   /** "Quem escreve" box at the end of each article (and in the Markdown version). */
-  bio: 'Projeta interiores de studios, primeiro imóvel e apartamentos de até 60 m², do briefing à entrega, online, para clientes de qualquer cidade.',
+  bio: aboutSummary,
 } as const
 
 export const CONTACT_LINE = `WhatsApp ${WHATSAPP_DISPLAY}`

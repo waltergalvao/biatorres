@@ -1,34 +1,35 @@
-// Page metadata for the blog. Next.js doesn't deep-merge nested metadata (a page's openGraph
-// replaces the layout's), so each page states the site name, locale and image again here.
+// Page metadata for the blog, built on the site-wide pageMetadata() (src/lib/metadata.ts), so
+// blog pages get the same title suffix (from the root layout's template), site name and locale.
 
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/metadata'
 import { absoluteUrl } from '@/lib/schema'
 import { articleMarkdownPath, articlePath, findArticleSlug, type Article } from './articles'
 import { getCategory } from './categories'
 import { getImageSize } from './image'
-import { AUTHOR, RSS_PATH, SITE_NAME, titleWithBrand } from './site'
+import { AUTHOR, RSS_PATH } from './site'
 
-/** Listing pages: /blog and the category pages. */
+/**
+ * Listing pages: /blog and the category pages. A page-level openGraph drops the inherited
+ * default image (and that one shows a price, which the blog avoids), so the share image is
+ * the cover of the newest article listed.
+ */
 export async function blogPageMetadata({
-  title,
-  description,
-  path,
   cover,
+  ...page
 }: {
   title: string
   description: string
   path: string
-  /** The newest listed article: its cover is the page's share image. */
   cover?: Pick<Article, 'image' | 'imageAlt'>
 }): Promise<Metadata> {
+  const base = pageMetadata(page)
   const size = cover && (await getImageSize(cover.image))
   const images = cover ? [{ url: cover.image, alt: cover.imageAlt, ...(size ?? {}) }] : undefined
   return {
-    title,
-    description,
-    alternates: { canonical: path, types: { 'application/rss+xml': RSS_PATH } },
-    openGraph: { title, description, url: path, siteName: SITE_NAME, locale: 'pt_BR', type: 'website', images },
-    twitter: { card: images ? 'summary_large_image' : 'summary', title, description, images },
+    ...base,
+    alternates: { ...base.alternates, types: { 'application/rss+xml': RSS_PATH } },
+    ...(images ? { openGraph: { ...base.openGraph, images }, twitter: { ...base.twitter, images } } : {}),
   }
 }
 
@@ -39,35 +40,31 @@ export async function blogPageMetadata({
  */
 export async function articleMetadata(article: Article): Promise<Metadata> {
   const slug = await findArticleSlug(article)
-  const title = titleWithBrand(article.title)
-  const url = slug ? articlePath(slug) : undefined
+  const path = slug ? articlePath(slug) : '/blog'
   const size = await getImageSize(article.image)
   const images = [{ url: article.image, alt: article.imageAlt, ...(size ?? {}) }]
-  const section = getCategory(article.category)?.label
+  // og:title is the article's title alone; the <title> gets the site suffix.
+  const base = pageMetadata({ title: article.title, description: article.description, path, socialTitle: article.title })
 
   return {
-    title,
-    description: article.description,
+    ...base,
     authors: [{ name: AUTHOR.name, url: absoluteUrl(AUTHOR.path) }],
-    alternates: url
-      ? {
-          canonical: url,
-          types: { 'text/markdown': articleMarkdownPath(slug!), 'application/rss+xml': RSS_PATH },
-        }
-      : undefined,
+    alternates: {
+      ...base.alternates,
+      types: {
+        ...(slug ? { 'text/markdown': articleMarkdownPath(slug) } : {}),
+        'application/rss+xml': RSS_PATH,
+      },
+    },
     openGraph: {
-      title: article.title,
-      description: article.description,
+      ...base.openGraph,
       type: 'article',
-      url,
-      siteName: SITE_NAME,
-      locale: 'pt_BR',
       publishedTime: article.date,
       modifiedTime: article.updated ?? article.date,
       authors: [absoluteUrl(AUTHOR.path)],
-      section,
+      section: getCategory(article.category)?.label,
       images,
     },
-    twitter: { card: 'summary_large_image', title: article.title, description: article.description, images },
+    twitter: { ...base.twitter, images },
   }
 }

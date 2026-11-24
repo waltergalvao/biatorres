@@ -1,13 +1,13 @@
 // Plain-Markdown version of each article, for AI assistants and agents
 // (/blog/<slug>.md, Accept: text/markdown, /llms-full.txt).
 
-import { absoluteUrl } from '@/lib/schema'
+import { absoluteUrl, BUSINESS_NAME } from '@/lib/schema'
 import { SITE_URL } from '@/lib/site'
 import { articlePath, getArticleBySlug, type ArticleWithSlug } from './articles'
 import { getCategory } from './categories'
 import { getArticleContent } from './content'
 import { formatDate } from './format'
-import { AUTHOR, CONTACT_LINE, SITE_NAME } from './site'
+import { AUTHOR, CONTACT_LINE } from './site'
 
 export const MARKDOWN_HEADERS = {
   'Content-Type': 'text/markdown; charset=utf-8',
@@ -32,7 +32,7 @@ export async function renderArticleMarkdown(article: ArticleWithSlug) {
     `description: ${JSON.stringify(article.description)}`,
     `url: ${url}`,
     `author: ${JSON.stringify(`${AUTHOR.name}, ${AUTHOR.role.toLowerCase()}`)}`,
-    `publisher: ${JSON.stringify(SITE_NAME)}`,
+    `publisher: ${JSON.stringify(BUSINESS_NAME)}`,
     `date_published: ${article.date}`,
     `date_modified: ${modified}`,
     `category: ${JSON.stringify(category)}`,
@@ -58,11 +58,11 @@ ${markdown}
 
 ## Quem escreve
 
-**${AUTHOR.name}**, ${AUTHOR.role.toLowerCase()}. ${AUTHOR.bio} Perfil: ${absoluteUrl(AUTHOR.path)}
+${AUTHOR.bio} Perfil: ${absoluteUrl(AUTHOR.path)}
 
 ---
 
-Fonte: [${article.title}](${url}), ${SITE_NAME} (${SITE_URL}).
+Fonte: [${article.title}](${url}), ${BUSINESS_NAME} (${SITE_URL}).
 Contato: ${SITE_URL} · ${CONTACT_LINE}.
 `
 }

@@ -30,9 +30,13 @@ export function middleware(request: NextRequest) {
 
   const response = NextResponse.next()
   response.headers.set('Vary', 'Accept')
-  response.headers.set('Link', `</blog/${slug}.md>; rel="alternate"; type="text/markdown"`)
+  response.headers.set('Link', [`</blog/${slug}.md>; rel="alternate"; type="text/markdown"`, ...SITE_LINKS].join(', '))
   return response
 }
+
+// The same site links next.config.mjs sends on every other page. Its rule skips the articles,
+// because a Link header from next.config would replace this one.
+const SITE_LINKS = ['</sitemap.xml>; rel="sitemap"', '</llms.txt>; rel="describedby"; type="text/plain"']
 
 /** True when text/markdown has the same or higher priority than text/html. */
 function prefersMarkdown(accept: string) {

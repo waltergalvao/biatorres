@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
-  articlePath,
   findArticleSlug,
   getRelatedArticles,
   type Article,
@@ -12,7 +11,7 @@ import { categoryPath, getCategory } from '@/lib/blog/categories'
 import { getArticleContent } from '@/lib/blog/content'
 import { formatDate, readingMinutes } from '@/lib/blog/format'
 import { getImageSize } from '@/lib/blog/image'
-import { blogPostingSchema, breadcrumbSchema, faqSchema, graph } from '@/lib/blog/schema'
+import { articleGraph } from '@/lib/blog/schema'
 import { AUTHOR, articleMessage } from '@/lib/blog/site'
 import { JsonLd } from '@/components/JsonLd'
 import { FinalCta } from '@/components/sections/FinalCta'
@@ -44,18 +43,13 @@ export async function ArticleLayout({ article, children }: { article: Article; c
   const updated = article.updated && article.updated !== article.date ? article.updated : undefined
   const message = articleMessage(article.title)
 
+  // The h1 right below names the current page, so the visible trail stops at the category.
   const crumbs = [
     { name: 'Início', path: '/' },
     { name: 'Blog', path: '/blog' },
     { name: category.label, path: categoryPath(category.slug) },
-    { name: article.title, path: articlePath(slug) },
   ]
-
-  const structuredData = graph(
-    blogPostingSchema(post, { wordCount: content.wordCount, image: imageSize }),
-    breadcrumbSchema(crumbs),
-    ...(content.faq.length > 0 ? [faqSchema(slug, content.faq)] : []),
-  )
+  const structuredData = articleGraph(post, { wordCount: content.wordCount, faq: content.faq, image: imageSize })
 
   return (
     <div data-service="blog">
@@ -64,8 +58,7 @@ export async function ArticleLayout({ article, children }: { article: Article; c
       <article>
         <header className="container-site pt-8 md:pt-12">
           <div className="enter" style={i(0)}>
-            {/* The h1 right below names the current page, so the trail stops at the category. */}
-            <Breadcrumb items={crumbs.slice(0, -1)} />
+            <Breadcrumb items={crumbs} />
           </div>
           <div className="max-w-[54rem]">
             <p className="enter mt-10" style={i(1)}>
