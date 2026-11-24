@@ -220,7 +220,7 @@ ${list(principles.map((p) => `**${p.title}.** ${p.text}`))}`
 /** /llms-full.txt: the whole site (and every blog article) as Markdown, in one file. */
 export async function llmsFullTxt() {
   const articles = await getAllArticles()
-  const markdown = (await Promise.all(articles.map((a) => getArticleMarkdown(a.slug)))).filter(Boolean)
+  const markdown = (await Promise.all(articles.map((a) => getArticleMarkdown(a.slug, { embedded: true })))).filter(Boolean)
 
   return [
     header(),

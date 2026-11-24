@@ -15,13 +15,12 @@ import { PRIMARY_CTA, waLink } from '@/lib/site'
 import type { Metadata } from 'next'
 import { JsonLd } from '@/components/JsonLd'
 import { BUSINESS_DESCRIPTION, SCHEMA_IDS, faqSchema, graph, webPageSchema } from '@/lib/schema'
-import { pageMetadata } from '@/lib/metadata'
+import { HOME_DESCRIPTION, HOME_TITLE, pageMetadata } from '@/lib/metadata'
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Projeto de interiores para apartamento pequeno | Beatriz Torres',
+  title: HOME_TITLE,
   absoluteTitle: true,
-  description:
-    'Projeto de interiores online para apartamento pequeno e studio: consultoria desde R$ 450 por ambiente, projeto com 3D a R$ 250/m² e apê até 60 m² em 10x.',
+  description: HOME_DESCRIPTION,
   path: '/',
 })
 

@@ -109,6 +109,7 @@ export function articleGraph(
         contentUrl: absoluteUrl(articleMarkdownPath(article.slug)),
       },
     },
+    blogSchema(),
     breadcrumbSchema(path, [
       { name: 'Blog', path: BLOG_PATH },
       ...(category ? [{ name: category.label, path: categoryPath(category.slug) }] : []),

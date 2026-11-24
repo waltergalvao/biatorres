@@ -20,7 +20,10 @@ export const MARKDOWN_HEADERS = {
  * YAML front matter with the metadata, the body, the same "Quem escreve" box as the page and a
  * source line at the end, so an excerpt stays attributable when it is quoted elsewhere.
  */
-export async function renderArticleMarkdown(article: ArticleWithSlug) {
+export async function renderArticleMarkdown(
+  article: ArticleWithSlug,
+  { embedded = false }: { embedded?: boolean } = {},
+) {
   const { markdown } = await getArticleContent(article.slug)
   const url = absoluteUrl(articlePath(article.slug))
   const modified = article.updated ?? article.date
@@ -46,9 +49,7 @@ export async function renderArticleMarkdown(article: ArticleWithSlug) {
       ? `Publicado em ${formatDate(article.date)}, atualizado em ${formatDate(modified)}`
       : `Publicado em ${formatDate(article.date)}`
 
-  return `${frontMatter}
-
-# ${article.title}
+  const document = `# ${article.title}
 
 > ${article.description}
 
@@ -65,6 +66,21 @@ ${AUTHOR.bio} Perfil: ${absoluteUrl(AUTHOR.path)}
 Fonte: [${article.title}](${url}), ${BUSINESS_NAME} (${SITE_URL}).
 Contato: ${SITE_URL} · ${CONTACT_LINE}.
 `
+  // Inside /llms-full.txt the article is one section of a bigger document: no front matter,
+  // and every heading one level down so the article title sits under "# Artigos do blog".
+  return embedded ? demoteHeadings(document) : `${frontMatter}\n\n${document}`
+}
+
+/** '# T' -> '## T', '## T' -> '### T'..., outside fenced code blocks. */
+function demoteHeadings(markdown: string) {
+  let inFence = false
+  return markdown
+    .split('\n')
+    .map((line) => {
+      if (/^(```|~~~)/.test(line)) inFence = !inFence
+      return !inFence && /^#{1,5} /.test(line) ? `#${line}` : line
+    })
+    .join('\n')
 }
 
 /**
@@ -72,7 +88,10 @@ Contato: ${SITE_URL} · ${CONTACT_LINE}.
  * import/export lines (components turned into plain Markdown), and an
  * attribution footer with the canonical URL. Undefined for an unknown slug.
  */
-export async function getArticleMarkdown(slug: string): Promise<string | undefined> {
+export async function getArticleMarkdown(
+  slug: string,
+  options?: { embedded?: boolean },
+): Promise<string | undefined> {
   const article = await getArticleBySlug(slug)
-  return article ? renderArticleMarkdown(article) : undefined
+  return article ? renderArticleMarkdown(article, options) : undefined
 }

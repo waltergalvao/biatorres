@@ -3,9 +3,11 @@ import { absoluteUrl } from '@/lib/schema'
 
 // Everyone may crawl the public site, including AI search and training crawlers: being read
 // and cited by ChatGPT, Claude, Perplexity, Gemini and Copilot is the point (owner decision).
-// The internal routes are blocked for all of them. A crawler that matches a named group ignores
+// The internal Markdown route is blocked for all of them. A crawler that matches a named group ignores
 // the `*` group, so the named group repeats the same rules.
-const DISALLOW = ['/social', '/marca', '/md/']
+// /social and /marca are not blocked: they carry `noindex`, and a crawler has to fetch them to
+// see it. /md/ is the internal target of the /blog/<slug>.md rewrite.
+const DISALLOW = ['/md/']
 
 const AI_CRAWLERS = [
   'GPTBot',

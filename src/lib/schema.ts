@@ -10,7 +10,7 @@
 
 import { EMAIL, SITE_URL, WHATSAPP_NUMBER, serviceLinks } from '@/lib/site'
 import { aboutSummary } from '@/data/about'
-import { services, serviceHref, type Faq, type ServiceSlug } from '@/data/services'
+import { services, serviceHref, serviceOrder, type Faq, type ServiceSlug } from '@/data/services'
 
 export const SCHEMA_IDS = {
   /** The architecture practice (ProfessionalService / Organization). */
@@ -57,6 +57,20 @@ export const graph = (...nodes: Thing[]) => ({ '@context': 'https://schema.org',
 /** "R$ 3.750" -> 3750. */
 export const brl = (price: string) => Number(price.replace(/[^\d,]/g, '').replace(',', '.'))
 
+/** Beatriz's job title (Person.jobTitle, article bylines). */
+export const JOB_TITLE = 'Arquiteta de interiores'
+
+/** 'R$ 450 a R$ 15.000': cheapest and most expensive public price, from the service data. */
+function priceRange() {
+  const all = serviceOrder.flatMap((slug) => {
+    const { pricing } = services[slug]
+    if (pricing.kind === 'rooms') return pricing.rows.map((row) => brl(row.price))
+    return [brl(pricing.total ?? pricing.price)]
+  })
+  const fmt = (n: number) => `R$ ${n.toLocaleString('pt-BR')}`
+  return `${fmt(Math.min(...all))} a ${fmt(Math.max(...all))}`
+}
+
 export const serviceId = (slug: ServiceSlug) => `${absoluteUrl(serviceHref(slug))}#service`
 export const webPageId = (path: string) => `${absoluteUrl(path)}#webpage`
 
@@ -82,7 +96,7 @@ export function businessSchema(): Thing {
     image: absoluteUrl(PORTRAIT_PATH),
     description: BUSINESS_DESCRIPTION,
     slogan: 'Projeto de interiores para apartamentos pequenos',
-    priceRange: 'R$ 450 a R$ 15.000',
+    priceRange: priceRange(),
     currenciesAccepted: 'BRL',
     telephone: PHONE,
     email: EMAIL,
@@ -134,7 +148,7 @@ export function personSchema(): Thing {
     '@type': 'Person',
     '@id': SCHEMA_IDS.person,
     name: 'Beatriz Torres',
-    jobTitle: 'Arquiteta de interiores',
+    jobTitle: JOB_TITLE,
     description: aboutSummary,
     url: absoluteUrl('/sobre'),
     image: absoluteUrl(PORTRAIT_PATH),
@@ -219,9 +233,16 @@ export function serviceSchema(slug: ServiceSlug): Thing {
       offer(`${service.name}: ${row.room}${pricing.showArea && row.area ? ` (${row.area})` : ''}`, brl(row.price)),
     )
     const prices = pricing.rows.map((row) => brl(row.price))
-    const list = pricing.calculator
-      ? [
-          offer(`${service.name}: valor por m²`, pricing.calculator.perM2, {
+    offers = {
+      '@type': 'AggregateOffer',
+      priceCurrency: 'BRL',
+      lowPrice: Math.min(...prices, ...(pricing.calculator ? [pricing.calculator.minimum] : [])),
+      highPrice: Math.max(...prices),
+      offerCount: rows.length,
+      offers: rows,
+      // The m² rate is how the price is calculated, not an offer of its own.
+      ...(pricing.calculator
+        ? {
             priceSpecification: [
               {
                 '@type': 'UnitPriceSpecification',
@@ -237,17 +258,8 @@ export function serviceSchema(slug: ServiceSlug): Thing {
                 description: `Valor mínimo por contratação: R$ ${pricing.calculator.minimum.toLocaleString('pt-BR')}`,
               },
             ],
-          }),
-          ...rows,
-        ]
-      : rows
-    offers = {
-      '@type': 'AggregateOffer',
-      priceCurrency: 'BRL',
-      lowPrice: Math.min(...prices, ...(pricing.calculator ? [pricing.calculator.minimum] : [])),
-      highPrice: Math.max(...prices),
-      offerCount: list.length,
-      offers: list,
+          }
+        : {}),
     }
   } else {
     const total = pricing.total ? brl(pricing.total) : brl(pricing.price)
