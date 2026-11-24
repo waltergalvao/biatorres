@@ -72,7 +72,7 @@ export const audiences: Record<AudienceSlug, Audience> = {
       who: 'Invisto em imóveis',
       kicker: 'Investidores',
       title: 'Imóvel de renda pronto para alugar',
-      text: 'Studios e apartamentos até 60 m² com layout que aproveita cada metro e acabamentos que aguentam a troca de inquilinos.',
+      text: 'Gaste menos para deixar o imóvel pronto, com acabamentos de qualidade que aguentam a troca de inquilinos.',
       menu: 'Imóveis de renda até 60 m², para temporada ou contrato longo.',
       image: '/images/para/investidores.jpg',
       imageAlt: 'Investidor de terno segurando a miniatura de uma casa ao lado de uma calculadora',
