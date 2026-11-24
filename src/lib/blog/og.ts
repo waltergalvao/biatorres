@@ -26,6 +26,9 @@ export const blogOgPath = {
   article: (slug: string) => `/og/blog/${slug}`,
 }
 
+/** Label of the /blog and category cards: says what the blog is about before the headline does. */
+export const BLOG_LABEL = 'Blog de arquitetura de interiores'
+
 /** The /blog headline, also drawn on its share image. */
 export const BLOG_HEADLINE = { title: 'Respostas para quem vai morar bem em', accent: 'poucos metros' }
 
@@ -48,16 +51,16 @@ function image(path: string, version: string, alt: string): OgImages {
 
 /** /blog: the headline on the newest post's cover. */
 export const blogOgImage = (latest?: Cover) =>
-  image(blogOgPath.blog, ogVersion('blog', ...coverVersion(latest)), 'Blog da Beatriz Torres Arquitetura sobre apartamentos pequenos')
+  image(blogOgPath.blog, ogVersion('blog', BLOG_LABEL, ...coverVersion(latest)), 'Blog da Beatriz Torres Arquitetura sobre apartamentos pequenos')
 
 /** A category page: its name on the cover of its newest post. */
 export const categoryOgImage = (category: { slug: string; label: string }, latest?: Cover) =>
   image(
     blogOgPath.category(category.slug),
-    ogVersion('category', category.slug, category.label, ...coverVersion(latest)),
+    ogVersion('category', BLOG_LABEL, category.slug, category.label, ...coverVersion(latest)),
     `${category.label}: artigos do blog da Beatriz Torres Arquitetura`,
   )
 
 /** A post: its title and category on its cover. */
 export const articleOgImage = (slug: string, article: Cover, categoryLabel = '') =>
-  image(blogOgPath.article(slug), ogVersion('article', categoryLabel, ...coverVersion(article)), article.title)
+  image(blogOgPath.article(slug), ogVersion('article', BLOG_LABEL, categoryLabel, ...coverVersion(article)), article.title)

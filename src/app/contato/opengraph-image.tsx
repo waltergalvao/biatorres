@@ -9,8 +9,8 @@ export const contentType = OG_CONTENT_TYPE
 export default async function Image() {
   const [portrait, site] = await Promise.all([portraitPhoto(), sitePhoto()])
   return renderOgCard({
-    label: 'WhatsApp ou e-mail',
-    title: 'Vamos conversar sobre o seu',
+    label: 'Projeto de interiores · WhatsApp ou e-mail',
+    title: 'Vamos projetar o seu',
     accent: 'apartamento',
     photo: [
       { data: site, position: '80% 30%' },

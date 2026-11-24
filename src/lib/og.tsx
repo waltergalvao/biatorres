@@ -128,11 +128,16 @@ const rgba = (color: string, alpha: number) => `rgba(${rgbChannels(color).split(
 /** Keeps "60 m²" and similar together on one line. */
 const keepTogether = (text: string) => text.replace(/(\d) (m²|m2|x)/g, '$1\u00a0$2')
 
-/** Splits on spaces but not on the no-break space (`\s` would match it). */
+/**
+ * Title words, split on spaces but not on no-break spaces (`\s` would match them). The no-break
+ * space then becomes a plain one: each word is its own flex item, which Satori never breaks, and
+ * Fraunces draws the no-break space narrower than a space ("60m\u00b2").
+ */
 const words = (text: string) =>
   keepTogether(text)
     .split(/[^\S\u00a0]+/)
     .filter(Boolean)
+    .map((w) => w.replace(/\u00a0/g, ' '))
 
 /** Capitals for the label, done here rather than with text-transform so units keep their case. */
 const upper = (text: string) =>

@@ -2,7 +2,7 @@
 
 import { homeHero } from '@/data/home'
 import { fetchPhoto, renderOgCard, unsplashPhoto } from '@/lib/og'
-import { BLOG_HEADLINE, BLOG_OG_DATA_PATH, categoryHeadline, type BlogOgData } from './og'
+import { BLOG_HEADLINE, BLOG_LABEL, BLOG_OG_DATA_PATH, categoryHeadline, type BlogOgData } from './og'
 
 export type BlogOgTarget = { kind: 'blog' } | { kind: 'category'; slug: string } | { kind: 'article'; slug: string }
 
@@ -41,7 +41,7 @@ export async function renderBlogOg(request: Request, target: BlogOgTarget) {
   if (target.kind === 'blog') {
     const [latest] = articles
     return renderOgCard({
-      label: 'Blog',
+      label: BLOG_LABEL,
       ...BLOG_HEADLINE,
       photo: { data: await (latest ? cover(request, latest.image) : unsplashPhoto(homeHero.image)) },
     })
@@ -52,13 +52,13 @@ export async function renderBlogOg(request: Request, target: BlogOgTarget) {
     const latest = articles.find((a) => a.category === target.slug)
     const name = label(target.slug)
     if (!latest || !name) return notFound()
-    return renderOgCard({ label: 'Blog', ...categoryHeadline(name), photo: { data: await cover(request, latest.image) } })
+    return renderOgCard({ label: BLOG_LABEL, ...categoryHeadline(name), photo: { data: await cover(request, latest.image) } })
   }
 
   const article = articles.find((a) => a.slug === target.slug)
   if (!article) return notFound()
   return renderOgCard({
-    label: label(article.category) ?? 'Blog',
+    label: `Blog · ${label(article.category) ?? 'arquitetura de interiores'}`,
     title: article.title,
     photo: { data: await cover(request, article.image) },
   })
