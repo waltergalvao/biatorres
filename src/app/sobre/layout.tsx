@@ -1,11 +1,14 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata: Metadata = {
-  title: 'Sobre a Beatriz Torres | Arquitetura de interiores para apartamentos pequenos',
+export const metadata: Metadata = pageMetadata({
+  title: 'Sobre Beatriz Torres, arquiteta de apartamentos pequenos',
+  absoluteTitle: true,
   description:
-    'Beatriz Torres é arquiteta de interiores dedicada a studios, primeiro imóvel e apartamentos de até 60 m². Projetos online, do briefing à entrega.',
-  alternates: { canonical: '/sobre' },
-}
+    'Beatriz Torres é arquiteta de interiores para studios, primeiro imóvel e apartamentos de até 60 m². Projetos online para todo o Brasil, do briefing à entrega.',
+  path: '/sobre',
+  type: 'profile',
+})
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return children

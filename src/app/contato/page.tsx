@@ -33,7 +33,7 @@ export default function ContatoPage() {
             <AnimateOnScroll delay={0.2}>
               <div className="space-y-8">
                 <div>
-                  <h3 className="eyebrow mb-3">E-mail</h3>
+                  <h2 className="eyebrow mb-3">E-mail</h2>
                   <a
                     href={`mailto:${EMAIL}`}
                     className="text-ink hover:text-ink-soft transition-colors duration-300"
@@ -43,7 +43,7 @@ export default function ContatoPage() {
                 </div>
 
                 <div>
-                  <h3 className="eyebrow mb-3">WhatsApp</h3>
+                  <h2 className="eyebrow mb-3">WhatsApp</h2>
                   <a
                     href={waLink()}
                     target="_blank"
@@ -55,33 +55,15 @@ export default function ContatoPage() {
                 </div>
 
                 <div>
-                  <h3 className="eyebrow mb-3">Endereço</h3>
+                  <h2 className="eyebrow mb-3">Endereço</h2>
                   <p className="text-ink-soft text-sm leading-relaxed">
                     São Paulo, SP — Brasil
                   </p>
                 </div>
 
-                <div>
-                  <h3 className="eyebrow mb-3">Redes</h3>
-                  <div className="flex gap-6">
-                    <a
-                      href="https://instagram.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-ink-soft hover:text-ink transition-colors duration-300"
-                    >
-                      Instagram
-                    </a>
-                    <a
-                      href="https://pinterest.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-ink-soft hover:text-ink transition-colors duration-300"
-                    >
-                      Pinterest
-                    </a>
-                  </div>
-                </div>
+                {/* TODO(owner): the "Redes" block linked to instagram.com and pinterest.com, not to
+                    real profiles, so it was removed. Add it back with the real profile URLs (and
+                    add them to SAME_AS in src/lib/schema.ts). */}
               </div>
             </AnimateOnScroll>
           </div>
@@ -94,9 +76,9 @@ export default function ContatoPage() {
                   animate={{ opacity: 1, y: 0 }}
                   className="flex flex-col items-center justify-center h-full min-h-[400px] text-center"
                 >
-                  <h3 className="font-display text-display-sm text-ink mb-4">
+                  <h2 className="font-display text-display-sm text-ink mb-4">
                     Mensagem enviada
-                  </h3>
+                  </h2>
                   <p className="text-ink-soft leading-relaxed max-w-md">
                     Obrigada pelo contato. Retornaremos em breve com toda a atenção
                     que o seu projeto merece.

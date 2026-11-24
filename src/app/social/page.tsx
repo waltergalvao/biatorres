@@ -6,7 +6,7 @@ import { POST_SIZE, socialPosts } from '@/data/social'
 
 // All Instagram posts at a glance, with download buttons. Internal: not linked from the site
 // and not indexed.
-export const metadata: Metadata = { title: 'Posts — Beatriz Torres', robots: { index: false, follow: false } }
+export const metadata: Metadata = { title: 'Posts', robots: { index: false, follow: false } }
 
 const SCALE = 0.36
 
