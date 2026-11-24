@@ -50,6 +50,7 @@ export type Service = {
   summary: string
   /** Three short highlights for cards. */
   highlights: string[]
+  /** title: about 40 characters, the layout adds " | Beatriz Torres". description: 140 to 160. */
   seo: { title: string; description: string }
   hero: {
     eyebrow: string
@@ -104,9 +105,9 @@ export const services: Record<ServiceSlug, Service> = {
     summary: 'Um ambiente resolvido online: layout, cores, materiais e a lista do que comprar.',
     highlights: ['Briefing por vídeo', 'Moodboard e planta dos móveis', 'Lista de compras com links'],
     seo: {
-      title: 'Consultoria de interiores online a partir de R$ 450 | Beatriz Torres Arquitetura',
+      title: 'Consultoria de interiores online, R$ 450',
       description:
-        'Consultoria de interiores 100% online, por ambiente: briefing por vídeo, layout, moodboard e lista de móveis com links de compra. Quarto R$ 450, sala R$ 500, cozinha R$ 600.',
+        'Consultoria de interiores online por ambiente: briefing por vídeo, layout, moodboard e lista de móveis com links. Quarto R$ 450, sala R$ 500, cozinha R$ 600.',
     },
     hero: {
       eyebrow: 'Consultoria de interiores · online',
@@ -247,9 +248,9 @@ export const services: Record<ServiceSlug, Service> = {
     summary: 'Um cômodo projetado com imagens 3D e caderno técnico para marceneiro e obra.',
     highlights: ['Imagens 3D realistas', 'Marcenaria e bancadas detalhadas', 'Caderno técnico para a obra'],
     seo: {
-      title: 'Projeto de interiores por ambiente com 3D, R$ 250/m² | Beatriz Torres Arquitetura',
+      title: 'Projeto de interiores por ambiente com 3D',
       description:
-        'Projeto de cozinha, banheiro, quarto ou sala com imagens 3D, detalhamento de marcenaria e caderno técnico para a obra. R$ 250/m², banheiro até 6 m² por R$ 1.500.',
+        'Projeto de cozinha, banheiro, quarto ou sala com imagens 3D, marcenaria detalhada e caderno técnico para a obra. R$ 250/m², banheiro até 6 m² por R$ 1.500.',
     },
     hero: {
       eyebrow: 'Projeto completo por ambiente',
@@ -394,9 +395,9 @@ export const services: Record<ServiceSlug, Service> = {
     summary: 'O apartamento inteiro com um conceito só, 3D de todos os ambientes e projeto técnico.',
     highlights: ['Até 60 m², todos os ambientes', 'Até 10 imagens 3D', 'Memorial e caderno técnico'],
     seo: {
-      title: 'Projeto de interiores de apartamento até 60 m² em 10x de R$ 1.500 | Beatriz Torres',
+      title: 'Projeto de apartamento completo até 60 m²',
       description:
-        'Projeto completo de apartamento até 60 m²: sala, cozinha, lavanderia, 2 quartos e 2 banheiros, com até 10 imagens 3D, projeto técnico, memorial descritivo e caderno para a obra.',
+        'Projeto de interiores do apartamento inteiro até 60 m², em 10x de R$ 1.500: todos os ambientes, até 10 imagens 3D, projeto técnico e caderno para a obra.',
     },
     hero: {
       eyebrow: 'Projeto completo de apartamento',

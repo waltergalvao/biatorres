@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation'
 import { serviceOrder, services, serviceHref, type ServiceSlug } from '@/data/services'
 import { testimonials } from '@/data/testimonials'
 import { waLink } from '@/lib/site'
+import { pageMetadata } from '@/lib/metadata'
+import { breadcrumbSchema, faqSchema, graph, serviceId, serviceSchema, webPageSchema } from '@/lib/schema'
+import { JsonLd } from '@/components/JsonLd'
 import { LandingHero } from '@/components/landing/LandingHero'
 import { FitCheck } from '@/components/service/FitCheck'
 import { Includes } from '@/components/service/Includes'
@@ -31,12 +34,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Props): Metadata {
   if (!isSlug(params.slug)) return {}
   const { seo } = services[params.slug]
-  return {
-    title: seo.title,
-    description: seo.description,
-    alternates: { canonical: serviceHref(params.slug) },
-    openGraph: { title: seo.title, description: seo.description, locale: 'pt_BR', type: 'website' },
-  }
+  return pageMetadata({ ...seo, path: serviceHref(params.slug) })
 }
 
 export default function ServicePage({ params }: Props) {
@@ -44,19 +42,17 @@ export default function ServicePage({ params }: Props) {
   const service = services[params.slug]
   const quotes = testimonials.filter((t) => t.service === service.slug)
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: service.name,
-    description: service.seo.description,
-    serviceType: service.name,
-    areaServed: 'BR',
-    provider: { '@type': 'ProfessionalService', name: 'Beatriz Torres Arquitetura' },
-  }
+  const path = serviceHref(service.slug)
+  const jsonLd = graph(
+    webPageSchema(path, { name: service.seo.title, description: service.seo.description, about: { '@id': serviceId(service.slug) }, faq: true }),
+    breadcrumbSchema(path, [{ name: service.name, path }]),
+    serviceSchema(service.slug),
+    faqSchema(path, service.faq),
+  )
 
   return (
     <div data-service={service.slug}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <LandingHero
         hero={service.hero}
         price={service.price}

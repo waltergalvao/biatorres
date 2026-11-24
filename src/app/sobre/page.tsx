@@ -2,7 +2,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Check } from 'lucide-react'
 import { work } from '@/data/work'
+import { aboutLede, aboutStory, aboutSummary, principles } from '@/data/about'
 import { PRIMARY_CTA, waLink } from '@/lib/site'
+import { JsonLd } from '@/components/JsonLd'
+import { SCHEMA_IDS, breadcrumbSchema, graph, webPageSchema } from '@/lib/schema'
 import { Work } from '@/components/sections/Work'
 import { FinalCta } from '@/components/sections/FinalCta'
 import { SectionHeader } from '@/components/sections/SectionHeader'
@@ -18,24 +21,21 @@ const credentials = [
   'Mais de dez anos em projetos residenciais',
 ]
 
-const principles = [
-  {
-    title: 'Escuta',
-    text: 'Antes de desenhar, entendo a sua rotina, o seu orçamento e o que fica ou sai. O projeto parte de como você vive, não de uma tendência.',
-  },
-  {
-    title: 'Medida',
-    text: 'Em poucos metros, cada centímetro conta. Confiro as medidas de cada móvel e cada circulação antes de você comprar ou quebrar.',
-  },
-  {
-    title: 'Clareza',
-    text: 'Você sabe o que vai receber e quanto vai pagar antes de começar. As entregas vêm organizadas para comprar, reformar e montar.',
-  },
-]
+// Profile page: its main entity is Beatriz (the Person node in the root layout).
+const jsonLd = graph(
+  webPageSchema('/sobre', {
+    type: 'ProfilePage',
+    name: 'Sobre Beatriz Torres',
+    description: aboutSummary,
+    mainEntity: { '@id': SCHEMA_IDS.person },
+  }),
+  breadcrumbSchema('/sobre', [{ name: 'Sobre', path: '/sobre' }]),
+)
 
 export default function SobrePage() {
   return (
     <>
+      <JsonLd data={jsonLd} />
       <section aria-labelledby="sobre-title" className="relative overflow-hidden" data-placement="hero">
         <div className="container-site grid items-center gap-12 pb-20 pt-8 md:pt-12 lg:grid-cols-12 lg:gap-16 lg:pb-28">
           <div className="lg:col-span-7">
@@ -46,8 +46,7 @@ export default function SobrePage() {
               Sou a Beatriz. Projeto apartamentos <em className="italic text-clay">pequenos</em>.
             </h1>
             <p className="enter lede mt-6 max-w-[38rem] text-pretty" style={i(2)}>
-              Arquiteta de interiores dedicada a studios, primeiro imóvel e apartamentos de até 60 m². Eu
-              conduzo cada projeto do briefing à entrega, online, para clientes de qualquer cidade.
+              {aboutLede}
             </p>
 
             <ul className="enter mt-8 grid gap-2.5 border-t border-line pt-6 text-[16px] text-ink" style={i(3)}>
@@ -115,20 +114,10 @@ export default function SobrePage() {
               </figcaption>
             </figure>
           </div>
-          {/* TODO(owner): personalise this text with Beatriz's own story. */}
           <div className="space-y-5 text-[18px] leading-relaxed text-ink-soft lg:col-span-7">
-            <p>
-              Em um apartamento grande, um erro de medida passa despercebido. Em 40 m², um sofá fora de
-              escala ocupa a sala inteira, e uma tomada no lugar errado vira uma extensão para sempre.
-            </p>
-            <p>
-              Por isso escolhi trabalhar com studios, primeiro imóvel e apartamentos compactos: quem compra
-              para morar, quem compra para alugar e quem quer fazer mais com menos metros.
-            </p>
-            <p>
-              Atendo online porque funciona: com a planta, fotos, medidas e uma boa conversa por vídeo, eu
-              entrego o projeto pronto para você comprar, reformar e montar, esteja onde estiver.
-            </p>
+            {aboutStory.map((p) => (
+              <p key={p}>{p}</p>
+            ))}
           </div>
         </div>
       </section>

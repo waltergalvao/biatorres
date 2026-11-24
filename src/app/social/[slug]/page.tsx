@@ -7,7 +7,7 @@ import { findPost, socialPosts } from '@/data/social'
 
 // One Instagram post at its real size, with a download button. `npm run social:export` also
 // screenshots #post-<slug>. Internal: not linked from the site and not indexed.
-export const metadata: Metadata = { title: 'Post — Beatriz Torres', robots: { index: false, follow: false } }
+export const metadata: Metadata = { title: 'Post', robots: { index: false, follow: false } }
 
 export function generateStaticParams() {
   return socialPosts.map((p) => ({ slug: p.slug }))
