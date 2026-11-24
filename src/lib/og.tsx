@@ -79,9 +79,9 @@ export type OgContent = {
 export async function renderOgImage({ eyebrow, title, detail }: OgContent) {
   const footer = `Beatriz Torres Arquitetura · ${SITE_DOMAIN}`
   // The font files hold only these glyphs; the eyebrow is drawn in capitals, so add those too.
-  const glyphs = `${eyebrow.toUpperCase()}${title}${detail ?? ''}${footer}`
-  const [fontList, photo] = await Promise.all([fonts(glyphs), portrait()])
   const detailText = detail ? detail.charAt(0).toUpperCase() + detail.slice(1) : undefined // 'a partir de...' -> 'A partir de...'
+  const glyphs = `${eyebrow.toUpperCase()}${title}${detailText ?? ''}${footer}`
+  const [fontList, photo] = await Promise.all([fonts(glyphs), portrait()])
   const display = fontList.length ? 'Fraunces' : undefined
   const sans = fontList.length ? 'Hanken Grotesk' : undefined
   const titleSize = title.length > 48 ? 54 : title.length > 32 ? 62 : 70

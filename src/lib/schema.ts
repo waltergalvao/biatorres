@@ -219,34 +219,35 @@ export function serviceSchema(slug: ServiceSlug): Thing {
       offer(`${service.name}: ${row.room}${pricing.showArea && row.area ? ` (${row.area})` : ''}`, brl(row.price)),
     )
     const prices = pricing.rows.map((row) => brl(row.price))
+    const list = pricing.calculator
+      ? [
+          offer(`${service.name}: valor por m²`, pricing.calculator.perM2, {
+            priceSpecification: [
+              {
+                '@type': 'UnitPriceSpecification',
+                price: pricing.calculator.perM2,
+                priceCurrency: 'BRL',
+                unitCode: 'MTK',
+                unitText: 'm²',
+              },
+              {
+                '@type': 'PriceSpecification',
+                minPrice: pricing.calculator.minimum,
+                priceCurrency: 'BRL',
+                description: `Valor mínimo por contratação: R$ ${pricing.calculator.minimum.toLocaleString('pt-BR')}`,
+              },
+            ],
+          }),
+          ...rows,
+        ]
+      : rows
     offers = {
       '@type': 'AggregateOffer',
       priceCurrency: 'BRL',
       lowPrice: Math.min(...prices, ...(pricing.calculator ? [pricing.calculator.minimum] : [])),
       highPrice: Math.max(...prices),
-      offerCount: rows.length,
-      offers: pricing.calculator
-        ? [
-            offer(`${service.name}: valor por m²`, pricing.calculator.perM2, {
-              priceSpecification: [
-                {
-                  '@type': 'UnitPriceSpecification',
-                  price: pricing.calculator.perM2,
-                  priceCurrency: 'BRL',
-                  unitCode: 'MTK',
-                  unitText: 'm²',
-                },
-                {
-                  '@type': 'PriceSpecification',
-                  minPrice: pricing.calculator.minimum,
-                  priceCurrency: 'BRL',
-                  description: `Valor mínimo por contratação: R$ ${pricing.calculator.minimum.toLocaleString('pt-BR')}`,
-                },
-              ],
-            }),
-            ...rows,
-          ]
-        : rows,
+      offerCount: list.length,
+      offers: list,
     }
   } else {
     const total = pricing.total ? brl(pricing.total) : brl(pricing.price)

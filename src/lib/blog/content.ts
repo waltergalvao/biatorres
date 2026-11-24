@@ -54,6 +54,18 @@ type Root = Node & { children: Node[] }
 
 const textOf = (node: Node) => toString(node as Parameters<typeof toString>[0])
 
+/**
+ * Text of a block, with a line break between list items and nested blocks.
+ * `toString` joins children with nothing, so a list would come out as one run of words.
+ */
+const BLOCK_CONTAINERS = new Set(['list', 'listItem', 'blockquote', 'mdxJsxFlowElement'])
+function blockText(node: Node): string {
+  if (BLOCK_CONTAINERS.has(node.type) && node.children) {
+    return node.children.map(blockText).filter(Boolean).join('\n')
+  }
+  return textOf(node)
+}
+
 function offsets(node: Node | undefined) {
   const start = node?.position?.start.offset
   const end = node?.position?.end.offset
@@ -131,7 +143,7 @@ function extractFaq(tree: Root): FaqItem[] {
       continue
     }
     if (current && node.type !== 'thematicBreak' && node.type !== 'mdxjsEsm') {
-      const text = textOf(node).trim()
+      const text = blockText(node).trim()
       if (text) current.parts.push(text)
     }
   }
@@ -156,7 +168,7 @@ function extractSections(tree: Root): Section[] {
 function countWords(tree: Root) {
   return tree.children
     .filter((node) => node.type !== 'mdxjsEsm')
-    .map(textOf)
+    .map(blockText)
     .join(' ')
     .split(/\s+/)
     .filter((word) => /[0-9A-Za-zÀ-ÿ]/.test(word)).length
