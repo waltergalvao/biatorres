@@ -12,14 +12,38 @@ import { WhatsAppIcon } from '@/components/WhatsAppIcon'
 import { generalFaq, generalProcess } from '@/data/general'
 import { testimonials } from '@/data/testimonials'
 import { PRIMARY_CTA, waLink } from '@/lib/site'
+import type { Metadata } from 'next'
+import { JsonLd } from '@/components/JsonLd'
+import { BUSINESS_DESCRIPTION, SCHEMA_IDS, faqSchema, graph, webPageSchema } from '@/lib/schema'
+import { pageMetadata } from '@/lib/metadata'
+
+export const metadata: Metadata = pageMetadata({
+  title: 'Projeto de interiores para apartamento pequeno | Beatriz Torres',
+  absoluteTitle: true,
+  description:
+    'Projeto de interiores online para apartamento pequeno e studio: consultoria desde R$ 450 por ambiente, projeto com 3D a R$ 250/m² e apê até 60 m² em 10x.',
+  path: '/',
+})
 
 // The home presents the studio, shows each service with its price anchor and sends visitors
 // to a service page (also the Google Ads landing pages) for the full scope and price table.
 const homeQuotes = [testimonials[0], testimonials[2], testimonials[4]]
 
 export default function Home() {
+  const jsonLd = graph(
+    webPageSchema('/', {
+      name: 'Projeto de interiores para apartamento pequeno',
+      description: BUSINESS_DESCRIPTION,
+      breadcrumb: false,
+      faq: true,
+      about: { '@id': SCHEMA_IDS.business },
+    }),
+    faqSchema('/', generalFaq),
+  )
+
   return (
     <>
+      <JsonLd data={jsonLd} />
       <Hero />
       <Services />
       <Audiences />

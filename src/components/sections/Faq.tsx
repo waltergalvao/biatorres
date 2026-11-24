@@ -11,19 +11,9 @@ export function Faq({
   title?: string
   message?: string
 }) {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  }
-
+  // The FAQPage structured data is part of each page's JSON-LD graph (faqSchema in src/lib/schema.ts).
   return (
     <section aria-labelledby="faq-title" className="section-y bg-sand" data-placement="faq">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="container-site grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
           <p className="eyebrow">Perguntas frequentes</p>

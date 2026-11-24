@@ -4,6 +4,9 @@ import { audienceHref, audienceOrder, audiences, type AudienceSlug } from '@/dat
 import { generalProcess } from '@/data/general'
 import { testimonials } from '@/data/testimonials'
 import { EMAIL, waLink } from '@/lib/site'
+import { pageMetadata } from '@/lib/metadata'
+import { breadcrumbSchema, faqSchema, graph, serviceId, webPageSchema } from '@/lib/schema'
+import { JsonLd } from '@/components/JsonLd'
 import { LandingHero } from '@/components/landing/LandingHero'
 import { Contrast } from '@/components/landing/Contrast'
 import { Packages } from '@/components/landing/Packages'
@@ -17,6 +20,10 @@ import { WhatsAppIcon } from '@/components/WhatsAppIcon'
 
 // Google Ads landing pages. The header drops the site navigation on /para/* (see Header),
 // and the footer to contact links (see Footer), so the only ways forward are WhatsApp and e-mail.
+//
+// They are indexed: each one answers a different search (investidores, primeiro apartamento,
+// studios) with its own problems, packages and FAQ, and the home page links to them. They don't
+// duplicate the service pages, which describe one service each.
 
 type Props = { params: { slug: string } }
 
@@ -31,21 +38,30 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Props): Metadata {
   if (!isSlug(params.slug)) return {}
   const { seo } = audiences[params.slug]
-  return {
-    title: seo.title,
-    description: seo.description,
-    alternates: { canonical: audienceHref(params.slug) },
-    openGraph: { title: seo.title, description: seo.description, locale: 'pt_BR', type: 'website' },
-  }
+  return pageMetadata({ ...seo, path: audienceHref(params.slug) })
 }
 
 export default function AudiencePage({ params }: Props) {
   if (!isSlug(params.slug)) notFound()
   const a = audiences[params.slug]
   const quotes = testimonials.filter((t) => t.audiences?.includes(a.slug))
+  const path = audienceHref(a.slug)
+  const jsonLd = graph(
+    webPageSchema(path, {
+      name: a.seo.title,
+      description: a.seo.description,
+      faq: true,
+      audience: { '@type': 'Audience', audienceType: a.card.kicker },
+      // The packages on the page are the site's services, each with its price.
+      mentions: a.packages.items.map((p) => ({ '@id': serviceId(p.service) })),
+    }),
+    breadcrumbSchema(path, [{ name: a.card.kicker, path }]),
+    faqSchema(path, a.faq),
+  )
 
   return (
     <div data-service={`para-${a.slug}`}>
+      <JsonLd data={jsonLd} />
       <LandingHero
         hero={a.hero}
         price={a.price}
