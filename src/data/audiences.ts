@@ -26,6 +26,7 @@ export type Audience = {
   /** `who` is the visitor describing themselves (first person, gender-neutral), the first thing
    *  read on the home card. `kicker` is the short label used in the menu. */
   card: { who: string; kicker: string; title: string; text: string; menu: string }
+  /** title: about 40 characters, the layout adds " | Beatriz Torres". description: 140 to 160. */
   seo: { title: string; description: string }
   hero: {
     eyebrow: string
@@ -64,9 +65,9 @@ export const audiences: Record<AudienceSlug, Audience> = {
       menu: 'Imóveis de renda até 60 m², para temporada ou contrato longo.',
     },
     seo: {
-      title: 'Projeto de interiores para investidores: imóveis até 60 m² | Beatriz Torres',
+      title: 'Projeto de interiores para investidores',
       description:
-        'Projeto de interiores para quem compra para alugar: layout, marcenaria e acabamentos pensados para temporada ou contrato longo. Studio de 30 m² com 3D por R$ 7.500, apartamento até 60 m² em 10x de R$ 1.500.',
+        'Projeto de interiores para imóvel de renda até 60 m², para temporada ou contrato longo: layout, marcenaria e acabamentos que aguentam a troca de inquilinos.',
     },
     hero: {
       // Short enough for one line at 390px ("Para investidores · ..." wraps to two and pushes
@@ -180,9 +181,9 @@ export const audiences: Record<AudienceSlug, Audience> = {
       menu: 'Pegou as chaves? Planeje antes de comprar o primeiro móvel.',
     },
     seo: {
-      title: 'Projeto de interiores para o primeiro apartamento | Beatriz Torres Arquitetura',
+      title: 'Interiores para o primeiro apartamento',
       description:
-        'Pegou as chaves do primeiro apartamento? Consultoria online a partir de R$ 450 por ambiente para decidir layout, móveis e cores, ou o projeto completo até 60 m² em 10x de R$ 1.500.',
+        'Pegou as chaves do primeiro apê? Consultoria online desde R$ 450 por ambiente para decidir layout, móveis e cores, ou o apartamento inteiro em 10x de R$ 1.500.',
     },
     hero: {
       eyebrow: 'Primeiro apartamento',
@@ -296,9 +297,9 @@ export const audiences: Record<AudienceSlug, Audience> = {
       menu: 'Dormir, trabalhar e receber no mesmo ambiente.',
     },
     seo: {
-      title: 'Projeto de interiores para studio: morar bem em poucos m² | Beatriz Torres',
+      title: 'Projeto de interiores para studio',
       description:
-        'Projeto de interiores para studios: dormir, trabalhar, cozinhar e receber no mesmo ambiente. Projeto com 3D e marcenaria a R$ 250/m² ou consultoria online a partir de R$ 450.',
+        'Projeto de interiores para studio: dormir, trabalhar e receber no mesmo ambiente. Projeto com 3D e marcenaria a R$ 250/m² ou consultoria online desde R$ 450.',
     },
     hero: {
       eyebrow: 'Projeto para studios',

@@ -6,7 +6,7 @@ import { Logo } from '@/components/Logo'
 // Internal reference for the design system: colors, type and buttons, all read from
 // src/design/tokens.ts. Not linked from the site and not indexed.
 export const metadata: Metadata = {
-  title: 'Marca — Beatriz Torres Arquitetura',
+  title: 'Marca',
   robots: { index: false, follow: false },
 }
 
