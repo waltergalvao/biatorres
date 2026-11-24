@@ -2,8 +2,10 @@
 //
 // Next.js merges metadata shallowly: a page that sets `openGraph` replaces the layout's whole
 // `openGraph` object (site name, locale...). Building every page's metadata here keeps those
-// fields on every page. The images come from the opengraph-image files (src/app/opengraph-image.tsx
-// and the per-page ones), which Next.js adds on its own.
+// fields on every page. That replacement also drops the parent's share image, so every route
+// that uses this has its own: an opengraph-image file in its folder (which Next.js adds on its
+// own, as og:image and twitter:image) or, for the blog, images set by src/lib/blog/metadata.ts.
+// All of them are drawn by src/lib/og.tsx.
 
 import type { Metadata } from 'next'
 import { BUSINESS_NAME } from '@/lib/schema'

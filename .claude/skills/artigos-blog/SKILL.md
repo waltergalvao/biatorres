@@ -158,7 +158,7 @@ src/app/blog/(posts)/<slug>/page.mdx
 - `description`: 140 a 160 caracteres, pensada para quem vê o resultado no Google. Não é o primeiro parágrafo colado. O build avisa se ficar fora da faixa.
 - `date`: `AAAA-MM-DD`, a data de publicação. Não muda depois de publicado.
 - `updated` (opcional): `AAAA-MM-DD`. Preencha só quando o conteúdo for revisado de verdade (seção nova, informação corrigida). Aparece como "Atualizado em" na página e vai para o sitemap, o RSS e os dados estruturados. Não atualize a data sem mudar o conteúdo.
-- `image`: capa em `public/images/blog/<slug>.jpg`, com uns 1600 px de largura, referenciada como `/images/blog/<slug>.jpg`. Guarde a imagem no repositório (não use URL externa), para a imagem de compartilhamento ficar no nosso domínio. Não reaproveite uma foto que já aparece em outra página do site.
+- `image`: capa em `public/images/blog/<slug>.jpg`, com uns 1600 px de largura, referenciada como `/images/blog/<slug>.jpg`. Guarde a imagem no repositório (não use URL externa). Use JPEG ou PNG: a imagem de compartilhamento (WhatsApp, LinkedIn, X) é gerada sozinha a partir do título, da categoria e da capa, em `/og/blog/<slug>`, e não lê WebP. O título fica num cartão no centro, então o que aparece da foto são as laterais. Não precisa criar nenhum arquivo para isso. Não reaproveite uma foto que já aparece em outra página do site.
 - `imageAlt`: descrição real do que aparece na foto ("Sala clara com sofá azul de pés de madeira..."), não a repetição do título.
 - `title` + `date` identificam o artigo internamente: dois artigos não podem ter os dois iguais.
 

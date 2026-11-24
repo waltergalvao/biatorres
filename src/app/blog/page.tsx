@@ -1,6 +1,7 @@
 import { getAllArticles } from '@/lib/blog/articles'
 import { getCategories } from '@/lib/blog/categories'
 import { blogPageMetadata } from '@/lib/blog/metadata'
+import { BLOG_HEADLINE, blogOgImage } from '@/lib/blog/og'
 import { listingGraph } from '@/lib/blog/schema'
 import { BLOG_DESCRIPTION, BLOG_PATH, BLOG_TITLE } from '@/lib/blog/site'
 import { JsonLd } from '@/components/JsonLd'
@@ -12,7 +13,7 @@ export async function generateMetadata() {
     title: 'Blog sobre apartamentos pequenos',
     description: BLOG_DESCRIPTION,
     path: BLOG_PATH,
-    cover: latest,
+    images: blogOgImage(latest),
   })
 }
 
@@ -31,7 +32,7 @@ export default async function BlogPage() {
       />
       <BlogListing
         eyebrow="Blog"
-        title="Respostas para quem vai morar bem em poucos metros"
+        title={`${BLOG_HEADLINE.title} ${BLOG_HEADLINE.accent}`}
         lede="Layout, móveis, marcenaria e o que decidir antes de comprar ou reformar. Escrito pela Beatriz Torres, arquiteta de interiores de apartamentos pequenos."
         breadcrumb={[{ name: 'Início', path: '/' }, { name: 'Blog' }]}
         articles={articles}

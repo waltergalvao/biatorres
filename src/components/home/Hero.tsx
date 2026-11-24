@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { ArrowDown, Check } from 'lucide-react'
+import { homeHero } from '@/data/home'
 import { services } from '@/data/services'
 import { unsplash, waLink } from '@/lib/site'
 import { WhatsAppIcon } from '../WhatsAppIcon'
@@ -19,10 +20,10 @@ export function Hero() {
       <div className="container-site grid items-center gap-10 pb-16 pt-8 md:pt-12 lg:min-h-[calc(100*var(--svh)-72px)] lg:grid-cols-12 lg:gap-12 lg:py-12">
         <div className="lg:col-span-6">
           <p className="eyebrow enter" style={i(0)}>
-            Arquitetura de interiores · online
+            {homeHero.eyebrow}
           </p>
           <h1 id="hero-title" className="enter mt-5 font-display text-display-xl text-ink" style={i(1)}>
-            Projeto de interiores para apartamentos <em className="font-display italic text-clay">pequenos</em>
+            {homeHero.title} <em className="font-display italic text-clay">{homeHero.accent}</em>
           </h1>
           <p className="enter lede mt-6 max-w-[34rem] text-pretty" style={i(2)}>
             Ajudo quem tem um apartamento compacto a usar bem cada metro: do primeiro móvel à reforma
@@ -76,8 +77,8 @@ export function Hero() {
         <div className="relative bleed-right lg:col-span-6">
           <div className="relative aspect-[5/4] overflow-hidden rounded-[28px] sm:aspect-[4/3] lg:aspect-auto lg:h-[min(calc(78*var(--svh)),760px)] lg:rounded-r-none">
             <Image
-              src={unsplash('1618220179428-22790b461013')}
-              alt="Sala pequena com poltrona terracota, aparador de madeira, espelho redondo e plantas"
+              src={unsplash(homeHero.image)}
+              alt={homeHero.imageAlt}
               fill
               priority
               sizes="(max-width: 640px) 92vw, (max-width: 1024px) 100vw, 55vw"

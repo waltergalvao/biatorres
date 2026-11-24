@@ -26,8 +26,8 @@ const nextConfig = {
     return [
       { source: '/:path*', headers: security },
       { source: '/', headers: [siteLinks] },
-      // Pages only: no files with an extension, no images or Next.js assets, no blog articles.
-      { source: '/:path((?!_next/|images/|md/|blog/[^/]+$)(?!.*\\.[a-z0-9]+$)(?!.*(?:opengraph-image|apple-icon)).+)', headers: [siteLinks] },
+      // Pages only: no files with an extension, no images, share images or Next.js assets, no blog articles.
+      { source: '/:path((?!_next/|images/|md/|og/|blog/[^/]+$)(?!.*\\.[a-z0-9]+$)(?!.*(?:opengraph-image|apple-icon)).+)', headers: [siteLinks] },
     ]
   },
   // Projetos was merged into Sobre while the portfolio is small.
