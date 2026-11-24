@@ -1,4 +1,5 @@
 import createMDX from '@next/mdx'
+import { PHASE_DEVELOPMENT_SERVER } from 'next/constants.js'
 import { rehypePlugins, remarkPlugins } from './src/lib/blog/mdx/plugins.mjs'
 
 // Blog posts are MDX pages (src/app/blog/(posts)/<slug>/page.mdx).
@@ -8,7 +9,6 @@ const withMDX = createMDX({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'mdx'],
   // Link headers (RFC 8288) let an AI agent find the sitemap and llms.txt from any page's
   // response without reading the HTML. Blog articles are left out: their Link header (Markdown
   // version) is set by the blog, and a rule here would replace it. Plus cheap security headers.
@@ -50,4 +50,14 @@ const nextConfig = {
   },
 }
 
-export default withMDX(nextConfig)
+// Internal pages (/social for the Instagram posts, /marca for the design system) are named
+// page.dev.tsx / route.dev.ts: they exist under `npm run dev` only, and a production build
+// doesn't contain them at all.
+const PAGE_EXTENSIONS = ['ts', 'tsx', 'js', 'jsx', 'mdx']
+const DEV_ONLY_EXTENSIONS = ['dev.tsx', 'dev.ts']
+
+export default (phase) =>
+  withMDX({
+    ...nextConfig,
+    pageExtensions: phase === PHASE_DEVELOPMENT_SERVER ? [...DEV_ONLY_EXTENSIONS, ...PAGE_EXTENSIONS] : PAGE_EXTENSIONS,
+  })

@@ -5,7 +5,7 @@ import { absoluteUrl } from '@/lib/schema'
 import { articlePath, getAllArticles, lastModified } from '@/lib/blog/articles'
 import { getCategories } from '@/lib/blog/categories'
 
-// Only indexable pages. Left out on purpose: /marca and /social (internal, noindex), the
+// Only indexable pages. Left out on purpose: the
 // Markdown versions of articles (/blog/<slug>.md), /llms.txt and /llms-full.txt.
 //
 // lastModified only where the date is real (articles: `updated ?? date`; /blog: the newest

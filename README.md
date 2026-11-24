@@ -2,7 +2,9 @@
 
 ## Design tokens
 
-Brand colors and fonts live in one file: [`src/design/tokens.ts`](src/design/tokens.ts). Open `/marca` on the site to see them all (the page is not indexed).
+Brand colors and fonts live in one file: [`src/design/tokens.ts`](src/design/tokens.ts). Run `npm run dev` and open `/marca` to see them all.
+
+**Internal pages** (`/marca`, and `/social` for the Instagram posts) are named `page.dev.tsx` / `route.dev.ts`. They exist under `npm run dev` only; `next.config.mjs` leaves the `.dev` extensions out of production builds, so they are never deployed.
 
 **Change a color:** edit its `hex` in `tokens.ts`. Tailwind writes every color as a CSS variable on `:root` (`--color-clay: 160 69 36`), and every class (`bg-clay`, `text-ink/70`, `border-line`…) reads that variable, so the whole site follows. Re-check the contrast notes at the top of the file when you do.
 
@@ -38,7 +40,7 @@ The site is built to be understood by search engines and by AI assistants (ChatG
 | Structured data (JSON-LD) | [`src/lib/schema.ts`](src/lib/schema.ts), rendered with `<JsonLd>` | The business (`ProfessionalService`), the website and Beatriz (`Person`) are on every page and linked by `@id`. Pages add `WebPage`/`ProfilePage`/`ContactPage`, `BreadcrumbList`, `Service` with the public prices and `FAQPage` with the questions shown on the page. |
 | Share images | `opengraph-image.tsx` files, drawn by [`src/lib/og.tsx`](src/lib/og.tsx) | Default image plus one per service and landing page, with the price. `/logo.png` and the Apple icon come from the same file. |
 | Sitemap | [`src/app/sitemap.ts`](src/app/sitemap.ts) | Indexable pages only. `lastmod` only where the date is real (blog articles). |
-| robots.txt | [`src/app/robots.ts`](src/app/robots.ts) | Everyone allowed, AI crawlers named explicitly. `/marca`, `/social` and `/md/` blocked. |
+| robots.txt | [`src/app/robots.ts`](src/app/robots.ts) | Everyone allowed, AI crawlers named explicitly. `/md/` blocked (`/marca` and `/social` aren't deployed). |
 | `/llms.txt`, `/llms-full.txt` | [`src/lib/llms.ts`](src/lib/llms.ts) | Markdown summary (and full text) of services, prices, audiences, process, FAQ and blog articles, for AI assistants and agents. |
 | `Link` headers | `headers()` in `next.config.mjs` | Every page points to `/sitemap.xml` and `/llms.txt`. |
 
