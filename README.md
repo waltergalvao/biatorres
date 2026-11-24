@@ -48,6 +48,12 @@ The site is built to be understood by search engines and by AI assistants (ChatG
 
 **Check:** paste a page URL into [Rich Results Test](https://search.google.com/test/rich-results) or [validator.schema.org](https://validator.schema.org), and share a link on WhatsApp to see the card.
 
+## Blog
+
+Posts are MDX pages in `src/app/blog/(posts)/<slug>/page.mdx`; the folder name is the URL. To write one, use the `artigos-blog` skill (`.claude/skills/artigos-blog/SKILL.md`): it has the voice, the structure (quick answer, question headings, `## Perguntas frequentes`), the rules (no prices in articles, link to the service pages) and the file template.
+
+From each post the site builds: the page (breadcrumb, dates, table of contents, author box, related posts, WhatsApp CTAs), `BlogPosting` + `BreadcrumbList` + `FAQPage` JSON-LD (the FAQ comes from the `## Perguntas frequentes` section), `/blog/<slug>.md` (also served at `/blog/<slug>` to clients that send `Accept: text/markdown`), `/blog/rss.xml`, and the entries in the sitemap and `/llms*.txt`. Categories live in `src/lib/blog/categories.ts`; a category gets a page (`/blog/categoria/<slug>`) once an article uses it. The code is in `src/lib/blog/` and `src/components/blog/`.
+
 ### IndexNow
 
 After a production deploy that adds or changes pages, tell Bing (and so ChatGPT search and Copilot) right away:
