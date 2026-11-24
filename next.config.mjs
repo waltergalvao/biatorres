@@ -1,5 +1,14 @@
+import createMDX from '@next/mdx'
+import { rehypePlugins, remarkPlugins } from './src/lib/blog/mdx/plugins.mjs'
+
+// Blog posts are MDX pages (src/app/blog/(posts)/<slug>/page.mdx).
+const withMDX = createMDX({
+  options: { remarkPlugins, rehypePlugins },
+})
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'mdx'],
   // Link headers (RFC 8288) let an AI agent find the sitemap and llms.txt from any page's
   // response without reading the HTML. Blog articles are left out: their Link header (Markdown
   // version) is set by the blog, and a rule here would replace it. Plus cheap security headers.
@@ -25,6 +34,12 @@ const nextConfig = {
   async redirects() {
     return [{ source: '/projetos', destination: '/sobre', permanent: false }]
   },
+  async rewrites() {
+    return [
+      // Markdown version of each blog article (for AI assistants and agents): /blog/<slug>.md
+      { source: '/blog/:slug([a-z0-9-]+)\\.md', destination: '/md/blog/:slug' },
+    ]
+  },
   images: {
     remotePatterns: [
       {
@@ -35,4 +50,4 @@ const nextConfig = {
   },
 }
 
-export default nextConfig
+export default withMDX(nextConfig)

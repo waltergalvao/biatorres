@@ -61,6 +61,7 @@ export const audienceLinks: NavLink[] = audienceOrder.map((slug) => ({
 
 export const pageLinks: NavLink[] = [
   { href: '/sobre', label: 'Sobre' },
+  { href: '/blog', label: 'Blog' },
   { href: '/contato', label: 'Contato' },
 ]
 
