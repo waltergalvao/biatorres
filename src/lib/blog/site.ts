@@ -2,6 +2,7 @@
 // Markdown versions, so every surface describes the blog and its author the same way.
 
 import { aboutSummary } from '@/data/about'
+import { JOB_TITLE } from '@/lib/schema'
 import { SITE_URL, WHATSAPP_DISPLAY } from '@/lib/site'
 
 export const BLOG_PATH = '/blog'
@@ -17,8 +18,7 @@ export const BLOG_ID = `${SITE_URL}/blog#blog`
 /** The author of every post. The Person entity itself is site-wide (src/lib/schema.ts). */
 export const AUTHOR = {
   name: 'Beatriz Torres',
-  /** Same as the Person's jobTitle in src/lib/schema.ts. */
-  role: 'Arquiteta de interiores',
+  role: JOB_TITLE,
   /** Profile page. Article bylines link here with rel="author". */
   path: '/sobre',
   avatar: '/images/beatriz-avatar.jpg',

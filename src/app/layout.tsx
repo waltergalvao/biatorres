@@ -8,7 +8,7 @@ import { Analytics } from '@/components/Analytics'
 import { hex } from '@/design/tokens'
 import { SITE_URL } from '@/lib/site'
 import { JsonLd } from '@/components/JsonLd'
-import { TITLE_SUFFIX } from '@/lib/metadata'
+import { HOME_DESCRIPTION, HOME_TITLE, TITLE_SUFFIX } from '@/lib/metadata'
 import { BUSINESS_NAME, businessSchema, graph, personSchema, websiteSchema } from '@/lib/schema'
 
 const fraunces = Fraunces({
@@ -26,9 +26,8 @@ const hanken = Hanken_Grotesk({
   display: 'swap',
 })
 
-const DEFAULT_TITLE = 'Projeto de interiores para apartamento pequeno | Beatriz Torres'
-const DEFAULT_DESCRIPTION =
-  'Projeto de interiores online para apartamento pequeno e studio: consultoria desde R$ 450 por ambiente, projeto com 3D a R$ 250/m² e apê até 60 m² em 10x.'
+const DEFAULT_TITLE = HOME_TITLE
+const DEFAULT_DESCRIPTION = HOME_DESCRIPTION
 
 // Defaults for every page. Each page sets its own title, description and canonical with
 // pageMetadata() (src/lib/metadata.ts); there is no default canonical on purpose, because a

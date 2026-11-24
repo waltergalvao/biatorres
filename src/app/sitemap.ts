@@ -2,10 +2,10 @@ import type { MetadataRoute } from 'next'
 import { serviceHref, serviceOrder } from '@/data/services'
 import { audienceHref, audienceOrder } from '@/data/audiences'
 import { absoluteUrl } from '@/lib/schema'
-import { articlePath, getAllArticles } from '@/lib/blog/articles'
+import { articlePath, getAllArticles, lastModified } from '@/lib/blog/articles'
 import { getCategories } from '@/lib/blog/categories'
 
-// Only indexable pages. Left out on purpose: /marca and /social (internal, noindex), the
+// Only indexable pages. Left out on purpose: the
 // Markdown versions of articles (/blog/<slug>.md), /llms.txt and /llms-full.txt.
 //
 // lastModified only where the date is real (articles: `updated ?? date`; /blog: the newest
@@ -13,8 +13,7 @@ import { getCategories } from '@/lib/blog/categories'
 // engines that every page changes on every deploy.
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [articles, categories] = await Promise.all([getAllArticles(), getCategories()])
-  const articleDate = (a: (typeof articles)[number]) => a.updated ?? a.date
-  const newest = articles.map(articleDate).sort().at(-1)
+  const newest = articles.map(lastModified).sort().at(-1)
 
   const page = (path: string, priority: number, lastModified?: string): MetadataRoute.Sitemap[number] => ({
     url: absoluteUrl(path),
@@ -28,8 +27,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...audienceOrder.map((slug) => page(audienceHref(slug), 0.8)),
     page('/blog', 0.7, newest),
     // Category pages that exist (at least one article), dated by their newest article.
-    ...categories.map((c) => page(c.path, 0.5, articles.filter((a) => a.category === c.slug).map(articleDate).sort().at(-1))),
-    ...articles.map((a) => page(articlePath(a.slug), 0.6, articleDate(a))),
+    ...categories.map((c) => page(c.path, 0.5, articles.filter((a) => a.category === c.slug).map(lastModified).sort().at(-1))),
+    ...articles.map((a) => page(articlePath(a.slug), 0.6, lastModified(a))),
     page('/sobre', 0.6),
     page('/contato', 0.5),
   ]

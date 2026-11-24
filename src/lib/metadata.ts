@@ -9,9 +9,17 @@
 
 import type { Metadata } from 'next'
 import { BUSINESS_NAME } from '@/lib/schema'
+import { services } from '@/data/services'
 
 /** Suffix the root layout adds to every page title (`title.template`). */
 export const TITLE_SUFFIX = ' | Beatriz Torres'
+
+/** Home page title, also the default for any page without its own. */
+export const HOME_TITLE = 'Projeto de interiores para apartamento pequeno | Beatriz Torres'
+
+const { consultoria, 'projeto-por-ambiente': porAmbiente, 'apartamento-completo': completo } = services
+/** Home page description (also the site default), with the prices read from the service data. */
+export const HOME_DESCRIPTION = `Projeto de interiores online para apartamento pequeno e studio: consultoria desde ${consultoria.price.value} por ambiente, projeto com 3D a ${porAmbiente.price.value}/m² e apê ${completo.price.unit} em ${completo.price.pre?.split(' ')[0]}.`
 
 type PageMeta = {
   /** Title without the suffix; it is added by the root layout's template. */
