@@ -25,7 +25,18 @@ export type Audience = {
   /** Card on the home page and in the menu. */
   /** `who` is the visitor describing themselves (first person, gender-neutral), the first thing
    *  read on the home card. `kicker` is the short label used in the menu. */
-  card: { who: string; kicker: string; title: string; text: string; menu: string }
+  card: {
+    who: string
+    kicker: string
+    title: string
+    text: string
+    menu: string
+    /** Photo for the home card, in public/images/para (Pexels). The landing hero keeps its own. */
+    image: string
+    imageAlt: string
+    /** CSS object-position for the portrait crop of a landscape photo. */
+    imagePosition?: string
+  }
   /** title: about 40 characters, the layout adds " | Beatriz Torres". description: 140 to 160. */
   seo: { title: string; description: string }
   hero: {
@@ -61,8 +72,10 @@ export const audiences: Record<AudienceSlug, Audience> = {
       who: 'Invisto em imóveis',
       kicker: 'Investidores',
       title: 'Imóvel de renda pronto para alugar',
-      text: 'Studios e apartamentos até 60 m² com layout que aproveita cada metro e acabamentos que aguentam a troca de inquilinos.',
+      text: 'Gaste menos para deixar o imóvel pronto, com acabamentos de qualidade que aguentam a troca de inquilinos.',
       menu: 'Imóveis de renda até 60 m², para temporada ou contrato longo.',
+      image: '/images/para/investidores.jpg',
+      imageAlt: 'Investidor de terno segurando a miniatura de uma casa ao lado de uma calculadora',
     },
     seo: {
       title: 'Projeto de interiores para investidores',
@@ -179,6 +192,8 @@ export const audiences: Record<AudienceSlug, Audience> = {
       title: 'Chaves na mão, casa vazia',
       text: 'Decida o que comprar primeiro e onde cada móvel entra, antes de gastar com o que não cabe.',
       menu: 'Pegou as chaves? Planeje antes de comprar o primeiro móvel.',
+      image: '/images/para/primeiro-apartamento.jpg',
+      imageAlt: 'Casal sorrindo e mostrando as chaves do primeiro apartamento',
     },
     seo: {
       title: 'Interiores para o primeiro apartamento',
@@ -295,6 +310,9 @@ export const audiences: Record<AudienceSlug, Audience> = {
       title: 'Tudo cabe, nada aperta',
       text: 'Dormir, trabalhar, cozinhar e receber no mesmo ambiente, com marcenaria sob medida e móveis na escala certa.',
       menu: 'Dormir, trabalhar e receber no mesmo ambiente.',
+      image: '/images/para/studio-cozinha.jpg',
+      imageAlt: 'Studio com cama, divisória de ripas de madeira e cozinha no mesmo ambiente',
+      imagePosition: '40% 50%',
     },
     seo: {
       title: 'Projeto de interiores para studio',

@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { audienceHref, audienceOrder, audiences } from '@/data/audiences'
-import { unsplash } from '@/lib/site'
 import { SectionHeader } from '../sections/SectionHeader'
 
 /**
@@ -31,24 +30,25 @@ export function Audiences() {
                 >
                   <div className="photo-zoom relative aspect-square w-20 shrink-0 overflow-hidden rounded-2xl md:aspect-[4/5] md:w-auto md:rounded-[24px]">
                     <Image
-                      src={unsplash(a.hero.image)}
-                      alt={a.hero.imageAlt}
+                      src={a.card.image}
+                      alt={a.card.imageAlt}
                       fill
                       sizes="(max-width: 768px) 80px, 33vw"
                       className="object-cover"
+                      style={a.card.imagePosition ? { objectPosition: a.card.imagePosition } : undefined}
                     />
-                    <div aria-hidden className="absolute inset-x-0 bottom-0 hidden h-3/5 bg-gradient-to-t from-ink/85 via-ink/50 to-transparent md:block" />
-                    <p className="absolute inset-x-6 bottom-6 hidden items-end justify-between gap-3 font-display text-[30px] leading-[1.05] text-linen [text-shadow:0_1px_12px_rgb(var(--color-ink)/0.45)] md:flex lg:text-[34px]">
+                    <div aria-hidden className="absolute inset-x-0 bottom-0 hidden h-2/3 bg-gradient-to-t from-ink/95 via-ink/70 to-transparent md:block" />
+                    <p className="absolute inset-x-6 bottom-6 hidden items-end justify-between gap-3 font-display text-[30px] leading-[1.05] text-linen [text-shadow:0_1px_16px_rgb(var(--color-ink)/0.7)] md:flex lg:text-[34px]">
                       <span>{a.card.who}</span>
                       <ArrowUpRight size={26} aria-hidden className="mb-1 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </p>
                   </div>
                   <div className="min-w-0 flex-1 md:flex md:flex-col">
                     <p className="font-display text-[21px] leading-tight text-clay md:hidden">{a.card.who}</p>
-                    <h3 className="mt-1 text-[15px] leading-snug text-ink-soft group-hover:text-clay md:mt-6 md:font-display md:text-[26px] md:leading-tight md:text-ink">
+                    <h3 className="mt-1 text-[15px] leading-snug text-ink-soft group-hover:text-clay md:hidden">
                       {a.card.title}
                     </h3>
-                    <p className="mt-2 hidden flex-1 text-[15px] leading-relaxed text-ink-soft md:block">{a.card.text}</p>
+                    <p className="mt-6 hidden flex-1 text-[15px] leading-relaxed text-ink-soft md:block">{a.card.text}</p>
                     <span className="link-draw mt-5 hidden self-start text-[15px] md:inline-flex">
                       Ver como funciona <ArrowUpRight size={16} aria-hidden />
                     </span>
